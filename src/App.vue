@@ -1,28 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <EditorComps msg="EditorComps"/>
+    <EditorContent msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import EditorComps from './components/editor-comps'
+import EditorContent from './components/editor-content';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    EditorComps,
+    EditorContent,
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  padding: 0;
+  position: relative;
   color: #2c3e50;
   margin-top: 60px;
+  display: grid;
+  grid-template-columns: 205px auto;
 }
 </style>
