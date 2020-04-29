@@ -1,23 +1,33 @@
 <template>
   <div id="content">
-    <div id="drawingBoard">
-        {{edrawComps}}
-    </div>
-
+    <img class="icon" 
+      v-bind:src="item.icon" 
+      v-for="(item, index) in edrawComps" :key="index" 
+      v-bind:style="{
+          width:item.style.width +'px',
+          height:item.style.height +'px',
+          top:item.style.top +'px',
+          left:item.style.left +'px',
+          position:item.style.position
+      }" 
+      v-bind:alt="item.name" >
   </div>
 </template>
-
+       
 <script>
 
 export default {
   name: 'EditorContent',
   props: {
-    edrawComps: Array
+    edrawComps: Array //绘制组件（图片）列表
   },
   data() {
     return {
       name:"age"
     }
+  },
+  methods: {
+
   }
 }
 
@@ -26,8 +36,8 @@ export default {
 
 <style scoped>
 #content {
-    width: 1502px;
-    height: 902px;
+    width: 100%;
+    height: 822px;
     background: whitesmoke;
     overflow: auto;
 }

@@ -21,12 +21,22 @@ export default {
     'editor-content':EditorContent,
   },
   methods: {
-    // 控件选择
+    // 组件选择
     selectComp(comp) {
-      this.edrawComponents.push(comp)
+      let item = JSON.parse(JSON.stringify(comp));
+      let {width, height} = item.defStyle;
+      let _style = {
+          width:width || 100,
+          height:height || 100,
+          top:100,
+          left:100,
+          position:'absolute'
+      }
+      item.style = _style;
+      this.edrawComponents.push(item)
     },
 
-    // 控件拖拽
+    // 组件拖拽
     dragCurrentComp(comp) {
       console.log("拖拽控件", comp)
     }
