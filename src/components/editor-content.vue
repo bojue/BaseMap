@@ -1,16 +1,19 @@
 <template>
-  <div id="content">
+  <div id="content" ref='cont'>
     <img class="icon" 
       v-bind:src="item.icon" 
       v-for="(item, index) in edrawComps" :key="index" 
       v-bind:style="{
           width:item.style.width +'px',
           height:item.style.height +'px',
-          top:item.style.top +'px',
-          left:item.style.left +'px',
+          top:(item.style.top - rect.y) +'px',
+          left:(item.style.left - rect.x) +'px',
           position:item.style.position
       }" 
-      v-bind:alt="item.name" >
+      v-bind:title="item.name"
+      v-bind:alt="item.name" 
+      v-bind:class="{active:item.isActive}"
+      @click="selectItem(item)">
   </div>
 </template>
        
@@ -23,11 +26,22 @@ export default {
   },
   data() {
     return {
-      name:"age"
+      name:"age",
+      rect:{
+        x:0,
+        y:0
+      }
     }
   },
+  mounted:function() {
+    let dom = document.querySelector('#content');
+    this.rect = dom && dom.getBoundingClientRect();
+  },
   methods: {
-
+    selectItem:function(comp) {
+      this.$emit('initEdrawComponents',null);
+      comp.isActive = true;
+    }
   }
 }
 
@@ -36,10 +50,15 @@ export default {
 
 <style scoped>
 #content {
-    width: 100%;
-    height: 822px;
-    background: whitesmoke;
-    overflow: auto;
+  position: relative;
+  width: 100%;
+  height: 822px;
+  background: whitesmoke;
+  overflow: auto;
+}
+
+.active {
+  border:1px solid rgba(225,00,00,0.8)
 }
 
 #drawingBoard {

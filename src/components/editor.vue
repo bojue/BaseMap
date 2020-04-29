@@ -22,18 +22,34 @@ export default {
   },
   methods: {
     // 组件选择
-    selectComp(comp) {
+    selectComp(data) {
+      let {event, comp} = data;
       let item = JSON.parse(JSON.stringify(comp));
-      let {width, height} = item.defStyle;
+      if(!item) return;
+      this.initEdrawComponents();
+      item.isActive = true;
+      let {width, height, startX, startY} = item.defStyle;
+      let {clientX , clientY} = event;
       let _style = {
           width:width || 100,
           height:height || 100,
-          top:100,
-          left:100,
+          top: clientY ||100,
+          left:clientX || 100,
+          startX: startX,
+          startY :startY,
           position:'absolute'
       }
       item.style = _style;
       this.edrawComponents.push(item)
+    },
+
+    // 初始化画布内组件状态
+    initEdrawComponents() {
+      console.log('initEdrawComponents')
+      let len = this.edrawComponents.length;
+      for(let i=0;i<len;i++) {
+        this.edrawComponents[i].isActive = false;
+      }
     },
 
     // 组件拖拽

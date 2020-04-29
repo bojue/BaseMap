@@ -1,12 +1,20 @@
 <template>
   <div id="comps">
     <div class="tits">
-      <span class="title" v-for="(tit, index) in compTits" :key="index"  @click="selCategory(tit)" v-bind:class="{active: tit['isActive']}">
+      <span class="title" 
+        v-for="(tit, index) in compTits" :key="index"  
+        @click="selCategory(tit)" 
+        v-bind:class="{active: tit['isActive']}">
         {{tit.name}}
       </span>
     </div>
     <div class="comps">
-      <span class="item item-comp" draggable="true" v-for="(item, index) in devices" :key="index" @click="selComp(item)">
+      <span 
+        class="item item-comp" 
+        draggable="true" 
+        v-for="(item, index) in devices" :key="index" 
+        @dragstart="dragStart($event, item)"
+        @dragend="dragEnd($event, item)">
         <img class="icon" v-bind:src="item.icon"  v-bind:style="item.styleObject" alt="">
         <span class="name"> {{item.name}}</span>
       </span>
@@ -35,8 +43,10 @@ export default {
         name:"灭火器",
         icon:require('./../assets/comps/miehuoqi.png'),
         defStyle:{
-          width:32,
-          height:32
+          width:64,
+          height:64,
+          startX:0,
+          startY:0
         },
       },{
         id:2,
@@ -44,8 +54,10 @@ export default {
         name:"办公桌",
         icon:require('./../assets/comps/bangongzhuo.png'),
         defStyle:{
-          width:32,
-          height:32
+          width:64,
+          height:64,
+          startX:0,
+          startY:0
         },
       },{
         id:3,
@@ -53,8 +65,10 @@ export default {
         name:"冷机",
         icon:require('./../assets/comps/lengji.png'),
         defStyle:{
-          width:25,
-          height:32
+          width:50,
+          height:64,
+          startX:0,
+          startY:0
         },
         styleObject:{
           width:'25px'
@@ -66,7 +80,9 @@ export default {
         icon:require('./../assets/comps/chaifa.png'),
         defStyle:{
           width:110,
-          height:40
+          height:40,
+          startX:0,
+          startY:0
         },
         styleObject:{
           width:'55px',
@@ -77,9 +93,20 @@ export default {
     }
   },
   methods: {
-    // 选择组件
-    selComp: function(event) {
-      this.$emit('selectComp', event);
+    // 组件拖拽完成
+    dragEnd: function(event, comp) {
+      let data = {
+        event:event, 
+        comp:comp
+      }
+      this.$emit('selectComp', data);
+    },
+
+    // 开始拖拽组件
+    dragStart:function(event, comp) {
+      let {clientX, clientY} = event;
+      comp.defStyle.startX = clientX;
+      comp.defStyle.startY  = clientY;
     },
 
     // Tab切换，目前只有一个组件库:tools
