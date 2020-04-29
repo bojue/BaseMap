@@ -1,16 +1,22 @@
 # edraw-basemap
 
-## Project setup
+基于Vue开发的底图配置小工具
+
+## 下载
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 启动项目
 ```
+npm run dev 
+
+//or
+
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 打包
 ```
 npm run build
 ```
@@ -19,6 +25,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

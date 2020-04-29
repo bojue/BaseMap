@@ -1,8 +1,7 @@
 <template>
   <div id="content">
     <div id="drawingBoard">
-        <p>vue</p>
-        {{msg}}
+        {{edrawComps}}
     </div>
 
   </div>
@@ -13,7 +12,7 @@
 export default {
   name: 'EditorContent',
   props: {
-    msg: String
+    edrawComps: Array
   },
   data() {
     return {
@@ -28,7 +27,7 @@ export default {
 <style scoped>
 #content {
     width: 1502px;
-    height: 820px;
+    height: 902px;
     background: whitesmoke;
     overflow: auto;
 }

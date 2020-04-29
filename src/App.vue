@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <EditorComps msg="EditorComps"/>
-    <EditorContent msg="Welcome to Your Vue.js App"/>
+    <Editor/>
   </div>
 </template>
 
 <script>
-import EditorComps from './components/editor-comps'
-import EditorContent from './components/editor-content';
+import Editor from './components/editor'
 
 export default {
   name: 'App',
   components: {
-    EditorComps,
-    EditorContent,
+    Editor
+  },
+  methods: {
+
   }
 }
 </script>
@@ -22,9 +22,6 @@ export default {
 #app {
   padding: 0;
   position: relative;
-  color: #2c3e50;
-  margin-top: 60px;
-  display: grid;
-  grid-template-columns: 205px auto;
+  width: 100%;
 }
 </style>
