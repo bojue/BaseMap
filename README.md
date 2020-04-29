@@ -2,18 +2,19 @@
 
 基于Vue开发的底图配置小工具
 
+## 预览
+
+
+
 ## 下载
 ```
-npm install
+git clone https://github.com/bojue/BaseMap.git
 ```
 
 ### 启动项目
 ```
+npm install
 npm run dev 
-
-//or
-
-npm run serve
 ```
 
 ### 打包
