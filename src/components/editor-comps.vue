@@ -15,7 +15,9 @@
         v-for="(item, index) in devices" :key="index" 
         @dragstart="dragStart($event, item)"
         @dragend="dragEnd($event, item)">
-        <img class="icon" v-bind:src="item.icon"  v-bind:style="item.styleObject" alt="">
+        <img class="icon" 
+          v-bind:src="item.icon"  
+          v-bind:style="item.styleObject" alt="">
         <span class="name"> {{item.name}}</span>
       </span>
     </div>
@@ -36,6 +38,11 @@ export default {
         name:"组件库",
         type:"tools",
         isActive:true
+      },{
+        id:1,
+        name:"元素",
+        type:"elements",
+        isActive:false
       }],
       devices: [{
         id:1,

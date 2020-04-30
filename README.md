@@ -1,4 +1,4 @@
-# edraw-basemap
+# BaseMap
 
 基于Vue开发的底图配置小工具
 
