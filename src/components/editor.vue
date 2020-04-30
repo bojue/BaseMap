@@ -1,7 +1,6 @@
 <template>
   <div id="editor">
     <editor-comps 
-      msg="EditorComps" 
       v-on:selectComp="selectComp"></editor-comps>
     <editor-canvas 
       v-bind:edrawComps="edrawComponents"

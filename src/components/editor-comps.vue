@@ -29,7 +29,7 @@
 export default {
   name: 'EditorComps',
   props: {
-    msg: String
+
   },
   data() {
     return {
@@ -203,9 +203,14 @@ export default {
   text-align: center;
   background: #fff;
 }
+.item-comp:hover {
+  background: bisque;
+}
+.item-comp:hover .name{
+  color:red !important;
+}
 .item-comp .icon {
   position: relative;
-  /* width: 32px; */
   height: 32px;
   padding: 2px;
 }

@@ -47,7 +47,7 @@
         </div>
 
         <!-- 4.柱子 -->
-        <div class="line comp-pillar"
+        <div class="line comp-pillar comp-pillar-shadow "
           v-if="item.type === 'pillar'"
           v-bind:style="{
             height:item.style.height +'px',
@@ -154,6 +154,10 @@ img {
 .comp-item .active {
   border:1px solid rgba(225,00,00,0.8)
 }
+.comp-item .comp-room.active {
+  border:4px solid white;
+  box-shadow: 1px 0px 8px 0px rgba(255,0,0,0.6);
+}
 
 #canvas {
     width: 1500px;
@@ -186,7 +190,7 @@ img {
   opacity: 0.3;
 }
 .comp-img {
-
+  box-shadow: -1px 1px 10px 5px rgba(0,0,0,0.3);
 }
 .comp-line_colu {
     width: 5px;
