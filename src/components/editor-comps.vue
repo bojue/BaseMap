@@ -46,50 +46,83 @@ export default {
       }],
       devices: [{
         id:1,
-        type:"miehuoqi",
+        type:"room",
+        name:"房间",
+        icon:require('./../assets/comps/room.png'),
+        defStyle:{
+          width:120,
+          height:120
+        },
+      },{
+        id:1,
+        type:"line_row",
+        name:"格挡1",
+        icon:require('./../assets/comps/line_row.png'),
+        defStyle:{
+          width:100,
+          height:5
+        },
+      },{
+        id:1,
+        type:"line_colu",
+        name:"格挡2",
+        icon:require('./../assets/comps/line_colu.png'),
+        defStyle:{
+          width:5,
+          height:100
+        },
+      },{
+        id:1,
+        type:"pillar",
+        name:"柱子",
+        icon:require('./../assets/comps/room.png'),
+        defStyle:{
+          width:15,
+          height:15
+        },
+        styleObject:{
+          width:'16px',
+          height:'16px',
+          marginTop:'16px'
+        }
+      },{
+        id:1,
+        type:"img",
         name:"灭火器",
         icon:require('./../assets/comps/miehuoqi.png'),
         defStyle:{
           width:64,
-          height:64,
-          startX:0,
-          startY:0
+          height:64
         },
       },{
         id:2,
-        type:"bangongzhuo",
+        type:"img",
         name:"办公桌",
         icon:require('./../assets/comps/bangongzhuo.png'),
         defStyle:{
           width:64,
-          height:64,
-          startX:0,
-          startY:0
+          height:64
         },
       },{
         id:3,
-        type:"lengji",
+        type:"img",
         name:"冷机",
         icon:require('./../assets/comps/lengji.png'),
         defStyle:{
           width:50,
-          height:64,
-          startX:0,
-          startY:0
+          height:64
         },
         styleObject:{
           width:'25px'
         }
       },{
         id:4,
-        type:"chaifa",
+        type:"img",
         name:"柴发",
         icon:require('./../assets/comps/chaifa.png'),
         defStyle:{
           width:110,
-          height:40,
-          startX:0,
-          startY:0
+          height:40
         },
         styleObject:{
           width:'55px',

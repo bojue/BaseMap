@@ -1,24 +1,78 @@
 <template>
  <div id="content">
     <div id="canvas" ref='cont'>
-      <img class="icon" 
-        v-for="(item, index) in edrawComps" :key="index" 
-        v-bind:src="item.icon" 
+      <!--遍历组件数组:图片-img,横线-lien_row,竖线-line_colu,柱子-pillar -->
+      <div class="comp-item"
+        v-for="(item, index) in edrawComps" :key="index"
+        @click="selectItem(item, index)"
+        @dragstart="dragComp($event, item, 'start', index)"
+        @drag="dragComp($event, item, 'drag', index)"
+        @dragend="dragComp($event, item,'end', index)"
         v-bind:style="{
             width:item.style.width +'px',
             height:item.style.height +'px',
             top:(item.style.top - rect.y) +'px',
             left:(item.style.left - rect.x) +'px',
             position:item.style.position
-        }" 
-        v-bind:title="item.name"
-        v-bind:alt="item.name" 
-        v-bind:class="{active:item.isActive}"
-        v-bind:draggable="item.active"
-        @click="selectItem($event, item, index)"
-        @dragstart="dragComp($event, item, 'start', index)"
-        @drag="dragComp($event, item, 'drag', index)"
-        @dragend="dragComp($event, item,'end', index)">
+        }"
+        v-bind:draggable="item.isActive">
+
+        <!-- 1.img -->
+        <img class="comp-img icon"
+          v-if="item.type === 'img'" 
+          v-bind:src="item.icon" 
+          v-bind:style="{
+              height:item.style.height +'px'
+          }" 
+          v-bind:title="item.name"
+          v-bind:alt="item.name" 
+          v-bind:class="{active:item.isActive}">
+
+        <!-- 2.line_colu  -->
+        <div class="line comp-line_colu"
+          v-if="item.type === 'line_colu'"
+          v-bind:style="{
+            height:item.style.height +'px'
+          }"
+          v-bind:class="{active:item.isActive}">
+        </div>
+
+        <!-- 3.line_row  -->
+        <div class="line comp-line_row"
+          v-if="item.type === 'line_row'"
+          v-bind:style="{
+            with:item.style.width +'px'
+          }"
+          v-bind:class="{active:item.isActive}">
+        </div>
+
+        <!-- 4.柱子 -->
+        <div class="line comp-pillar"
+          v-if="item.type === 'pillar'"
+          v-bind:style="{
+            height:item.style.height +'px',
+            with:item.style.width +'px'
+          }"
+          v-bind:class="{active:item.isActive}">
+
+        </div>
+
+        <!-- 5.盒子 -->
+        <div class="line comp-room"
+          v-if="item.type === 'room'"
+          v-bind:style="{
+            width:item.style.width +'px',
+            height:item.style.height +'px',
+          }"
+          v-bind:class="{active:item.isActive}">
+          <span class="comp-room-inset"
+            v-bind:style="{
+              width:item.style.width +'px',
+              height:item.style.height +'px',
+            }"></span>
+        </div>
+      </div>
+
   </div>
   <div class="control">
       <img class="del"  
@@ -56,10 +110,9 @@ export default {
     this.rect = dom && dom.getBoundingClientRect();
   },
   methods: {
-    selectItem:function(event, comp, index) {
+    selectItem:function(comp, index) {
       this.$emit('initCompsState',index);
       comp.isActive = true;
-      event.preventDefault()
     },
     delComp:function() {
       this.$emit('delComp', this.currentActiveIndex);
@@ -73,12 +126,6 @@ export default {
         comp.isActive = true;
       } else {
         this.$emit('dragComp',event, comp, state, index, this.rect)
-        // let _now = new Date().getTime();
-        // if(!this.timerState.lastTime || _now - this.timerState.lastTime > this.timerState.waitTime) {
-        //   console.log(_now)
-        // this.$emit('dragComp',event, comp, state, index, this.rect)
-        // this.timerState.lastTime = _now;
-        // }
       }
     }
   }
@@ -97,10 +144,14 @@ export default {
 }
 
 img {
-  cursor: move;
   border:1px solid transparent;
 }
-.active {
+.comp-item {
+  user-select: none;
+  cursor: move;
+  z-index: 1000;
+}
+.comp-item .active {
   border:1px solid rgba(225,00,00,0.8)
 }
 
@@ -133,5 +184,34 @@ img {
 }
 .delDef {
   opacity: 0.3;
+}
+.comp-img {
+
+}
+.comp-line_colu {
+    width: 5px;
+    background: #ffffff;
+    box-shadow: 0px 0px 14px -1px rgba(0,0,0,1);
+}
+.comp-line_row {
+    height: 5px;
+    background: #ffffff;
+    box-shadow: 0px 0px 14px -1px rgba(0,0,0,1);
+}
+.comp-pillar {
+  width: 15px;
+  height: 15px;
+  background: #fff;
+}
+.comp-pillar-shadow {
+  box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.4);
+}
+.comp-room {
+  border: 4px solid #ffffff;
+  box-shadow: 1px 0px 8px 0px rgba(0,0,0,0.6);
+}
+.comp-room-inset {
+  display: inline-block;
+  box-shadow: inset 0px 0px 26px -11px rgba(13,13,13,0.8);
 }
 </style>
