@@ -4,7 +4,7 @@
 
 ## 预览
 
-![DEMO](./assets/demo.png)
+![DEMO](assets/demo.png)
 
 ## 下载
 ```
