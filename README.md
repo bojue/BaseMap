@@ -4,7 +4,7 @@
 
 ## 预览
 
-![DEMO](assets/demo.png)
+![DEMO](https://github.com/bojue/BaseMap/tree/master/src/assets/demo.png)
 
 ## 下载
 ```
