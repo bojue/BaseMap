@@ -18,17 +18,20 @@
 </template>
 
 <script>
-import EditorComps from './editor-comps'
+import EditorComps from './editor-comps';
 import EditorCanvas from './editor-canvas';
-import EditorSettings from './editor-settings'
+import EditorSettings from './editor-settings';
 
 export default {
   name: 'Editor',
+  created:function() {
+    document.addEventListener('keydown', this.kaydownFun)
+  },
   data(){
      return {
         eStates:{
           currentActiveIndex:-1,
-          copyActiveBool:false,
+          copyByKeyBool:false,
         },
         edrawComponents:[],
         configs:{
@@ -44,6 +47,7 @@ export default {
     'editor-settings':EditorSettings
   },
   methods: {
+    
     // 组件选择
     selectComp(data) {
       let {event, comp} = data;
@@ -68,7 +72,6 @@ export default {
       this.edrawComponents.push(item);
       this.eStates.currentActiveIndex = this.edrawComponents.length -1;
     },
-
     initComponentState(currnent) {
       if(currnent === undefined || currnent === null) return;
       this.initCompState();     
@@ -82,7 +85,6 @@ export default {
         this.edrawComponents[i].isActive = false;
       }
     },
-
     // 组件拖拽
     dragCurrentComp(event, comp, state, currentIndex, canvesRect) {
       if(state === 'start') {
@@ -99,13 +101,33 @@ export default {
         comp.style.top = top;
       }
     },
-
     // 组件删除
     delCompByIndex() {
       if(this.eStates.currentActiveIndex > -1 &&this.edrawComponents.length > 0) {
         this.edrawComponents.splice(this.eStates.currentActiveIndex,1)
         this.eStates.currentActiveIndex = -1;
       }
+    },
+    // 键盘拷贝事件
+    kaydownFun(event) {
+      if(this.eStates.currentActiveIndex === -1 || !event.ctrlKey) return; 
+      if(event.key === 'c') {
+        this.copyByKeyBool = true;
+      }else if(this.copyByKeyBool && event.key === 'v') {
+        this.copyCurrentComp();
+      }
+    },
+    // 创建当前组件
+    copyCurrentComp:function() {
+      let _currComp = this.edrawComponents[this.eStates.currentActiveIndex];
+      if(!_currComp) return;
+      _currComp.isActive = false;
+      let _copy = JSON.parse(JSON.stringify(_currComp));
+      let _style = _currComp.style;
+      _copy.style.top = _style.height + _style.top + 1;
+      _copy.isActive = true;
+      this.edrawComponents.push(_copy);
+      this.eStates.currentActiveIndex = this.edrawComponents.length - 1; //更新激活组件的下标
     }
   }
 }
