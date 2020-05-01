@@ -151,7 +151,7 @@ img {
 }
 
 #canvas {
-    width: 1500px;
+    width: 1450px;
     height: 802px;
     background-image: linear-gradient(rgba(200,205,208,.3) 1px,transparent 0),
                       linear-gradient(90deg,rgba(200,205,208,.3),1px,transparent 0),

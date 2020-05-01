@@ -96,7 +96,7 @@ export default {
 #settings {
   position: relative;
   background: #eee;
-  min-height: 800px;
+  min-height: 820px;
   height: 60px;
   padding: 0px;
 }
