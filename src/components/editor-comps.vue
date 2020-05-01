@@ -8,7 +8,7 @@
         {{tit.name}}
       </span>
     </div>
-    <div class="comps">
+    <div class="comps" v-if="currentCategory === 'tools'">
       <span 
         class="item item-comp" 
         draggable="true" 
@@ -21,6 +21,21 @@
         <span class="name"> {{item.name}}</span>
       </span>
     </div>
+    <div class="elements" v-if="currentCategory === 'elements'">
+      <span 
+        class="item item-element" 
+        v-for="(item, index) in elements" :key="index"
+        v-bind:class="{active:item.isActive}"
+        @click="selectElement(index)"
+        >
+        <span class="index">{{index + 1}}</span>
+        <img class="icon" 
+          v-bind:src="item.icon" 
+          alt="">
+        <span class="name"> {{item.name}}</span>
+        <span v-if="item.isActive" class="activeState"></span>
+      </span> 
+    </div>
   </div>
 </template>
 
@@ -29,10 +44,11 @@
 export default {
   name: 'EditorComps',
   props: {
-
+    elements:Array
   },
   data() {
     return {
+      currentCategory:'tools',
       compTits:[{
         id:1,
         name:"组件库",
@@ -152,12 +168,18 @@ export default {
     // Tab切换，目前只有一个组件库:tools
     selCategory: function(categroy) {
       if(categroy.isActive) return;
+      this.currentCategory= categroy.type;
       let len = this.compTits.length;
       for(let i=0;i< len;i++) {
         this.compTits[i].isActive = false;
       }
       categroy.isActive = true;
-    }
+    },
+
+    // 元素选择
+    selectElement:function(index) {
+      this.$emit('initCompsState',index);
+    },
   }
 }
 
@@ -190,6 +212,7 @@ export default {
   border-bottom: 1px solid red;
 }
 
+/* 组件库 */
 .comps {
   margin: 5px 2px;
   display: inline-grid;
@@ -222,5 +245,53 @@ export default {
   color: #666;
 }
 
+/* 元素列表 */
+.elements {
+  position: relative;
+  margin: 5px 2px;
+  background: #fff;
+  font-size: 12px;
+}
 
+.elements .item-element{
+  cursor: pointer;
+  padding: 3px 10px;
+  display: inline-block;
+  position: relative;
+  width: 90%;
+  height: 26px;
+  line-height: 26px;
+  border-bottom: 1px solid rgba(200,205,208,.3);
+}
+.item-element.active {
+  background: bisque;
+}
+.item-element .index {
+  display: inline-block;
+  width: 15px;
+}
+.item-element .icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+}
+.item-element .name {
+  margin-left: 25px;
+}
+.item-element:hover {
+  background: bisque;
+}
+.item-element:hover .name{
+  color:red !important;
+}
+.activeState {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 10px;
+  right: 10px;
+  background: green;
+  border-radius: 50%;
+}
 </style>

@@ -4,7 +4,7 @@
       <!--遍历组件数组:图片-img,横线-lien_row,竖线-line_colu,柱子-pillar -->
       <div class="comp-item"
         v-for="(item, index) in edrawComps" :key="index"
-        @click="selectItem(item, index)"
+        @click="selectItem(index)"
         @dragstart="dragComp($event, item, 'start', index)"
         @drag="dragComp($event, item, 'drag', index)"
         @dragend="dragComp($event, item,'end', index)"
@@ -112,7 +112,6 @@ export default {
   methods: {
     selectItem:function(comp, index) {
       this.$emit('initCompsState',index);
-      comp.isActive = true;
     },
     delComp:function() {
       this.$emit('delComp', this.currentActiveIndex);

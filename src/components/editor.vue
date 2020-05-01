@@ -1,6 +1,8 @@
 <template>
   <div id="editor">
     <editor-comps 
+      v-bind:elements="edrawComponents"
+      v-on:initCompsState="initComponentState" 
       v-on:selectComp="selectComp"></editor-comps>
     <editor-canvas 
       v-bind:edrawComps="edrawComponents"
@@ -54,8 +56,10 @@ export default {
     },
 
     initComponentState(currnent) {
+      console.log(currnent)
+      this.initCompState();     
       this.eStates.currentActiveIndex = currnent;
-      this.initCompState();
+      this.edrawComponents[currnent].isActive = true;
     },
     // 初始化画布内组件状态
     initCompState() {
