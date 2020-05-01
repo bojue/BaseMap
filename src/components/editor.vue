@@ -12,6 +12,7 @@
     <editor-settings
       v-bind:currentActiveIndex="eStates.currentActiveIndex"
       v-bind:currentElement="edrawComponents[eStates.currentActiveIndex]"
+      v-bind:configs="configs"
       v-on:delComp="delCompByIndex"></editor-settings>
   </div>
 </template>
@@ -26,9 +27,15 @@ export default {
   data(){
      return {
         eStates:{
-          currentActiveIndex:-1
+          currentActiveIndex:-1,
+          copyActiveBool:false,
         },
         edrawComponents:[],
+        configs:{
+          pageName:'底图',
+          spacing:10,
+          dowloadImgType:'png'
+        }
      }
   },
   components: {
@@ -64,7 +71,6 @@ export default {
 
     initComponentState(currnent) {
       if(currnent === undefined || currnent === null) return;
-      console.log("选择下标", currnent)
       this.initCompState();     
       this.eStates.currentActiveIndex = currnent;
       this.edrawComponents[currnent].isActive = true;
@@ -108,6 +114,7 @@ export default {
 <style>
 
 #editor {
+  margin-top: 60px;
   padding: 0;
   position: relative;
   color: #2c3e50;

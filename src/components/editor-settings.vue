@@ -1,6 +1,14 @@
 <template>
  <div id="settings">
-  <div class="element" v-if="currentElement">
+  <div class="setting-config config">
+    <div class="item">
+      <span class="page-name"> 页面名称:</span>
+      <input type="text" class="name-val" v-model="configs.pageName"  placeholder="页面名称（下载时使用）">
+    </div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+  <div class="setting-element element" v-if="currentElement">
     <div class="item">
       <span class="name">{{currentElement.name}}</span>
     </div>
@@ -70,8 +78,9 @@
 
 export default {
   props: {
-    currentElement:Object,
+    currentElement:Object, //当前组件
     currentActiveIndex:Number, // 编辑状态管理
+    configs:Object, //页面对象
   },
   data() {
     return {
@@ -99,6 +108,20 @@ export default {
   min-height: 820px;
   height: 60px;
   padding: 0px;
+}
+.setting-config {
+  position: fixed;
+  top:0px;
+  left: 0px;
+  width: 1000px;
+  margin-left: 205px;
+  font-size: 16px;
+}
+.page-name {
+  padding: 10px;
+}
+.name-val {
+  padding: 5px 10px;
 }
 .item {
   margin: 10px;

@@ -15,6 +15,7 @@
             left:(item.style.left - rect.x) +'px',
             position:item.style.position,
         }"
+        v-bind:class="{active:item.isActive}"
         v-bind:draggable="item.isActive">
         <!-- 1.img -->
         <img class="comp-img icon"
@@ -140,10 +141,12 @@ img {
 .comp-item {
   user-select: none;
   cursor: move;
-  z-index: 1000;
+}
+.active {
+  z-index: 99;
 }
 .comp-item .active {
-  border:1px solid rgba(225,0,00,0.8)
+  border:1px solid rgba(225,0,00,0.8);
 }
 .comp-item .comp-room.active {
   border:4px solid white;
