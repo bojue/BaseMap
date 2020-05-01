@@ -24,6 +24,7 @@
     <div class="elements" v-if="currentCategory === 'elements'">
       <span 
         class="item item-element" 
+        draggable="false" 
         v-for="(item, index) in elements" :key="index"
         v-bind:class="{active:item.isActive}"
         @click="selectElement(index)"
@@ -35,6 +36,9 @@
         <span class="name"> {{item.name}}</span>
         <span v-if="item.isActive" class="activeState"></span>
       </span> 
+      <span v-if="!elements.length" class="item item-element noElement">
+        当前页面没有元素
+      </span>
     </div>
   </div>
 </template>
@@ -108,7 +112,8 @@ export default {
         icon:require('./../assets/comps/miehuoqi.png'),
         defStyle:{
           width:64,
-          height:64
+          height:64,
+          borderRadius:'50'
         },
       },{
         id:2,
@@ -268,7 +273,7 @@ export default {
 }
 .item-element .index {
   display: inline-block;
-  width: 15px;
+  width: 20px;
 }
 .item-element .icon {
   position: absolute;
@@ -293,5 +298,9 @@ export default {
   right: 10px;
   background: green;
   border-radius: 50%;
+}
+.noElement {
+  text-align: center;
+  color: #000;
 }
 </style>

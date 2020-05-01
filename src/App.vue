@@ -13,7 +13,7 @@ export default {
     Editor
   },
   methods: {
-
+   
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
- <div id="content">
-    <div id="canvas" ref='cont'>
+ <div id="content" @click="clickContent">
+    <div id="canvas">
       <!--遍历组件数组:图片-img,横线-lien_row,竖线-line_colu,柱子-pillar -->
       <div class="comp-item"
         v-for="(item, index) in edrawComps" :key="index"
@@ -13,7 +13,7 @@
             height:item.style.height +'px',
             top:(item.style.top - rect.y) +'px',
             left:(item.style.left - rect.x) +'px',
-            position:item.style.position
+            position:item.style.position,
         }"
         v-bind:draggable="item.isActive">
 
@@ -22,7 +22,8 @@
           v-if="item.type === 'img'" 
           v-bind:src="item.icon" 
           v-bind:style="{
-              height:item.style.height +'px'
+              height:item.style.height +'px',
+              borderRadius:item.style.borderRadius +'%'
           }" 
           v-bind:title="item.name"
           v-bind:alt="item.name" 
@@ -75,6 +76,9 @@
 
   </div>
   <div class="control">
+      <div class="screen-tree">
+
+      </div>
       <img class="del"  
         v-bind:class="{
           delDef:currentActiveIndex === -1
@@ -110,7 +114,7 @@ export default {
     this.rect = dom && dom.getBoundingClientRect();
   },
   methods: {
-    selectItem:function(comp, index) {
+    selectItem:function(index) {
       this.$emit('initCompsState',index);
     },
     delComp:function() {
@@ -126,6 +130,9 @@ export default {
       } else {
         this.$emit('dragComp',event, comp, state, index, this.rect)
       }
+    },
+    clickContent:function(event) {
+       console.log(event)
     }
   }
 }

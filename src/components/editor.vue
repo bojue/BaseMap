@@ -10,12 +10,15 @@
       v-on:initCompsState="initComponentState" 
       v-on:dragComp="dragCurrentComp"
       v-on:delComp="delCompByIndex"></editor-canvas>
+    <editor-settings
+      v-bind:currentActiveIndex="eStates.currentActiveIndex"></editor-settings>
   </div>
 </template>
 
 <script>
 import EditorComps from './editor-comps'
 import EditorCanvas from './editor-canvas';
+import EditorSettings from './editor-settings'
 
 export default {
   name: 'Editor',
@@ -30,6 +33,7 @@ export default {
   components: {
     'editor-comps':EditorComps,
     'editor-canvas':EditorCanvas,
+    'editor-settings':EditorSettings
   },
   methods: {
     // 组件选择
@@ -39,7 +43,7 @@ export default {
       if(!item) return;
       this.initCompState();
       item.isActive = true;
-      let {width, height} = item.defStyle;
+      let {width, height, borderRadius} = item.defStyle;
       let {clientX , clientY} = event;
       let _style = {
           width:width || 100,
@@ -48,7 +52,8 @@ export default {
           left:clientX || 100,
           drag_start_x: 0, //拖拽相对
           drag_start_y :0,
-          position:'absolute'
+          position:'absolute',
+          borderRadius:borderRadius || 0
       }
       item.style = _style;
       this.edrawComponents.push(item);
@@ -56,7 +61,8 @@ export default {
     },
 
     initComponentState(currnent) {
-      console.log(currnent)
+      if(currnent === undefined || currnent === null) return;
+      console.log("选择下标", currnent)
       this.initCompState();     
       this.eStates.currentActiveIndex = currnent;
       this.edrawComponents[currnent].isActive = true;
