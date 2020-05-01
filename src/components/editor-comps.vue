@@ -156,11 +156,7 @@ export default {
   methods: {
     // 组件拖拽完成
     dragEnd: function(event, comp) {
-      let data = {
-        event:event, 
-        comp:comp
-      }
-      this.$emit('selectComp', data);
+      this.$emit('selectComp', event, comp);
     },
 
     // 开始拖拽组件

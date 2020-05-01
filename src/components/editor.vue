@@ -49,8 +49,7 @@ export default {
   methods: {
     
     // 组件选择
-    selectComp(data) {
-      let {event, comp} = data;
+    selectComp(event, comp) {
       let item = JSON.parse(JSON.stringify(comp));
       if(!item) return;
       this.initCompState();
@@ -93,7 +92,7 @@ export default {
         this.eStates.currentActiveIndex = currentIndex;
         comp.style.drag_start_x = event.clientX - comp.style.left;
         comp.style.drag_start_y = event.clientY - comp.style.top;
-      }else{
+      }else if(state === 'drag'){
         let _left = event.clientX - comp.style.drag_start_x; 
         let _top = event.clientY - comp.style.drag_start_y;
         if(_left <0 || _top < 0) return;
@@ -118,8 +117,7 @@ export default {
       }else if(this.eStates.copyByKeyBool && event.key === 'v') {
         this.copyCurrentComp();
       }
-      if(event.key === 'Delete') {
-        console.log(event)
+      if(event.key === 'Delete' || this.isMac() && event.key === 'Backspace')  {
         this.delCompByIndex();
       }
     },
@@ -134,6 +132,9 @@ export default {
       _copy.isActive = true;
       this.edrawComponents.push(_copy);
       this.eStates.currentActiveIndex = this.edrawComponents.length - 1; //更新激活组件的下标
+    },
+    isMac:function() {
+      return /macintosh|mac os x/i.test(navigator.userAgent)
     }
   }
 }
