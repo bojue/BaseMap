@@ -84,9 +84,11 @@ export default {
       for(let i=0;i<len;i++) {
         this.edrawComponents[i].isActive = false;
       }
+      this.eStates.copyByKeyBool = false;
     },
     // 组件拖拽
     dragCurrentComp(event, comp, state, currentIndex, canvesRect) {
+      this.eStates.copyByKeyBool = false;
       if(state === 'start') {
         this.eStates.currentActiveIndex = currentIndex;
         comp.style.drag_start_x = event.clientX - comp.style.left;
@@ -112,8 +114,8 @@ export default {
     kaydownFun(event) {
       if(this.eStates.currentActiveIndex === -1 || !event.ctrlKey) return; 
       if(event.key === 'c') {
-        this.copyByKeyBool = true;
-      }else if(this.copyByKeyBool && event.key === 'v') {
+        this.eStates.copyByKeyBool = true;
+      }else if(this.eStates.copyByKeyBool && event.key === 'v') {
         this.copyCurrentComp();
       }
     },

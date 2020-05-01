@@ -256,6 +256,8 @@ export default {
   margin: 5px 2px;
   background: #fff;
   font-size: 12px;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .elements .item-element{
