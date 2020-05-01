@@ -112,11 +112,15 @@ export default {
     },
     // 键盘拷贝事件
     kaydownFun(event) {
-      if(this.eStates.currentActiveIndex === -1 || !event.ctrlKey) return; 
+      if(this.eStates.currentActiveIndex === -1) return; 
       if(event.key === 'c') {
         this.eStates.copyByKeyBool = true;
       }else if(this.eStates.copyByKeyBool && event.key === 'v') {
         this.copyCurrentComp();
+      }
+      if(event.key === 'Delete') {
+        console.log(event)
+        this.delCompByIndex();
       }
     },
     // 创建当前组件
