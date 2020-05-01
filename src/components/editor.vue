@@ -8,10 +8,11 @@
       v-bind:edrawComps="edrawComponents"
       v-bind:currentActiveIndex="eStates.currentActiveIndex"
       v-on:initCompsState="initComponentState" 
-      v-on:dragComp="dragCurrentComp"
-      v-on:delComp="delCompByIndex"></editor-canvas>
+      v-on:dragComp="dragCurrentComp"></editor-canvas>
     <editor-settings
-      v-bind:currentActiveIndex="eStates.currentActiveIndex"></editor-settings>
+      v-bind:currentActiveIndex="eStates.currentActiveIndex"
+      v-bind:currentElement="edrawComponents[eStates.currentActiveIndex]"
+      v-on:delComp="delCompByIndex"></editor-settings>
   </div>
 </template>
 
@@ -53,6 +54,7 @@ export default {
           drag_start_x: 0, //拖拽相对
           drag_start_y :0,
           position:'absolute',
+          isApplyShadow:'true',
           borderRadius:borderRadius || 0
       }
       item.style = _style;
@@ -104,12 +106,12 @@ export default {
 </script>
 
 <style>
+
 #editor {
   padding: 0;
   position: relative;
   color: #2c3e50;
-  margin-top: 60px;
   display: grid;
-  grid-template-columns: 205px auto;
+  grid-template-columns: 205px auto 205px;
 }
 </style>
