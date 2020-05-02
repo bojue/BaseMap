@@ -253,7 +253,7 @@ export default {
 }
 .aligins {
   position: absolute;
-  right: 310px;
+  right: 163px;
   top:0px;
   cursor: pointer;
 }

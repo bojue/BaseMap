@@ -18,12 +18,20 @@
                  <span class="val"><code>Ctrl</code>+<code>v</code></span>
             </div>
             <div class="item">
-                <span class="name">多选</span>
+                <span class="name"><code>win</code>多选</span>
                 <span class="val"><code>Ctrl</code>+点击</span>
             </div>
             <div class="item">
-                <span class="name">取消多选</span>
-                <span class="val"><code>Ctrl</code>+点击+点击</span>
+                <span class="name"><code>win</code>取消多选</span>
+                <span class="val"><code>Ctrl</code>+点击</span>
+             </div>
+             <div class="item">
+                <span class="name"><code>mac</code>多选</span>
+                <span class="val"><code>Comm</code>+点击</span>
+            </div>
+            <div class="item">
+                <span class="name"><code>mac</code>取消多选</span>
+                <span class="val"><code>Comm</code>+点击</span>
              </div>
          </div>
      </div>
@@ -56,7 +64,7 @@ export default {
 #keyboard {
     position: fixed;
     right: 30px;
-    bottom: 80px;
+    bottom: 30px;
     cursor: pointer;
 }
 #keyboard .icon {
@@ -65,6 +73,7 @@ export default {
     padding: 10px;
     border-radius: 50%;
     box-shadow: 0px 0px 5px rgba(255,0,0,0.2);
+    background:#ccc;
 }
 #keyboard  .icon:hover {
     padding: 11px;
@@ -73,7 +82,7 @@ export default {
 .info {
     position: fixed;
     right: 10px;
-    bottom: 150px;
+    bottom: 120px;
     background: #ccc;
     width: 180px;
     padding: 10px;
