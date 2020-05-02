@@ -1,6 +1,9 @@
 <template>
  <div id="keyboard">
      <img src="./../assets/icon/keyborder.svg" class="icon" @click="showKeyBoadrInfoBool= !showKeyBoadrInfoBool" alt="">
+     <a href="https://github.com/bojue/BaseMap" class="github">
+        <img src="./../assets/github.gif" alt="">
+     </a>
      <div class="info" v-if="showKeyBoadrInfoBool">
          <div class="title">
              快捷操作(<code>Window/Mac</code>)
@@ -91,5 +94,11 @@ code {
     color:green;
     padding: 2px 4px;
 }
-
+.github img {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    left: 10px;
+    bottom: 50px;
+}
 </style>
