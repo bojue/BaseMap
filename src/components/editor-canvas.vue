@@ -1,10 +1,10 @@
 <template>
- <div id="content" @click="clickContent">
+ <div id="content">
     <div id="canvas">
       <!--遍历组件数组:图片-img,横线-lien_row,竖线-line_colu,柱子-pillar -->
       <div class="comp-item"
         v-for="(item, index) in edrawComps" :key="index"
-        @click="selectItem(index)"
+        @click="selectItem($event, index)"
         @dragstart="dragComp($event, item, 'start', index)"
         @drag="dragComp($event, item, 'drag', index)"
         @dragend="dragComp($event, item,'end', index)"
@@ -18,54 +18,70 @@
         v-bind:class="{active:item.isActive}"
         v-bind:draggable="item.isActive">
         <!-- 1.img -->
-        <img class="comp-img icon"
+        <img class="comp-element comp-img icon"
           v-if="item.type === 'img'" 
           v-bind:src="item.icon" 
           v-bind:style="{
+              width:item.style.width +'px',
               height:item.style.height +'px',
               borderRadius:item.style.borderRadius +'%'
           }" 
           v-bind:title="item.name"
           v-bind:alt="item.name" 
-          v-bind:class="{active:item.isActive, isShadow:item.style.isApplyShadow ==='true'}">
+          v-bind:class="{
+            active:item.isActive, 
+            isShadow:item.style.isApplyShadow ==='true',
+            multipleActive:item.multipleActiveBool}">
 
         <!-- 2.line_colu  -->
-        <div class="line comp-line_colu"
+        <div class="comp-element line comp-line_colu"
           v-if="item.type === 'line_colu'"
           v-bind:style="{
             height:item.style.height +'px'
           }"
-          v-bind:class="{active:item.isActive,isShadow:item.style.isApplyShadow ==='true'}">
+          v-bind:class="{
+            active:item.isActive, 
+            isShadow:item.style.isApplyShadow ==='true',
+            multipleActive:item.multipleActiveBool}">
         </div>
 
         <!-- 3.line_row  -->
-        <div class="line comp-line_row"
+        <div class="comp-element line comp-line_row"
           v-if="item.type === 'line_row'"
           v-bind:style="{
             with:item.style.width +'px'
           }"
-          v-bind:class="{active:item.isActive,isShadow:item.style.isApplyShadow ==='true'}">
+          v-bind:class="{
+            active:item.isActive, 
+            isShadow:item.style.isApplyShadow ==='true',
+            multipleActive:item.multipleActiveBool}">
         </div>
 
         <!-- 4.柱子 -->
-        <div class="line comp-pillar comp-pillar-shadow "
+        <div class="comp-element line comp-pillar comp-pillar-shadow "
           v-if="item.type === 'pillar'"
           v-bind:style="{
             height:item.style.height +'px',
             with:item.style.width +'px'
           }"
-          v-bind:class="{active:item.isActive,isShadow:item.style.isApplyShadow ==='true'}">
+          v-bind:class="{
+            active:item.isActive, 
+            isShadow:item.style.isApplyShadow ==='true',
+            multipleActive:item.multipleActiveBool}">
 
         </div>
 
         <!-- 5.盒子 -->
-        <div class="line comp-room"
+        <div class="comp-element line comp-room"
           v-if="item.type === 'room'"
           v-bind:style="{
             width:item.style.width +'px',
             height:item.style.height +'px',
           }"
-          v-bind:class="{active:item.isActive, isShadow:item.style.isApplyShadow ==='true'}">
+          v-bind:class="{
+            active:item.isActive, 
+            isShadow:item.style.isApplyShadow ==='true',
+            multipleActive:item.multipleActiveBool}">
           <span class="comp-room-inset"
             v-bind:style="{
               width:item.style.width +'px',
@@ -104,8 +120,8 @@ export default {
     this.rect = dom && dom.getBoundingClientRect();
   },
   methods: {
-    selectItem:function(index) {
-      this.$emit('initCompsState',index);
+    selectItem:function(event, index) {
+      this.$emit('initCompsState',index, event);
     },
     // 拖拽图片，注释了节流优化
     dragComp:function(event, comp, state, index) {
@@ -117,9 +133,6 @@ export default {
         this.$emit('dragComp',event, comp, state, index, this.rect)
       }
     },
-    clickContent:function(event) {
-       console.log(event)
-    }
   }
 }
 
@@ -143,7 +156,10 @@ img {
   cursor: move;
 }
 .active {
-  z-index: 99;
+  z-index: 11;
+}
+.multipleActive {
+  border:1px solid red ;
 }
 .comp-item .active {
   border:1px solid rgba(225,0,00,0.8);

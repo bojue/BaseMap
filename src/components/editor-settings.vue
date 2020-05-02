@@ -2,13 +2,19 @@
  <div id="settings">
   <div class="setting-config config">
     <div class="item">
-      <span class="page-name"> 页面名称:</span>
-      <input type="text" class="name-val" v-model="configs.pageName"  placeholder="页面名称（下载时使用）">
+
     </div>
     <div class="item"></div>
-    <div class="item"></div>
+    <div class="item">
+      <div class="title">背景</div>
+      <div class="bgs">
+        <span class="bg white"></span>
+        <span class="bg gray"></span>
+        <span class="bg "></span>
+      </div>
+    </div>
   </div>
-  <div class="setting-element element" v-if="currentElement">
+  <div class="setting-element element" v-if="currentElement && multipleActiveArr.length === 0">
     <div class="item">
       <span class="name">{{currentElement.name}}</span>
     </div>
@@ -68,8 +74,79 @@
       v-bind:class="{
         delDef:currentActiveIndex === -1
       }"
-      @click="delComp($event)" src="./../assets/icon/delete.svg" alt="">
+      @click="delComp()" src="./../assets/icon/delete.svg" alt="">
   </div>
+  </div>
+
+   <div class="setting-element element" v-if="currentActiveIndex === -1">
+    <div class="item">
+      <span class="name">{{'多选操作'}}</span>
+    </div>
+    <div class="item">
+      <label for="" class="title">阴影</label>
+      <div class="subs">
+        <div class="subs-item">
+          <input class="val-cb"
+            type="checkbox"
+            v-model="multipleApplyShadow"
+            true-value=true
+            false-value=false
+            @change="setMultipleState('isApplyShadow', multipleApplyShadow)"
+          >
+          <span class="val">应用阴影</span>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+        <label for="" class="title">圆角</label>
+        <div class="subs">
+          <div class="subs-item">
+          <select class="val-s" 
+            v-model="multipleApplyBorderRadius"
+             @change="setMultipleState('borderRadius', multipleApplyBorderRadius)">
+            <option v-bind:value="0">无</option>
+            <option v-bind:value="50">圆角</option>
+          </select>
+        </div>
+      </div>
+  </div>
+  <div class="item del-item">
+    <img class="del"  
+      v-bind:class="{
+        delDef:currentActiveIndex === -1
+      }"
+      @click="setMultipleState('reSel')" src="./../assets/icon/reSel.svg" alt="反选" title="反选">
+  </div>
+  <div class="item del-item">
+    <img class="del"  
+      v-bind:class="{
+        delDef:currentActiveIndex === -1
+      }"
+      @click="setMultipleState('clear')" src="./../assets/icon/clear.svg" alt="清空多选" title="清空多选">
+  </div>
+  <div class="item del-item">
+    <img class="del"  
+      v-bind:class="{
+        delDef:currentActiveIndex === -1
+      }"
+      @click="delComp('multipleDel')" src="./../assets/icon/delete.svg" alt="多选删除" title="多选删除">
+  </div>
+  <div class="item">
+      <div class="muls-list">
+        <label for="" class="title">多选列表</label>      
+        <span class="nums">选中
+          <span class="val">{{multipleActiveArr.length}}</span>个组件
+        </span>
+      </div>
+      <div class="muls">
+        <div class="muls-item" v-for="(ele, index) in multipleActiveArr" :key="index">
+          <span class="ele-index">{{index+1}}</span>
+          <img  class="ele-icon" v-bind:src="ele.icon" alt="">
+          <span class="ele-name">{{ele.name}}</span>
+          <img class="ele-del" @click="delMultipComp(ele, index)" src="./../assets/icon/del_sub.svg" alt="">
+        </div>
+      </div>
+    </div>
   </div>
  </div>
 </template>
@@ -81,19 +158,27 @@ export default {
     currentElement:Object, //当前组件
     currentActiveIndex:Number, // 编辑状态管理
     configs:Object, //页面对象
+    multipleActiveArr:Array
   },
   data() {
     return {
-     
+      multipleApplyShadow:'true',
+      multipleApplyBorderRadius:'0',
     }
   },
   mounted:function() {
 
   },
   methods: {
-    delComp:function() {
-      this.$emit('delComp', this.currentActiveIndex);
+    delMultipComp:function(comp, index) {
+      this.$emit('delMultipComp', comp, index);
     },
+    delComp:function(state) {
+      this.$emit('delComp', this.currentActiveIndex, state);
+    },
+    setMultipleState:function(state, val) {
+      this.$emit('setMultipleState',state, val)
+    }
 
   }
 }
@@ -113,20 +198,19 @@ export default {
   position: fixed;
   top:0px;
   left: 0px;
-  width: 1000px;
-  margin-left: 205px;
+  width: 100%;
+  margin-left: 10px;
   font-size: 16px;
+  display: grid;
+  grid-template-columns: 330px 300px 300px auto;
+  border-left: 10px solid red;
 }
-.page-name {
-  padding: 10px;
-}
-.name-val {
-  padding: 5px 10px;
-}
+
 .item {
-  margin: 10px;
-  margin-bottom: 10px;
-  min-height: 40px;
+  padding: 10px;
+  min-height: 30px;
+  line-height: 30px;
+  position: relative;
 }
 .item .name {
   border-left: 5px solid red;
@@ -136,6 +220,26 @@ export default {
   top:0px;
   width: 100%;
   border-bottom: 1px dashed #cccccc;
+}
+.muls-list{
+  font-size: 14px;
+  padding-left: 10px;
+  border-left: 2px solid red;
+  border-bottom:1px dashed #cccccc;
+}
+.item .nums { 
+  font-size: 12px;
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  color:#aaa;
+  overflow-y: auto;
+  height: 479px;
+
+}
+.nums .val {
+  color: red;
+  padding: 5px;
 }
 .title {
   font-size: 16px;
@@ -185,5 +289,47 @@ export default {
 }
 .del:hover {
   box-shadow: 0px 0px 10px red;
+}
+#download {
+  position: absolute;
+  right: 50px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  top: 15px;
+}
+.muls-item {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  border-bottom: 1px solid #ccc;
+}
+.ele-index {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+}
+.ele-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 15px;
+}
+.ele-name {
+  width: 100px;
+  height: 30px;
+  color: #888;
+}
+.ele-name:hover {
+  color: #555;
+}
+.ele-del {
+  opacity: 0.5;
+  width: 25px;
+  position: absolute;
+  right: 10px;
+  top: 6px;
 }
 </style>
