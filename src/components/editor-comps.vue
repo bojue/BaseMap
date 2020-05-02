@@ -183,8 +183,6 @@ export default {
     },
   }
 }
-
-
 </script>
 
 <style scoped>
@@ -252,7 +250,7 @@ export default {
   margin: 5px 2px;
   background: #fff;
   font-size: 12px;
-  height: 100%;
+  height: 99%;
   overflow-y: auto;
 }
 

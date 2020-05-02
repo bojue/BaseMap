@@ -1,6 +1,8 @@
 <template>
  <div id="content">
-    <div id="canvas">
+    <div id="canvas" 
+      v-bind:class="{grid:configs && configs.bg === 'grid'}">
+      
       <!--遍历组件数组:图片-img,横线-lien_row,竖线-line_colu,柱子-pillar -->
       <div class="comp-item"
         v-for="(item, index) in edrawComps" :key="index"
@@ -100,7 +102,8 @@ export default {
   name: 'EditorCanvas',
   props: {
     currentActiveIndex:Number, // 编辑状态管理
-    edrawComps: Array //绘制组件（图片）列表
+    edrawComps: Array, //绘制组件（图片）列表
+    configs:Object
   },
   data() {
     return {
@@ -172,6 +175,9 @@ img {
 #canvas {
     width: 1450px;
     height: 802px;
+    background: #eeeeee;
+}
+#canvas.grid {
     background-image: linear-gradient(rgba(200,205,208,.3) 1px,transparent 0),
                       linear-gradient(90deg,rgba(200,205,208,.3),1px,transparent 0),
                       linear-gradient(#c8cdd0 1px,transparent 0),

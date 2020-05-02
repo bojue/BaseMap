@@ -1,16 +1,15 @@
 <template>
  <div id="settings">
   <div class="setting-config config">
-    <div class="item">
-
-    </div>
-    <div class="item"></div>
-    <div class="item">
-      <div class="title">背景</div>
+    <div class="config-item bg">
+      <div class="name">背景</div>
       <div class="bgs">
-        <span class="bg white"></span>
-        <span class="bg gray"></span>
-        <span class="bg "></span>
+        <span class="bg gray" @click="changeBg('bg', 'gray')">
+          <img src="./../assets/icon/bg-gray.svg" alt="">
+        </span>
+        <span class="bg "  @click="changeBg('bg', 'grid')">
+          <img src="./../assets/icon/bg-grid.svg" alt="">
+        </span>
       </div>
     </div>
   </div>
@@ -178,6 +177,9 @@ export default {
     },
     setMultipleState:function(state, val) {
       this.$emit('setMultipleState',state, val)
+    },
+    changeBg:function(state, val) {
+      this.$emit('changeConfig', state, val)
     }
 
   }
@@ -201,9 +203,32 @@ export default {
   width: 100%;
   margin-left: 10px;
   font-size: 16px;
-  display: grid;
-  grid-template-columns: 330px 300px 300px auto;
+  height: 60px;
   border-left: 10px solid red;
+}
+
+.config-item{
+  display: grid;
+  grid-template-columns: 60px 200px;
+}
+.config-item.bg {
+  position: absolute;
+  right: -12px;
+}
+.config-item .name {
+  text-align: center;
+  line-height: 60px;
+}
+.config-item .bg {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  margin: 15px 5px;
+  display: inline-block;
+}
+.config-item .bg img {
+  width: 30px;
+  height: 30px;
 }
 
 .item {
@@ -332,4 +357,6 @@ export default {
   right: 10px;
   top: 6px;
 }
+
+
 </style>

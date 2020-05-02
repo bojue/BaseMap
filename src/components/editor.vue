@@ -5,6 +5,7 @@
       v-on:initCompsState="initComponentState" 
       v-on:selectComp="selectComp"></editor-comps>
     <editor-canvas 
+      v-bind:configs="configs"
       v-bind:edrawComps="edrawComponents"
       v-bind:currentActiveIndex="eStates.currentActiveIndex"
       v-bind:multipleActiveBool="eStates.multipleActiveBool"
@@ -17,7 +18,8 @@
       v-bind:configs="configs"
       v-on:delComp="delComp"
       v-on:delMultipComp="delMultipComp"
-      v-on:setMultipleState="setMultipleState"></editor-settings>
+      v-on:setMultipleState="setMultipleState"
+      v-on:changeConfig="changeConfig"></editor-settings>
   </div>
 </template>
 
@@ -41,6 +43,7 @@ export default {
         },
         edrawComponents:[],
         configs:{
+          bg:"grid",
           pageName:'底图',
           spacing:10,
           dowloadImgType:'png'
@@ -209,7 +212,6 @@ export default {
         let len = this.eStates.multipleActiveArr.length;
         for(let i=len;i--;i >0) {
           this.eStates.multipleActiveArr[i].style[state] = value;
-          console.log(this.eStates.multipleActiveArr)
         }
       }
     },
@@ -220,6 +222,10 @@ export default {
       if(_index > -1) {
         this.edrawComponents[_index].multipleActiveBool = false;
       }
+    },
+    changeConfig(state, value){
+      if(!this.configs[state]) return;
+      this.configs[state] = value;
     },
     isMac:function() {
       return /macintosh|mac os x/i.test(navigator.userAgent)
