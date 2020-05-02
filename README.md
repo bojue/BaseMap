@@ -1,6 +1,6 @@
 # BaseMap
 
-基于Vue开发的底图配置小工具
+基于Vue开发的底图配置小工具, 在线预览 [DEMO](https://bojue.github.io/BaseMap/dist/)
 
 ## 预览
 
