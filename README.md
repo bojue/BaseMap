@@ -6,6 +6,14 @@
 
 ![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/demo.png)
 
+![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/demo1.png)
+
+## 功能
+- 组件拖拽
+- 属性绑定:样式属性绑定
+- 多选操作:快捷对齐
+- 快捷键:复制粘贴
+
 ## 下载
 ```
 git clone https://github.com/bojue/BaseMap.git
