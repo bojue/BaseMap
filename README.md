@@ -6,7 +6,7 @@
 
 ![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/demo.png)
 
-![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/demo1.png)
+![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/other.png)
 
 ## 功能
 - 组件拖拽
