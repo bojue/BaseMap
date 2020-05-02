@@ -20,6 +20,9 @@
       v-on:delMultipComp="delMultipComp"
       v-on:setMultipleState="setMultipleState"
       v-on:changeConfig="changeConfig"></editor-settings>
+    <editor-help>
+      
+    </editor-help>
   </div>
 </template>
 
@@ -27,6 +30,7 @@
 import EditorComps from './editor-comps';
 import EditorCanvas from './editor-canvas';
 import EditorSettings from './editor-settings';
+import EditorHelp from './editor-help'
 
 export default {
   name: 'Editor',
@@ -53,7 +57,8 @@ export default {
   components: {
     'editor-comps':EditorComps,
     'editor-canvas':EditorCanvas,
-    'editor-settings':EditorSettings
+    'editor-settings':EditorSettings,
+    'editor-help':EditorHelp
   },
   methods: {
     
@@ -213,6 +218,23 @@ export default {
         for(let i=len;i--;i >0) {
           this.eStates.multipleActiveArr[i].style[state] = value;
         }
+      }else if(state === 'align') {
+        switch(value) {
+          case 't' :
+            this.multipArray('top');
+            break;
+          case 'l' :
+            this.multipArray('left');
+            break;
+          case 'b' :
+            this.multipArray('bottom');
+            break;
+          case 'r' :
+            this.multipArray('right');
+            break;
+          default:
+            break;
+        }
       }
     },
     // 删除多选元素
@@ -226,6 +248,34 @@ export default {
     changeConfig(state, value){
       if(!this.configs[state]) return;
       this.configs[state] = value;
+    },
+    multipArray(param) {
+      let list = JSON.parse(JSON.stringify(this.edrawComponents));
+      list.sort(function(a, b) {
+        return ['top', 'left'].indexOf(param) > -1 ? a.style[param] - b.style[param]:
+          param === 'bottom' ?  b.style.top + b.style.height - (a.style.top + a.style.height) :
+          b.style.left + b.style.width - (a.style.left + a.style.width) 
+      });
+      let len = this.edrawComponents.length;
+      let resObj = list[0];
+      if(['top', 'left'].indexOf(param) > -1) {
+        for(let i=0;i<len;i++) {
+          this.edrawComponents[i].style[param] = resObj.style[param];
+        }
+      }else if(param === 'bottom') {
+        let _bottom = resObj.style.top + resObj.style.height;
+        for(let i=0;i<len;i++) {
+          this.edrawComponents[i].style.top = _bottom - this.edrawComponents[i].style.height;
+        }
+      }else if(param === 'right') {
+        console.log(param, resObj)
+        let _right = resObj.style.left + resObj.style.width;
+        for(let i=0;i<len;i++) {
+          console.log(_right)
+          console.log(_right - this.edrawComponents[i].style.width)
+          this.edrawComponents[i].style.left = _right - this.edrawComponents[i].style.width;
+        }
+      }
     },
     isMac:function() {
       return /macintosh|mac os x/i.test(navigator.userAgent)

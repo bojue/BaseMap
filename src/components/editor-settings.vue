@@ -1,15 +1,22 @@
 <template>
  <div id="settings">
   <div class="setting-config config">
+    <div class="config-item name">
+      <span class="baseMap">BaseMap</span>
+    </div>
+    <div class="config-item aligins">
+        <div class="aligin">
+          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'l')"><img src="./../assets/icon/align-l.svg" alt="左对齐" title="左对齐"></div>
+          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 't')"><img src="./../assets/icon/align-t.svg" alt="上对齐" title="上对齐"></div>
+          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'b')"><img src="./../assets/icon/align-b.svg" alt="下对齐" title="下对齐"></div>
+          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'r')"><img src="./../assets/icon/align-r.svg" alt="右对齐" title="右对齐"></div>
+        </div>
+    </div>
     <div class="config-item bg">
       <div class="name">背景</div>
       <div class="bgs">
-        <span class="bg gray" @click="changeBg('bg', 'gray')">
-          <img src="./../assets/icon/bg-gray.svg" alt="">
-        </span>
-        <span class="bg "  @click="changeBg('bg', 'grid')">
-          <img src="./../assets/icon/bg-grid.svg" alt="">
-        </span>
+        <img class="bg-item" src="./../assets/icon/bg-gray.svg"  @click="changeBg('bg', 'gray')" alt="">
+        <img class="bg-item" src="./../assets/icon/bg-grid.svg"   @click="changeBg('bg', 'grid')" alt="">
       </div>
     </div>
   </div>
@@ -197,40 +204,71 @@ export default {
   padding: 0px;
 }
 .setting-config {
-  position: fixed;
-  top:0px;
-  left: 0px;
-  width: 100%;
-  margin-left: 10px;
-  font-size: 16px;
-  height: 60px;
-  border-left: 10px solid red;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    margin-left: 10px;
+    font-size: 16px;
+    height: 60px;
+    border-left: 10px solid red;
+    background: #fff;
+    z-index: 1000;
+    border-bottom: 1px solid #cccccc;
 }
-
+.baseMap {
+  margin: 14px;
+  position: relative;
+  display: block;
+  color: #999;
+  font-size: 25px;
+}
 .config-item{
-  display: grid;
-  grid-template-columns: 60px 200px;
+  height: 60px;
+  width: 300px;
 }
 .config-item.bg {
   position: absolute;
   right: -12px;
+  top:0px;
+  width: 130px;
 }
-.config-item .name {
-  text-align: center;
-  line-height: 60px;
+.bg .name {
+  position: absolute;
+  right: 120px;
+  top: 19px;
+  color:#ccc;
+  width: 50px;
 }
-.config-item .bg {
+.bg .bgs {
+  width: 130px;
+  display: inline-block;
+  height: 60px;
+}
+.bg .bg-item {
   cursor: pointer;
   width: 30px;
   height: 30px;
-  margin: 15px 5px;
-  display: inline-block;
+  padding: 13px 5px;
 }
-.config-item .bg img {
+.aligins {
+  position: absolute;
+  right: 310px;
+  top:0px;
+  cursor: pointer;
+}
+.aligin {
+  width: 300px;
+  margin-top: 15px;
+  display: grid;
+  margin-left: 40px;
+  text-align: center;
+  grid-template-columns: 50px 50px 50px 50px;
+}
+.aligin-item img {
   width: 30px;
   height: 30px;
 }
-
 .item {
   padding: 10px;
   min-height: 30px;
