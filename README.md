@@ -4,7 +4,7 @@
 
 ## 预览
 
-![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/show.png)
+![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/demo.png)
 
 
 ## 功能
