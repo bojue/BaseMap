@@ -107,6 +107,20 @@ export default {
         }
       },{
         id:1,
+        type:"device",
+        name:"设备",
+        icon:require('./../assets/comps/device.png'),
+        defStyle:{
+          width:25,
+          height:25
+        },
+        styleObject:{
+          width:'22px',
+          height:'22px',
+          marginTop:'10px'
+        }
+      },{
+        id:1,
         type:"img",
         name:"灭火器",
         icon:require('./../assets/comps/miehuoqi.png'),

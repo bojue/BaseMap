@@ -6,12 +6,26 @@
     </div>
     <div class="config-item aligins">
         <div class="aligin">
+          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'colu')">
+            <label for="">垂直间距:</label>
+            <input type="number" min="0" max="20" v-model="configs.Isometric_colu">
+            <img class="img" src="./../assets/icon/lsometric_colu.svg" alt="垂直等距" title="垂直等距">
+          </div>
+          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'row')">
+            <label for="">水平间距:</label>
+            <input type="number" min="0" max="20" v-model="configs.Isometric_row">
+            <img class="img" src="./../assets/icon/lsometric_row.svg" alt="水平等距" title="水平等距">
+          </div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'l')"><img src="./../assets/icon/align-l.svg" alt="左对齐" title="左对齐"></div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 't')"><img src="./../assets/icon/align-t.svg" alt="上对齐" title="上对齐"></div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'b')"><img src="./../assets/icon/align-b.svg" alt="下对齐" title="下对齐"></div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'r')"><img src="./../assets/icon/align-r.svg" alt="右对齐" title="右对齐"></div>
+          <div class="aligin-item screen" @click="screen()"><img src="./../assets/icon/screen_full.svg" alt="右对齐" title="右对齐"></div>
         </div>
     </div>
+    <!-- <div class="download">
+      <span class="title" @click="download">下载</span>
+    </div> -->
     <div class="config-item bg">
       <div class="name">背景</div>
       <div class="bgs">
@@ -158,7 +172,6 @@
 </template>
        
 <script>
-
 export default {
   props: {
     currentElement:Object, //当前组件
@@ -186,7 +199,13 @@ export default {
       this.$emit('setMultipleState',state, val)
     },
     changeBg:function(state, val) {
-      this.$emit('changeConfig', state, val)
+      this.$emit('changeConfig', state, val);
+    },
+    screen:function() {
+      this.$emit('screen')
+    },
+    download:function() {
+      this.$emit('download')
     }
 
   }
@@ -253,21 +272,43 @@ export default {
 }
 .aligins {
   position: absolute;
-  right: 163px;
+  right: 610px;
   top:0px;
   cursor: pointer;
 }
 .aligin {
-  width: 300px;
+  width: 610px;
   margin-top: 15px;
   display: grid;
   margin-left: 40px;
   text-align: center;
-  grid-template-columns: 50px 50px 50px 50px;
+  grid-template-columns:160px 160px 50px 50px 50px 50px 50px 50px;
+}
+.aligin-item  {
+  position: relative;
+}
+.aligin-item.screen {
+  z-index: 9999;
+}
+.aligin-item label {
+    padding: 2px 4px;
+    font-size: 12px;
+    position: absolute;
+    top: 6px;
+    left: 0;
+}
+.aligin-item  input {
+  width: 30px;
+  padding: 2px 4px;
+  margin: 4px 12px;
 }
 .aligin-item img {
   width: 30px;
   height: 30px;
+}
+.aligin-item .img {
+  position: absolute;
+  right: 10px;
 }
 .item {
   padding: 10px;
