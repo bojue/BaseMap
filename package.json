@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "html2canvas": "^1.0.0-rc.5",
     "lodash": "^4.17.15",
     "vue": "^2.6.11",
+    "vue-html2canvas": "0.0.4",
     "vue-lodash": "^2.1.2",
     "vue-mention": "^0.1.7"
   },
