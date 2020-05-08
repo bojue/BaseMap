@@ -20,7 +20,7 @@
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 't')"><img src="./../assets/icon/align-t.svg" alt="上对齐" title="上对齐"></div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'b')"><img src="./../assets/icon/align-b.svg" alt="下对齐" title="下对齐"></div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'r')"><img src="./../assets/icon/align-r.svg" alt="右对齐" title="右对齐"></div>
-          <div class="aligin-item screen" @click="screen()"><img src="./../assets/icon/screen_full.svg" alt="右对齐" title="右对齐"></div>
+          <div class="aligin-item screen" @click="screen()"><img src="./../assets/icon/screen_full.svg" alt="全屏预览" title="全屏预览"></div>
         </div>
     </div>
     <!-- <div class="download">

@@ -7,10 +7,8 @@
       left:configs.bgAllBool && 0
     }">
     <div id="canvas"
-      ref="canvas" 
       v-bind:style="{'transform':'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)'}"
-      v-bind:class="{grid:configs.bg === 'grid'}" >
-      
+      v-bind:class="{grid:configs.bg === 'grid'}" >    
       <!--遍历组件数组:图片-img,横线-lien_row,竖线-line_colu,柱子-pillar -->
       <div class="comp-item"
         v-for="(item, index) in edrawComps" :key="index"
@@ -27,6 +25,7 @@
         }"
         v-bind:class="{active:item.isActive}"
         v-bind:draggable="!configs.bgAllBool && item.isActive">
+
         <!-- 1.img -->
         <img class="comp-element comp-img icon"
           v-if="item.type === 'img'" 
@@ -111,6 +110,47 @@
             isShadow:item.style.isApplyShadow ==='true',
             multipleActive:item.multipleActiveBool}">
         </div>
+
+        <!-- 辅助 -->
+        <span class="assist-drag"
+          v-if="!configs.bgAllBool && item.isActive">
+          <span class="adR" 
+            draggable="true"
+            v-bind:style="{
+              left:(item.style.width-6) +'px',
+              top:(item.style.height /2 - 6)+'px',
+            }"
+            @dragstart.stop="resizeByDragComp($event, item, 'start','r', index)"
+            @drag.stop="resizeByDragComp($event, item, 'drag','r', index)"
+            @dragend.stop="resizeByDragComp($event, item,'end', 'r', index)"></span>
+          <span class="adL"
+            draggable="true"
+            v-bind:style="{
+              left:(-6) +'px',
+              top:(item.style.height /2 - 6)+'px',
+            }"
+            @dragstart.stop="resizeByDragComp($event, item, 'start','l', index)"
+            @drag.stop="resizeByDragComp($event, item, 'drag','l', index)"
+            @dragend.stop="resizeByDragComp($event, item,'end', 'l', index)"></span>
+          <span class="adT"
+            draggable="true"
+            v-bind:style="{
+              left:(item.style.width /2 -6) +'px',
+              top:(-6)+'px',
+            }"
+            @dragstart.stop="resizeByDragComp($event, item, 'start','t', index)"
+            @drag.stop="resizeByDragComp($event, item, 'drag','t', index)"
+            @dragend.stop="resizeByDragComp($event, item,'end', 't', index)"></span>
+          <span class="adB"
+            draggable="true"
+            v-bind:style="{
+              left:(item.style.width /2 -6) +'px',
+              top:(item.style.height - 6)+'px',
+            }"
+            @dragstart.stop="resizeByDragComp($event, item, 'start','b', index)"
+            @drag.stop="resizeByDragComp($event, item, 'drag','b', index)"
+            @dragend.stop="resizeByDragComp($event, item,'end', 'b', index)"></span>
+        </span>
       </div>
   </div>
   <div class="slide" v-if="!configs.bgAllBool">
@@ -164,12 +204,21 @@ export default {
     },
     // 拖拽图片，注释了节流优化
     dragComp:function(event, comp, state, index) {
+      console.log('drag ---- > ')
       if(state === 'start') {
         this.$emit('initCompsState',index);
         this.$emit('dragComp',event, comp, state, index, this.rect)
         comp.isActive = true;
       } else {
         this.$emit('dragComp',event, comp, state, index, this.rect)
+      }
+    },
+    resizeByDragComp:function(event, comp, arrow, state, index) {
+      if(event && !event.clientX && !event.clientY) return;
+      if(state === 'start') {
+        this.$emit('resizeByDragComp',event, comp, arrow, state, index)
+      } else {
+        this.$emit('resizeByDragComp',event, comp, arrow, state, index)
       }
     },
     screen:function() {
@@ -208,7 +257,7 @@ export default {
   right: 30px;
   top:10px;
   cursor: pointer;
-  opacity: 0.2;
+  opacity: 0.1;
 }
 .screen:hover {
   opacity: 0.9;
@@ -348,5 +397,20 @@ img {
 }
 .comp-room-inset.isShadow {
   box-shadow: inset 0px 0px 26px -11px rgba(13,13,13,0.8);
+}
+
+.assist-drag span {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border:1px solid red;
+  display: inline;
+  background: #fff;
+}
+.adR, .adL {
+  cursor: ew-resize;
+}
+.adT, .adB {
+  cursor: ns-resize;
 }
 </style>

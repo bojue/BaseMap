@@ -1,9 +1,12 @@
 <template>
   <div id="editor">
+    <!-- 组件库 -->
     <editor-comps 
       v-bind:elements="edrawComponents"
       v-on:initCompsState="initComponentState" 
       v-on:selectComp="selectComp"></editor-comps>
+    
+    <!-- 画布 -->
     <editor-canvas 
       v-bind:configs="configs"
       v-bind:edrawComps="edrawComponents"
@@ -11,7 +14,10 @@
       v-bind:multipleActiveBool="eStates.multipleActiveBool"
       v-on:initCompsState="initComponentState" 
       v-on:dragComp="dragCurrentComp"
+      v-on:resizeByDragComp="resizeByDragComp"
       v-on:screen="screen"></editor-canvas>
+
+    <!-- 组件设置 -->
     <editor-settings
       v-bind:currentActiveIndex="eStates.currentActiveIndex"
       v-bind:currentElement="edrawComponents[eStates.currentActiveIndex]"
@@ -23,9 +29,9 @@
       v-on:changeConfig="changeConfig"
       v-on:download="download"
       v-on:screen="screen"></editor-settings>
-    <editor-help>
-
-    </editor-help>
+    
+    <!-- 帮助 -->
+    <editor-help/>
   </div>
 </template>
 
@@ -156,7 +162,6 @@ export default {
       if(event && (event.ctrlKey || event.metaKey && this.isMac())  ){
         console.log('多选处理')
       } else {
-        this.initCompState();
         this.eStates.copyByKeyBool = false;
         if(state === 'start') {
           this.eStates.currentActiveIndex = currentIndex;
@@ -170,6 +175,75 @@ export default {
           let top = (_top - canvesRect.y) >= 0 ? _top : canvesRect.y; // 处理top边界问题
           comp.style.left = left;
           comp.style.top = top;
+        }
+      }
+    },
+    resizeByDragComp(event, comp, state, arrow,currentIndex) {
+      if(event && (event.ctrlKey || event.metaKey && this.isMac())  ){
+        console.log('多选处理')
+      } else {
+        this.eStates.copyByKeyBool = false;
+        if(state === 'start') {
+          this.eStates.currentActiveIndex = currentIndex;
+          comp.style.drag_start_x = arrow === 'r' ? comp.style.left :
+                                    arrow === 'l' ?comp.style.left + comp.style.width :
+                                    10;
+          comp.style.drag_start_y = arrow === 'b' ? comp.style.top :
+                                    arrow === 't' ?comp.style.top + comp.style.height :
+                                    10;
+        }else if(state === 'drag'){
+          let _width = 0;
+          let _top = 0;
+          let _height = 0;
+          switch(arrow) {
+            case 'r':
+              _width = event.clientX - comp.style.drag_start_x; 
+              comp.style.width = _width >= 10 ? _width: 10;
+              break;
+            case 'l':
+              comp.style.left = event.clientX;
+              _width = comp.style.drag_start_x - event.clientX ; 
+              comp.style.width = _width >= 10 ? _width: 10;
+              break;
+            case 't':
+              comp.style.top = event.clientY;
+              _height = comp.style.drag_start_y - event.clientY;
+              comp.style.height = _height >= 10 ? _height : 10;
+              break;
+            case 'b':
+              _top = event.clientY - comp.style.drag_start_y;
+              comp.style.height = _top >= 10 ? _top: 10;
+              break;
+            default:
+              break
+          }
+
+        }else {
+          let _width = 0;
+          let _top = 0;
+          let _height = 0;
+          switch(arrow) {
+            case 'r':
+              _width = event.clientX - comp.style.drag_start_x; 
+              comp.style.width = _width > 10 ? _width: 10;
+              break;
+            case 'l':
+              comp.style.left = event.clientX;
+              _width = comp.style.drag_start_x - event.clientX ; 
+              comp.style.width = _width >= 10 ? _width: 10;
+              break;
+            case 't':
+              comp.style.top = event.clientY;
+              _height = comp.style.drag_start_y - event.clientY;
+              comp.style.height = _height >= 10 ? _height : 10;
+              break;
+            case 'b':
+               _top = event.clientY - comp.style.drag_start_y;
+              comp.style.height = _top >= 10 ? _top: 10;
+              break;
+            default:
+              break
+          }
         }
       }
     },
@@ -249,7 +323,8 @@ export default {
       _currComp.isActive = false;
       let _copy = JSON.parse(JSON.stringify(_currComp));
       let _style = _currComp.style;
-      _copy.style.top = _style.height + _style.top + 1;
+      let _h = this.configs.Isometric_colu > 1? this.configs.Isometric_colu : 1;
+      _copy.style.top = _style.height + _style.top + _h;
       _copy.isActive = true;
       this.edrawComponents.push(_copy);
       this.eStates.currentActiveIndex = this.edrawComponents.length - 1; //更新激活组件的下标

@@ -8,7 +8,6 @@
 import Editor from './components/editor'
 
 export default {
-  name: 'App',
   components: {
     Editor
   },
