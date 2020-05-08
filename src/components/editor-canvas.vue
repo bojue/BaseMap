@@ -275,10 +275,11 @@ export default {
 }
 .slide {
   position: fixed;
-  top: 24px;
-  left: 211px;
-  z-index: 100000;
+  top: 17px;
+  left: 313px;
+  z-index: 10000;
   user-select: none;
+  font-size: 14px;
 }
 .screen {
   position: absolute;
@@ -301,7 +302,8 @@ export default {
 .slider {
   -webkit-appearance: none;
   width: 150px;
-  height: 10px;
+  height: 6px;
+  color:#2c3e50;
   background: #d3d3d3;
   outline: none;
   opacity: 0.7;

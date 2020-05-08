@@ -4,6 +4,13 @@
     <div class="config-item name">
       <span class="baseMap">BaseMap</span>
     </div>
+    <div class="config-item bg">
+      <div class="name">背景</div>
+      <div class="bgs">
+        <img class="bg-item" src="./../assets/icon/bg-gray.svg"  @click="changeBg('bg', 'gray')" alt="">
+        <img class="bg-item" src="./../assets/icon/bg-grid.svg"   @click="changeBg('bg', 'grid')" alt="">
+      </div>
+    </div>
     <div class="config-item aligins">
         <div class="aligin">
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'colu')">
@@ -20,19 +27,13 @@
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 't')"><img src="./../assets/icon/align-t.svg" alt="上对齐" title="上对齐"></div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'b')"><img src="./../assets/icon/align-b.svg" alt="下对齐" title="下对齐"></div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'r')"><img src="./../assets/icon/align-r.svg" alt="右对齐" title="右对齐"></div>
-          <div class="aligin-item screen" @click="screen()"><img src="./../assets/icon/screen_full.svg" alt="全屏预览" title="全屏预览"></div>
         </div>
     </div>
+    <div class="aligin-item screen" @click="screen()"><img src="./../assets/icon/screen_full.svg" alt="全屏预览" title="全屏预览"></div>
     <!-- <div class="download">
       <span class="title" @click="download">下载</span>
     </div> -->
-    <div class="config-item bg">
-      <div class="name">背景</div>
-      <div class="bgs">
-        <img class="bg-item" src="./../assets/icon/bg-gray.svg"  @click="changeBg('bg', 'gray')" alt="">
-        <img class="bg-item" src="./../assets/icon/bg-grid.svg"   @click="changeBg('bg', 'grid')" alt="">
-      </div>
-    </div>
+   
   </div>
   <div class="setting-element element" v-if="currentElement && multipleActiveArr.length === 0">
     <div class="item">
@@ -267,15 +268,16 @@ export default {
 }
 .config-item.bg {
   position: absolute;
-  right: -12px;
-  top:0px;
+  top: 0px;
+  font-size: 14px;
   width: 130px;
+  left: 230px;
 }
 .bg .name {
   position: absolute;
   right: 120px;
   top: 19px;
-  color:#ccc;
+  color:#2c3e50;
   width: 50px;
 }
 .bg .bgs {
@@ -285,13 +287,13 @@ export default {
 }
 .bg .bg-item {
   cursor: pointer;
-  width: 30px;
-  height: 30px;
-  padding: 13px 5px;
+  width: 22px;
+  height: 22px;
+  padding: 17px 2px;
 }
 .aligins {
   position: absolute;
-  right: 610px;
+  right: 487px;
   top:0px;
   cursor: pointer;
 }
@@ -301,29 +303,33 @@ export default {
   display: grid;
   margin-left: 40px;
   text-align: center;
-  grid-template-columns:160px 160px 50px 50px 50px 50px 50px 50px;
+  grid-template-columns:160px 160px 50px 50px 50px 50px;
 }
 .aligin-item  {
   position: relative;
+  margin-top: 5px;
 }
 .aligin-item.screen {
   z-index: 9999;
+  position: absolute;
+  right: 40px;
+  top: 21px;
 }
 .aligin-item label {
     padding: 2px 4px;
     font-size: 12px;
     position: absolute;
-    top: 6px;
+    top: 0px;
     left: 0;
 }
 .aligin-item  input {
-  width: 30px;
+  width: 40px;
   padding: 2px 4px;
-  margin: 4px 12px;
+  margin-left: 15px;
 }
 .aligin-item img {
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
 }
 .aligin-item .img {
   position: absolute;
