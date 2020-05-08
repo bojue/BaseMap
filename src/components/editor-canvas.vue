@@ -13,9 +13,9 @@
       <div class="comp-item"
         v-for="(item, index) in edrawComps" :key="index"
         @click="selectItem($event, index)"
-        @dragstart="!configs.bgAllBool && dragComp($event, item, 'start', index)"
-        @drag="!configs.bgAllBool && dragComp($event, item, 'drag', index)"
-        @dragend="!configs.bgAllBool && dragComp($event, item,'end', index)"
+        @dragstart="!configs.bgAllBool && item.style.isFixed === 'false' && dragComp($event, item, 'start', index)"
+        @drag="!configs.bgAllBool && item.style.isFixed === 'false' && dragComp($event, item, 'drag', index)"
+        @dragend="!configs.bgAllBool && item.style.isFixed === 'false' && dragComp($event, item,'end', index)"
         v-bind:style="{
             width:item.style.width +'px',
             height:item.style.height +'px',
@@ -24,7 +24,9 @@
             position:item.style.position,
             transform: 'rotate('+ item.style.rotate +'deg)'
         }"
-        v-bind:class="{active:item.isActive}"
+        v-bind:class="{
+          active:item.isActive,
+          roomActive:item.type === 'room'}"
         v-bind:draggable="!configs.bgAllBool && item.isActive">
 
         <!-- 1.img -->
@@ -323,9 +325,13 @@ img {
 .comp-item {
   user-select: none;
   cursor: move;
+  z-index: 1;
 }
 .active {
   z-index: 11;
+}
+.roomActive {
+  z-index: 0;
 }
 .multipleActive {
   border:1px solid red ;

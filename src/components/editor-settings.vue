@@ -50,6 +50,17 @@
           <input type="number" class="val" v-model="currentElement.style.left"> 
         </div>
       </div>
+      <div class="subs">
+        <div class="subs-item">
+          <input class="val-cb"
+            type="checkbox"
+            v-model="currentElement.style.isFixed"
+            true-value=true
+            false-value=false
+          >
+          <span class="val">固定</span>
+        </div>
+      </div>
     </div>
     <div class="item">
       <label for="" class="title">大小</label>

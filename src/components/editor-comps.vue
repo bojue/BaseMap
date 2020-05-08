@@ -76,7 +76,7 @@ export default {
       },{
         id:1,
         type:"line_row",
-        name:"格挡1",
+        name:"水平墙",
         icon:require('./../assets/comps/line_row.png'),
         defStyle:{
           width:100,
@@ -85,7 +85,7 @@ export default {
       },{
         id:1,
         type:"line_colu",
-        name:"格挡2",
+        name:"垂直墙",
         icon:require('./../assets/comps/line_colu.png'),
         defStyle:{
           width:5,

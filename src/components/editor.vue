@@ -47,7 +47,8 @@ export default {
   name: 'Editor',
   created:function() {
     document.addEventListener('keydown', this.kaydownFun);
-    document.addEventListener('mousedown', this.mousedownFun)
+    document.addEventListener('mousedown', this.mousedownFun);
+    window.addEventListener('beforeunload', this.leaving);
   },
   data(){
      return {
@@ -78,6 +79,11 @@ export default {
     'editor-help':EditorHelp
   },
   methods: {
+    leaving(event) {
+      let message = "内容更改，注意截图缓存"; 
+      event.returnValue = message;
+      return message;
+    },
     download:function() {
       html2canvas(document.getElementById('canvas'),{
         letterRendering: true, allowTaint: false, useCORS: true, 
@@ -116,6 +122,7 @@ export default {
           drag_start_y :0,
           position:'absolute',
           isApplyShadow:'true',
+          isFixed:"false",
           borderRadius:borderRadius || 0
       }
       item.style = _style;
