@@ -66,7 +66,7 @@
     </div>
     <div class="item">
       <label for="" class="title">旋转</label>
-      <div class="subs grid grid-2">
+      <div class="subs grid grid-1">
         <div class="subs-item">
           <label class="lab" for="">角度</label>
           <input class="val" type="number"  v-model="currentElement.style.rotate">
@@ -365,19 +365,31 @@ export default {
 .grid {
   display: grid;
 }
+.grid-1 {
+  grid-template-columns: 100%;
+} 
+.grid-1 .subs-item {
+  display: grid;
+  grid-template-columns: 40px 40%;
+}
+.grid-1 .subs-item .lab {
+  width: 40px;
+}
 .grid-2 {
   grid-template-columns: 50% 50%;
 }
-.grid-2 .lab {
+
+.grid-1 .lab,.grid-2 .lab {
   text-align: center;
   width: 25px;
   font-size: 14px;
   display: inline-block;
   color:#aaa;
 }
-.grid-2 .val {
+.grid-1 .val ,.grid-2 .val {
   width: 50px;
   padding: 2px 4px;
+  height: 16px;
 }
 .val-cb {
   margin: 10px;
