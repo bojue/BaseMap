@@ -71,7 +71,8 @@ export default {
         icon:require('./../assets/comps/room.png'),
         defStyle:{
           width:120,
-          height:120
+          height:120,
+          borderWidth:4
         },
       },{
         id:1,
@@ -80,7 +81,8 @@ export default {
         icon:require('./../assets/comps/line_row.png'),
         defStyle:{
           width:100,
-          height:5
+          height:5,
+          borderWidth:0
         },
       },{
         id:1,

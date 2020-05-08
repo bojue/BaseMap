@@ -22,6 +22,7 @@
             top:(item.style.top - rect.y) +'px',
             left:(item.style.left - rect.x) +'px',
             position:item.style.position,
+            borderWidth:item.style.borderWidth + 'px',
             transform: 'rotate('+ item.style.rotate +'deg)'
         }"
         v-bind:class="{
@@ -123,7 +124,7 @@
             v-if="['line_colu'].indexOf(item.type) === -1"
             draggable="true"
             v-bind:style="{
-              left:(item.style.width-6) +'px',
+              left:(item.style.width - 6 + item.style.borderWidth * 2) +'px',
               top:(item.style.height /2 - 6)+'px',
             }"
             @dragstart.stop="resizeByDragComp($event, item, 'start','r', index)"
@@ -157,7 +158,7 @@
             draggable="true"
             v-bind:style="{
               left:(item.style.width /2 -6) +'px',
-              top:(item.style.height - 6)+'px',
+              top:(item.style.height - 6 + item.style.borderWidth * 2) +'px',
             }"
             @dragstart.stop="resizeByDragComp($event, item, 'start','b', index)"
             @drag.stop="resizeByDragComp($event, item, 'drag','b', index)"
