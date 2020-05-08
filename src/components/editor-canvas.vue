@@ -15,9 +15,9 @@
       <div class="comp-item"
         v-for="(item, index) in edrawComps" :key="index"
         @click="selectItem($event, index)"
-        @dragstart="dragComp($event, item, 'start', index)"
-        @drag="dragComp($event, item, 'drag', index)"
-        @dragend="dragComp($event, item,'end', index)"
+        @dragstart="!configs.bgAllBool && dragComp($event, item, 'start', index)"
+        @drag="!configs.bgAllBool && dragComp($event, item, 'drag', index)"
+        @dragend="!configs.bgAllBool && dragComp($event, item,'end', index)"
         v-bind:style="{
             width:item.style.width +'px',
             height:item.style.height +'px',
@@ -26,7 +26,7 @@
             position:item.style.position,
         }"
         v-bind:class="{active:item.isActive}"
-        v-bind:draggable="item.isActive">
+        v-bind:draggable="!configs.bgAllBool && item.isActive">
         <!-- 1.img -->
         <img class="comp-element comp-img icon"
           v-if="item.type === 'img'" 
@@ -205,9 +205,13 @@ export default {
 }
 .screen {
   position: absolute;
-  right: 10px;
+  right: 30px;
   top:10px;
   cursor: pointer;
+  opacity: 0.2;
+}
+.screen:hover {
+  opacity: 0.9;
 }
 .screen img {
   width: 30px;

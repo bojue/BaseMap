@@ -202,7 +202,6 @@ export default {
 <style scoped>
 #comps {
   width: 200px;
-  height: 820px;
   background:#eee;
   user-select: none;
   border:1px solid #eeeeee;

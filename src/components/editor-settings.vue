@@ -219,7 +219,6 @@ export default {
   position: relative;
   background: #eee;
   min-height: 820px;
-  height: 60px;
   padding: 0px;
 }
 .setting-config {
