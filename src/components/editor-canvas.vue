@@ -115,9 +115,12 @@
         </div>
 
         <!-- 辅助 -->
-        <span class="assist"
-          v-if="!configs.bgAllBool && item.isActive">
+        <span 
+          class="assist"
+          v-if="!configs.bgAllBool && item.isActive && ['pillar'].indexOf(item.type) === -1">
+
           <span class="adR" 
+            v-if="['line_colu'].indexOf(item.type) === -1"
             draggable="true"
             v-bind:style="{
               left:(item.style.width-6) +'px',
@@ -126,7 +129,9 @@
             @dragstart.stop="resizeByDragComp($event, item, 'start','r', index)"
             @drag.stop="resizeByDragComp($event, item, 'drag','r', index)"
             @dragend.stop="resizeByDragComp($event, item,'end', 'r', index)"></span>
+          
           <span class="adL"
+            v-if="['line_colu'].indexOf(item.type) === -1"
             draggable="true"
             v-bind:style="{
               left:(-6) +'px',
@@ -135,7 +140,9 @@
             @dragstart.stop="resizeByDragComp($event, item, 'start','l', index)"
             @drag.stop="resizeByDragComp($event, item, 'drag','l', index)"
             @dragend.stop="resizeByDragComp($event, item,'end', 'l', index)"></span>
+          
           <span class="adT"
+            v-if="['line_row'].indexOf(item.type) === -1"
             draggable="true"
             v-bind:style="{
               left:(item.style.width /2 -6) +'px',
@@ -144,7 +151,9 @@
             @dragstart.stop="resizeByDragComp($event, item, 'start','t', index)"
             @drag.stop="resizeByDragComp($event, item, 'drag','t', index)"
             @dragend.stop="resizeByDragComp($event, item,'end', 't', index)"></span>
+
           <span class="adB"
+            v-if="['line_row'].indexOf(item.type) === -1"
             draggable="true"
             v-bind:style="{
               left:(item.style.width /2 -6) +'px',
@@ -153,6 +162,7 @@
             @dragstart.stop="resizeByDragComp($event, item, 'start','b', index)"
             @drag.stop="resizeByDragComp($event, item, 'drag','b', index)"
             @dragend.stop="resizeByDragComp($event, item,'end', 'b', index)"></span>
+
           <span class="trans" 
             draggable="true"
             v-bind:style="{
