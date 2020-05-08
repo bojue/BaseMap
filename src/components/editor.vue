@@ -15,6 +15,7 @@
       v-on:initCompsState="initComponentState" 
       v-on:dragComp="dragCurrentComp"
       v-on:resizeByDragComp="resizeByDragComp"
+      v-on:trans="transComp"
       v-on:screen="screen"></editor-canvas>
 
     <!-- 组件设置 -->
@@ -103,13 +104,14 @@ export default {
       this.initCompState();
       item.isActive = true;
       item.multipleActiveBool=false;
-      let {width, height, borderRadius} = item.defStyle;
+      let {width, height, borderRadius, rotate} = item.defStyle;
       let {clientX , clientY} = event;
       let _style = {
           width:width || 100,
           height:height || 100,
           top: clientY ||100,
           left:clientX || 100,
+          rotate: rotate || 0,
           drag_start_x: 0, //拖拽相对
           drag_start_y :0,
           position:'absolute',
@@ -246,6 +248,11 @@ export default {
           }
         }
       }
+    },
+    transComp(event, comp){
+        let _x = event.clientX - comp.style.left - comp.style.width / 2;
+        let _y = event.clientY - comp.style.top - comp.style.height / 2;
+        comp.style.rotate = this.calcAngleDegrees(_x, _y);
     },
     // 组件删除
     delComp(index, state) {
@@ -436,7 +443,6 @@ export default {
           this.eStates.multipleActiveArr[i].style.top = _bottom - this.eStates.multipleActiveArr[i].style.height;
         }
       }else if(param === 'right') {
-        console.log(param, resObj)
         let _right = resObj.style.left + resObj.style.width;
         for(let i=0;i<len;i++) {
           this.eStates.multipleActiveArr[i].style.left = _right - this.eStates.multipleActiveArr[i].style.width;
@@ -446,6 +452,10 @@ export default {
     isMac:function() {
       return /macintosh|mac os x/i.test(navigator.userAgent)
     },
+    calcAngleDegrees(x, y) {
+      let val =  Math.atan2(y, x) * 180 / Math.PI;
+      return Math.ceil(val);
+    },
     screen:function() {
       this.configs.bgAllBool = !this.configs.bgAllBool;
       if(this.configs.bgAllBool) {
@@ -453,7 +463,6 @@ export default {
         this.configs.window_h = window.screen.height > 800 ? window.screen.height : 800;
         this.configs.scale = 1;
       }
-
     }
   }
 }

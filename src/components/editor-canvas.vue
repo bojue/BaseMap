@@ -22,6 +22,7 @@
             top:(item.style.top - rect.y) +'px',
             left:(item.style.left - rect.x) +'px',
             position:item.style.position,
+            transform: 'rotate('+ item.style.rotate +'deg)'
         }"
         v-bind:class="{active:item.isActive}"
         v-bind:draggable="!configs.bgAllBool && item.isActive">
@@ -112,7 +113,7 @@
         </div>
 
         <!-- 辅助 -->
-        <span class="assist-drag"
+        <span class="assist"
           v-if="!configs.bgAllBool && item.isActive">
           <span class="adR" 
             draggable="true"
@@ -150,6 +151,17 @@
             @dragstart.stop="resizeByDragComp($event, item, 'start','b', index)"
             @drag.stop="resizeByDragComp($event, item, 'drag','b', index)"
             @dragend.stop="resizeByDragComp($event, item,'end', 'b', index)"></span>
+          <span class="trans" 
+            draggable="true"
+            v-bind:style="{
+              left:(item.style.width + 25) +'px',
+              top:(item.style.height / 2 - 11)+'px',
+            }"
+            @dragstart.stop="trans($event, item, 'start', index)"
+            @drag.stop="trans($event, item, 'drag', index)"
+            @dragend.stop="trans($event, item,'end', index)">
+            <img src="./../assets/icon/translate.svg" alt="">
+          </span>
         </span>
       </div>
   </div>
@@ -204,7 +216,6 @@ export default {
     },
     // 拖拽图片，注释了节流优化
     dragComp:function(event, comp, state, index) {
-      console.log('drag ---- > ')
       if(state === 'start') {
         this.$emit('initCompsState',index);
         this.$emit('dragComp',event, comp, state, index, this.rect)
@@ -220,6 +231,10 @@ export default {
       } else {
         this.$emit('resizeByDragComp',event, comp, arrow, state, index)
       }
+    },
+    trans:function(event, comp, state, index) {
+      if(event && !event.clientX && !event.clientY) return;
+      this.$emit('trans',event, comp, state, index)
     },
     screen:function() {
       this.$emit('screen')
@@ -399,13 +414,25 @@ img {
   box-shadow: inset 0px 0px 26px -11px rgba(13,13,13,0.8);
 }
 
-.assist-drag span {
+.assist span {
   position: absolute;
   width: 10px;
   height: 10px;
   border:1px solid red;
   display: inline;
   background: #fff;
+}
+.assist .trans {
+  width: 22px;
+  height: 22px;
+  border:none;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.assist .trans img {
+  width: 22px;
+  height: 22px;
 }
 .adR, .adL {
   cursor: ew-resize;
