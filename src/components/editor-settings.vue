@@ -65,6 +65,15 @@
       </div>
     </div>
     <div class="item">
+      <label for="" class="title">旋转</label>
+      <div class="subs grid grid-2">
+        <div class="subs-item">
+          <label class="lab" for="">角度</label>
+          <input class="val" type="number"  v-model="currentElement.style.rotate">
+        </div>
+      </div>
+    </div>
+    <div class="item">
       <label for="" class="title">阴影</label>
       <div class="subs">
         <div class="subs-item">
