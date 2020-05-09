@@ -46,7 +46,7 @@ import html2canvas from 'html2canvas';
 export default {
   name: 'Editor',
   created:function() {
-    document.addEventListener('keydown', this.kaydownFun);
+    document.addEventListener('keydown', this.kaydownFun, false);
     document.addEventListener('mousedown', this.mousedownFun);
     window.addEventListener('beforeunload', this.leaving);
   },
@@ -288,6 +288,7 @@ export default {
         this.copyCurrentComp();
       }else {
         if(['ArrowUp','ArrowDown','ArrowLeft',"ArrowRight"].indexOf(event['code'])> -1) {
+          event.preventDefault();
           if(this.eStates.currentActiveIndex > -1 && this.eStates.multipleActiveArr.length === 0) {
             this.arrowItem(event['code'], this.edrawComponents[this.eStates.currentActiveIndex])
           }else if(this.eStates.multipleActiveArr.length > 0){

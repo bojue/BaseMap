@@ -265,7 +265,7 @@ export default {
   margin: 5px 2px;
   background: #fff;
   font-size: 12px;
-  height: 99%;
+  height: 878px;
   overflow-y: auto;
 }
 
