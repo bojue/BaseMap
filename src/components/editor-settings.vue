@@ -2,6 +2,7 @@
  <div id="settings">
   <div class="setting-config config">
     <div class="config-item name">
+      <img class="icon" src="./../assets/icon/3D.svg" alt="">
       <span class="baseMap">BaseMap</span>
     </div>
     <div class="config-item bg">
@@ -29,7 +30,12 @@
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'r')"><img src="./../assets/icon/align-r.svg" alt="右对齐" title="右对齐"></div>
         </div>
     </div>
-    <div class="aligin-item history">
+    <div class="aligin-item contrls">
+      <img  
+        @click="saveData()" 
+        src="./../assets/icon/save.svg" 
+        alt="历史记录" 
+        title="历史记录">
       <img  
         @click="getHistory()" 
         src="./../assets/icon/history.svg" 
@@ -206,6 +212,8 @@
 </template>
        
 <script>
+import Vue from 'vue';
+
 export default {
   props: {
     currentElement:Object, //当前组件
@@ -239,10 +247,28 @@ export default {
       this.$emit('screen')
     },
     getHistory:function() {
-      console.log('getHistory')
+      this.$emit('getHistory')
+    },
+    saveData:function() {
+      try {
+        this.$emit('saveDateToStorage', null , 'custom');
+        this.saveDataInfo();
+      }catch {
+        this.saveDataInfo('error','保存数据出错！')
+      }
+
     },
     download:function() {
       this.$emit('download')
+    },
+    saveDataInfo:function(state, msgs) {
+      let type = state || 'success';
+      let msg = msgs || '数据保存成功！';
+      Vue.$toast.open({
+        type:type,
+        message:msg,
+        position:'top-right'
+      });
     }
   }
 }
@@ -265,21 +291,30 @@ export default {
     margin-left: 10px;
     font-size: 16px;
     height: 60px;
-    border-left: 10px solid red;
     background: #fff;
     z-index: 1000;
     border-bottom: 1px solid #cccccc;
 }
 .baseMap {
-  margin: 14px;
-  position: relative;
-  display: block;
   color: #999;
-  font-size: 25px;
+  font-size: 18px;
+  display: inline-block;
+  width: 100px;
+  position: absolute;
+  top: 18px;
 }
 .config-item{
   height: 60px;
   width: 300px;
+  user-select: none;
+}
+
+.icon {
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+  padding: 10px 5px;
+  margin-top: 9px;
 }
 .config-item.bg {
   position: absolute;
@@ -332,18 +367,18 @@ export default {
   top: 16px;
  
 }
-.history {
+.contrls {
   z-index: 9999;
   position: absolute;
   right: 80px;
   text-align: center;
-  width: 80px;
+  width: 120px;
   height: 59px;
   top: -4px;
   border-right:1px solid #cccccc;
 }
-.history img {
-  margin: 22px;
+.contrls img {
+  margin: 22px 10px ;
 }
 .aligin-item label {
     padding: 2px 4px;

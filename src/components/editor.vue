@@ -8,6 +8,7 @@
     
     <!-- 画布 -->
     <editor-canvas 
+      v-bind:rect="rect"
       v-bind:configs="configs"
       v-bind:edrawComps="edrawComponents"
       v-bind:currentActiveIndex="eStates.currentActiveIndex"
@@ -29,8 +30,15 @@
       v-on:setMultipleState="setMultipleState"
       v-on:changeConfig="changeConfig"
       v-on:download="download"
-      v-on:screen="screen"></editor-settings>
+      v-on:screen="screen"
+      v-on:saveDateToStorage="saveDateToStorage"
+      v-on:getHistory="getStorageData"></editor-settings>
     
+    <editor-history
+      v-if="activeHistoryBool"
+      v-bind:rect="rect"
+      v-bind:historyData="historyData"
+      v-bind:list="historyCurrnetData"></editor-history>
     <!-- 帮助 -->
     <editor-help/>
   </div>
@@ -40,15 +48,14 @@
 import EditorComps from './editor-comps';
 import EditorCanvas from './editor-canvas';
 import EditorSettings from './editor-settings';
-import EditorHelp from './editor-help'
-import html2canvas from 'html2canvas';
+import EditorHelp from './editor-help';
+import EditorHistory from './editor-history';
 
 export default {
   name: 'Editor',
   created:function() {
-    document.addEventListener('keydown', this.kaydownFun, false);
-    document.addEventListener('mousedown', this.mousedownFun);
-    window.addEventListener('beforeunload', this.leaving);
+    this.initStorageData();
+    this.initBindingEvent();
   },
   data(){
      return {
@@ -69,31 +76,39 @@ export default {
           bgAllBool:false,
           window_w:1920,
           window_h:900
-        }
+        },
+        rect:{
+          x:0,
+          y:0
+        },
+        historyData:null,
+        historyCurrnetData:[],
+        activeHistoryBool:false
      }
   },
   components: {
     'editor-comps':EditorComps,
     'editor-canvas':EditorCanvas,
     'editor-settings':EditorSettings,
-    'editor-help':EditorHelp
+    'editor-help':EditorHelp,
+    'editor-history':EditorHistory
   },
   methods: {
+    initData() {
+      this.activeHistoryBool = false;
+    },
+    initBindingEvent() {
+      document.addEventListener('keydown', this.kaydownFun, false);
+      document.addEventListener('mousedown', this.mousedownFun);
+      window.addEventListener('beforeunload', this.leaving);
+    },
     leaving(event) {
       let message = "内容更改，注意截图缓存"; 
       event.returnValue = message;
       return message;
     },
     download:function() {
-      html2canvas(document.getElementById('canvas'),{
-        letterRendering: true, allowTaint: false, useCORS: true, 
-        scale: 1920*2/window.innerWidth, 
-        backgroundColor: 'red' 
-      }).then(canvas => {
-        this.saveAs( canvas.toDataURL('image/png'))
-      }).catch((error) => {
-        console.log("ERROR SAVING FESTIVAL IMAGE", error)
-      });
+      //TODO:页面下载
     },
     saveAs:function(img) {
       let _dom = window.document.createElement('a');
@@ -472,6 +487,46 @@ export default {
         this.configs.window_h = window.screen.height > 800 ? window.screen.height : 800;
         this.configs.scale = 1;
       }
+    },
+    initStorageData(clearBool) {
+      if(!clearBool && window.localStorage.getItem('bm_datas')) return;
+      let params = {
+          save_data_auto:[],
+          save_data_custom:[]
+      }
+      window.localStorage.setItem('bm_datas', JSON.stringify(params))
+    },
+    saveDateToStorage(data, state) {
+      let obj = {
+        data: data || this.edrawComponents,
+        updateTime:new Date()
+      };
+      if(!window.localStorage.getItem('bm_datas')) {
+        this.initStorageData();
+      }
+      let params = window.localStorage.getItem('bm_datas');
+      if(params && typeof params === 'string') {
+        params = JSON.parse(params)
+      }
+      if(state === 'custom') {
+        params.save_data_custom.push(obj);
+      } else {
+        params.save_data_auto.push(obj);
+      }
+      window.localStorage.setItem('bm_datas', JSON.stringify(params));
+    },
+    getStorageData() {
+      this.activeHistoryBool = !this.activeHistoryBool;
+      let params = window.localStorage.getItem('bm_datas');
+      if(params && typeof params === 'string') {
+        params = JSON.parse(params)
+      }
+
+      this.historyData = params;
+      this.historyCurrnetData = params.save_data_custom;
+    },
+    clearStorageData() {
+      this.initStorageData(true);
     }
   }
 }

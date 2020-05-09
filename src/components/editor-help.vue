@@ -1,6 +1,11 @@
 <template>
- <div id="keyboard">
-     <img src="./../assets/icon/keyborder.svg" class="icon" @click="showKeyBoadrInfoBool= !showKeyBoadrInfoBool" alt="">
+ <div id="keyboard"> 
+     <img 
+        src="./../assets/icon/keyborder.svg" 
+        class="icon" 
+        @click="showKeyBoadrInfoBool= !showKeyBoadrInfoBool" 
+        alt="快捷键"
+        title="快捷键">
      <div class="info" v-if="showKeyBoadrInfoBool">
          <div class="title">
              快捷操作(<code>Window/Mac</code>)
@@ -65,15 +70,17 @@ export default {
     cursor: pointer;
 }
 #keyboard .icon {
-    width: 30px;
-    height: 30px;
+    opacity: 0.6;
+    width: 22px;
+    height: 22px;
     padding: 10px;
     border-radius: 50%;
     box-shadow: 0px 0px 5px rgba(255,0,0,0.2);
-    background:#ccc;
+    background: #ffffff;
 }
 #keyboard  .icon:hover {
     padding: 11px;
+    opacity: 1;
     box-shadow: 0px 0px 5px rgba(255,0,0,0.6);
 }
 .info {
@@ -88,6 +95,7 @@ export default {
     margin: 10px 3px;
 }
 .datas {
+    color: #666666;
     font-size: 14px;
     margin: 3px;
 }

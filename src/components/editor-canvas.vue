@@ -119,7 +119,6 @@
         <span 
           class="assist"
           v-if="!configs.bgAllBool && item.isActive && ['pillar'].indexOf(item.type) === -1">
-
           <span class="adR" 
             v-if="['line_colu'].indexOf(item.type) === -1"
             draggable="true"
@@ -321,14 +320,14 @@ export default {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: red;
+  background: #666666;
   cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
-  background: red;
+  background: #666666;
   cursor: pointer;
 }
 
