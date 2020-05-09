@@ -29,7 +29,20 @@
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'r')"><img src="./../assets/icon/align-r.svg" alt="右对齐" title="右对齐"></div>
         </div>
     </div>
-    <div class="aligin-item screen" @click="screen()"><img src="./../assets/icon/screen_full.svg" alt="全屏预览" title="全屏预览"></div>
+    <div class="aligin-item history">
+      <img  
+        @click="getHistory()" 
+        src="./../assets/icon/history.svg" 
+        alt="历史记录" 
+        title="历史记录"></div>
+    <div 
+      class="aligin-item screen">
+      <img 
+        @click="screen()"
+        src="./../assets/icon/screen_full.svg" 
+        alt="全屏预览" 
+        title="全屏预览"></div>
+      
     <!-- <div class="download">
       <span class="title" @click="download">下载</span>
     </div> -->
@@ -225,10 +238,12 @@ export default {
     screen:function() {
       this.$emit('screen')
     },
+    getHistory:function() {
+      console.log('getHistory')
+    },
     download:function() {
       this.$emit('download')
     }
-
   }
 }
 
@@ -306,14 +321,29 @@ export default {
   grid-template-columns:160px 160px 50px 50px 50px 50px;
 }
 .aligin-item  {
+  cursor: pointer;
   position: relative;
   margin-top: 5px;
 }
 .aligin-item.screen {
   z-index: 9999;
+  position: fixed;
+  right: 18px;
+  top: 16px;
+ 
+}
+.history {
+  z-index: 9999;
   position: absolute;
-  right: 40px;
-  top: 21px;
+  right: 80px;
+  text-align: center;
+  width: 80px;
+  height: 59px;
+  top: -4px;
+  border-right:1px solid #cccccc;
+}
+.history img {
+  margin: 22px;
 }
 .aligin-item label {
     padding: 2px 4px;
