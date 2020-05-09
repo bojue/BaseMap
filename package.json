@@ -15,7 +15,9 @@
     "vue": "^2.6.11",
     "vue-html2canvas": "0.0.4",
     "vue-lodash": "^2.1.2",
-    "vue-mention": "^0.1.7"
+    "vue-mention": "^0.1.7",
+    "vue-moment": "^4.1.0",
+    "vue-toast-notification": "^0.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",
