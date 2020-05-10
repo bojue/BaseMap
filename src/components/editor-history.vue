@@ -179,6 +179,7 @@ export default {
 }
 .list .item {
     color: #999999;
+    font-size:13px;
     cursor: pointer;
     padding: 4px 10px 4px 5px;
     position: relative;
@@ -227,7 +228,7 @@ export default {
     height: 10px;
     position: absolute;
     right: 14px;
-    background: darkgreen;
+    background: darkseagreen;
     border-radius: 50%;
     top: 9px;
 }
