@@ -175,7 +175,7 @@
         </div>
       </div>
   </div>
-  <div class="item del-item">
+  <!-- <div class="item del-item">
     <img class="del"  
       v-bind:class="{
         delDef:currentActiveIndex === -1
@@ -188,7 +188,7 @@
         delDef:currentActiveIndex === -1
       }"
       @click="setMultipleState('clear')" src="./../assets/icon/clear.svg" alt="清空多选" title="清空多选">
-  </div>
+  </div> -->
   <div class="item del-item">
     <img class="del"  
       v-bind:class="{
