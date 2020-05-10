@@ -102,9 +102,10 @@ export default {
     },
     leaving(event) {
       this.saveDateToStorage();
-      let message = "内容更改，注意截图缓存"; 
-      event.returnValue = message;
-      return message;
+      console.log(event.returnValue)
+      // let message = "内容更改，注意截图缓存"; 
+      // event.returnValue = message;
+      // return message;
     },
     download:function() {
       //TODO:页面下载

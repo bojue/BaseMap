@@ -10,7 +10,7 @@
                 }"
                 v-bind:title="item.type === 'custom' ? '用户保存于' + item.updateTime : '自动保存于' + item.updateTime"
                 @click="selectData(item, index)">
-                    <span class="index">{{index+1}}.</span>
+                    <!-- <span class="index">{{index+1}}.</span> -->
                     <span class="name">{{item.updateTime | bm_time}}</span>
                     <span class="state" v-bind:class="{
                         custom:item.type === 'custom'
@@ -147,13 +147,15 @@ export default {
 #history {
     background: #ffffff;
     width: 1300px;
-    height: 750px;
+    height: 715px;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translateX(-650px) translateY(-430px);
     display: grid;
     grid-template-columns: 20% 80%;
+    border:1px solid #cccccc;
+    border-radius: 5px;
 }
 .list {
     border-right:1px solid #cccccc;
@@ -165,7 +167,7 @@ export default {
     padding: 10px;
 }
 .list .uls {
-    height: 700px;
+    height: 650px;
     overflow-y: auto;
     scrollbar-color: red yellow;
 }
@@ -224,7 +226,7 @@ export default {
 .btns {
     position: absolute;
     right: 20px;
-    bottom: 20px;
+    bottom: 10px;
 }
 .btn {
     width: 60px;
