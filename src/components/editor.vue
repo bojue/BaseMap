@@ -127,7 +127,7 @@ export default {
       this.initCompState();
       item.isActive = true;
       item.multipleActiveBool=false;
-      let {width, height, borderRadius, rotate, borderWidth} = item.defStyle;
+      let {width, height, borderRadius, rotate, borderWidth, background} = item.defStyle;
       let {clientX , clientY} = event;
       let _style = {
           width:width || 100,
@@ -138,6 +138,7 @@ export default {
           drag_start_x: 0, //拖拽相对
           drag_start_y :0,
           borderWidth:borderWidth || 0,
+          background:background,
           position:'absolute',
           isApplyShadow:'true',
           isFixed:"false",

@@ -110,6 +110,7 @@
           v-bind:style="{
             width:item.style.width +'px',
             height:item.style.height +'px',
+            background:item.style.background
           }"
           v-bind:class="{
             active:item.isActive, 
