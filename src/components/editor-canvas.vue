@@ -205,10 +205,14 @@ export default {
   transform: rotate(90deg);
 }
 .screen {
-  position: absolute;
+  position: fixed;
+  opacity:0.2;
   right: 10px;
   top:10px;
   cursor: pointer;
+}
+.screen:hover {
+  opacity:0.8;
 }
 .screen img {
   width: 30px;
