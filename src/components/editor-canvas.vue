@@ -7,7 +7,9 @@
       left:configs.bgAllBool && 0
     }">
     <div id="canvas"
-      v-bind:style="{'transform':'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)'}"
+      v-bind:style="{
+        transform:'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)',
+        background:'url(' + configs.backgroundUrl + ')'}"
       v-bind:class="{grid:configs.bg === 'grid'}" >    
       <!--遍历组件数组:图片-img,横线-lien_row,竖线-line_colu,柱子-pillar -->
       <div class="comp-item"
@@ -271,11 +273,12 @@ export default {
   height: 822px;
   background: whitesmoke;
   overflow: auto;
+  background-size: 100% 100%;
 }
 .slide {
   position: fixed;
   top: 17px;
-  left: 313px;
+  left: 513px;
   z-index: 10000;
   user-select: none;
   font-size: 14px;

@@ -10,6 +10,11 @@
       <div class="bgs">
         <img class="bg-item" src="./../assets/icon/bg-gray.svg"  @click="changeBg('bg', 'gray')" alt="">
         <img class="bg-item" src="./../assets/icon/bg-grid.svg"   @click="changeBg('bg', 'grid')" alt="">
+        <input class="baseMapImgUrl" 
+          id="filePicker"
+          type="file" 
+          placeholder="底图路径"
+          @change="changeFile"> 
       </div>
     </div>
     <div class="config-item aligins">
@@ -244,7 +249,7 @@ export default {
       this.$emit('changeConfig', state, val);
     },
     screen:function() {
-      this.$emit('screen')
+      this.$emit('screen');
     },
     getHistory:function() {
       this.$emit('getHistory')
@@ -269,6 +274,18 @@ export default {
         message:msg,
         position:'top-right'
       });
+    },
+    changeFile:function() {
+      let that = this;
+      let fileInput = document.getElementById("filePicker").files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(fileInput);
+      reader.onload = function() 
+      {
+        that.$emit('changeBgImg', this.result)
+      }
+    
+
     }
   }
 }
@@ -332,7 +349,7 @@ export default {
   width: 50px;
 }
 .bg .bgs {
-  width: 130px;
+  width: 215px;
   display: inline-block;
   height: 60px;
 }
@@ -341,6 +358,15 @@ export default {
   width: 22px;
   height: 22px;
   padding: 17px 2px;
+}
+.bg .baseMapImgUrl {
+    padding: 2px 5px;
+    width: 140px;
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 10px;
+    display: -webkit-inline-box;
+    position: absolute;
 }
 .aligins {
   position: absolute;

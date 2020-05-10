@@ -32,7 +32,8 @@
       v-on:download="download"
       v-on:screen="screen"
       v-on:saveDateToStorage="saveDateToStorage"
-      v-on:getHistory="getStorageData"></editor-settings>
+      v-on:getHistory="getStorageData"
+      v-on:changeBgImg="changeBgImg"></editor-settings>
     
     <editor-history
       v-if="activeHistoryBool"
@@ -77,7 +78,8 @@ export default {
           dowloadImgType:'png',
           bgAllBool:false,
           window_w:1920,
-          window_h:900
+          window_h:900,
+          backgroundUrl:""
         },
         historyCurrnetData:[],
         currentHistoryIndex:-1,
@@ -537,6 +539,9 @@ export default {
         params = JSON.parse(params)
       }
       this.historyCurrnetData = [].concat(params.save_data_custom, params.save_data_auto);
+    },
+    changeBgImg(url) {
+      this.configs.backgroundUrl = url;
     },
     clearStorageData() {
       this.initStorageData(true);
