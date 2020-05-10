@@ -87,7 +87,7 @@ export default {
     position: fixed;
     right: 10px;
     bottom: 120px;
-    background: #ccc;
+    background: #f4f5f5;
     width: 180px;
     padding: 10px;
 }
@@ -105,7 +105,7 @@ export default {
     line-height: 20px;
 }
 code {
-    color:green;
+    color:dodgerblue;
     padding: 2px 4px;
 }
 .github img {

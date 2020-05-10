@@ -408,7 +408,7 @@ export default {
   position: relative;
 }
 .item .name {
-  border-left: 5px solid red;
+  border-left: 5px solid #ccc;
   padding: 10px;
   position: absolute;
   left: 0px;
@@ -419,7 +419,7 @@ export default {
 .muls-list{
   font-size: 14px;
   padding-left: 10px;
-  border-left: 2px solid red;
+  border-left: 2px solid #ccc;
   border-bottom:1px dashed #cccccc;
 }
 .item .nums { 
@@ -495,7 +495,7 @@ export default {
     box-shadow: 0px 0px 5px rgba(255,0,0,0.3);
 }
 .del:hover {
-  box-shadow: 0px 0px 10px red;
+  box-shadow: 0px 0px 10px #ccc;
 }
 #download {
   position: absolute;

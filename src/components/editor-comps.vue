@@ -386,9 +386,9 @@ export default {
   margin-bottom: -1px;
 }
 .tits .title.active {
-  color: red;
-  background: #fff;
-  border-bottom: 1px solid red;
+  color: #ffffff;
+  background: #cccccc;
+  border-bottom: 1px solid #cccccc;
 }
 
 /* 组件库 */
@@ -408,7 +408,6 @@ export default {
   font-weight: 600;
   padding: 2px 10px;
   background: #eeeeee;
-  
 }
 .item-comp {
   cursor: pointer;
