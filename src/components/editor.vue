@@ -8,7 +8,7 @@
     
     <!-- 画布 -->
     <editor-canvas 
-      v-bind:rect="rect"
+
       v-bind:configs="configs"
       v-bind:edrawComps="edrawComponents"
       v-bind:currentActiveIndex="eStates.currentActiveIndex"
@@ -36,9 +36,9 @@
     
     <editor-history
       v-if="activeHistoryBool"
-      v-bind:rect="rect"
-      v-bind:historyData="historyData"
-      v-bind:list="historyCurrnetData"></editor-history>
+      v-bind:list="historyCurrnetData"
+      v-bind:currentIndex="currentHistoryIndex"
+      v-on:initState="initHistoryListState"></editor-history>
     <!-- 帮助 -->
     <editor-help/>
   </div>
@@ -77,12 +77,8 @@ export default {
           window_w:1920,
           window_h:900
         },
-        rect:{
-          x:0,
-          y:0
-        },
-        historyData:null,
         historyCurrnetData:[],
+        currentHistoryIndex:-1,
         activeHistoryBool:false
      }
   },
@@ -103,6 +99,7 @@ export default {
       window.addEventListener('beforeunload', this.leaving);
     },
     leaving(event) {
+      this.saveDateToStorage();
       let message = "内容更改，注意截图缓存"; 
       event.returnValue = message;
       return message;
@@ -497,8 +494,15 @@ export default {
       window.localStorage.setItem('bm_datas', JSON.stringify(params))
     },
     saveDateToStorage(data, state) {
+      let saveData = data || this.edrawComponents;
+
+      //存储优化，没有内容的页面不需要存储
+      if(!saveData || Array.isArray(saveData) && saveData.length === 0) {
+        return;
+      }
       let obj = {
-        data: data || this.edrawComponents,
+        data: saveData,
+        type: state || 'auto',
         updateTime:new Date()
       };
       if(!window.localStorage.getItem('bm_datas')) {
@@ -509,24 +513,40 @@ export default {
         params = JSON.parse(params)
       }
       if(state === 'custom') {
-        params.save_data_custom.push(obj);
+        params.save_data_custom.unshift(obj);
+        params.save_data_custom.unshift(obj);
+        if(params.save_data_custom.length > 50) {
+          params.save_data_custom = params.save_data_custom.slice(0, 50);
+        }
       } else {
-        params.save_data_auto.push(obj);
+        params.save_data_auto.unshift(obj);
+        if(params.save_data_auto.length > 50) {
+          params.save_data_auto = params.save_data_auto.slice(0, 50);
+        }
       }
+      console.log(state, obj)
       window.localStorage.setItem('bm_datas', JSON.stringify(params));
     },
     getStorageData() {
       this.activeHistoryBool = !this.activeHistoryBool;
+      this.currentHistoryIndex = -1;
       let params = window.localStorage.getItem('bm_datas');
       if(params && typeof params === 'string') {
         params = JSON.parse(params)
       }
-
-      this.historyData = params;
-      this.historyCurrnetData = params.save_data_custom;
+      this.historyCurrnetData = [].concat(params.save_data_custom, params.save_data_auto);
     },
     clearStorageData() {
       this.initStorageData(true);
+    },
+    initHistoryListState(index) {
+      this.currentHistoryIndex = index > -1 ? index : -1;
+      if(Array.isArray(this.historyCurrnetData)) {
+        let len = this.historyCurrnetData.length;
+        for(let i=0;i<len;i++) {
+          this.historyCurrnetData[i].isActive = false;
+        }
+      }
     }
   }
 }

@@ -8,14 +8,23 @@
                 v-bind:class="{
                     isActive:item.isActive
                 }"
+                v-bind:title="item.type === 'custom' ? '用户保存于' + item.updateTime : '自动保存于' + item.updateTime"
                 @click="selectData(item, index)">
                     <span class="index">{{index+1}}.</span>
                     <span class="name">{{item.updateTime | bm_time}}</span>
+                    <span class="state" v-bind:class="{
+                        custom:item.type === 'custom'
+                        }"></span>
                 </div>
         </div>
     </div>
     <div class="content">
+      <p class="current-name" v-if="currentIndex > -1">
+        {{"数据记录：" + list[currentIndex].updateTime }}</p>
       <div id="history-content">    
+        <div class="onData" v-if="currentData.length ===0">
+            {{currentIndex === -1 ? '请选择记录' :'当前记录没有数据'}}
+        </div>
         <div class="comp-item"
             v-for="(item, index) in currentData" :key="index"
             v-bind:style="{
@@ -23,13 +32,10 @@
                 height:item.style.height +'px',
                 top:(item.style.top) +'px',
                 left:(item.style.left) +'px',
-                top:(item.style.top - rect.y) +'px',
-                left:(item.style.left - rect.x) +'px',
                 position:item.style.position,
                 borderWidth:item.style.borderWidth + 'px',
                 transform: 'rotate('+ item.style.rotate +'deg)'
             }">
-
             <!-- 1.img -->
             <img class="comp-element comp-img icon"
             v-if="item.type === 'img'" 
@@ -102,14 +108,12 @@ export default {
 
   },
   props: {
-      historyData:Object,
       list:Array, //当前历史记录列表
-      rect:Object
+      currentIndex:Number,
   },
   data(){
       return {
         activeTheme:'save_data_custom', //选择主题
-        currentIndex:Number, // 当前下标
         currentData:[]
       }
   },
@@ -118,16 +122,10 @@ export default {
   },
   methods: {
     selectData:function(data, index) {
-        this.currentIndex = index;
+        this.$emit('initState', index)
         data.isActive = true;
         this.currentData = data.data;
     },
-    initData:function() {
-        let len = this.list;
-        for(let i=0;i<len;i++) {
-            this.list[i].isActive = false;
-        }
-    }
   }
 }
 
@@ -138,11 +136,11 @@ export default {
 #history {
     background: #ffffff;
     width: 1300px;
-    height: 800px;
+    height: 750px;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translateX(-650px) translateY(-450px);
+    transform: translateX(-650px) translateY(-430px);
     display: grid;
     grid-template-columns: 20% 80%;
 }
@@ -155,10 +153,16 @@ export default {
     border-bottom: 1px solid #cccccc;
     padding: 10px;
 }
+.list .uls {
+    height: 700px;
+    overflow-y: auto;
+    scrollbar-color: red yellow;
+}
 .list .item {
     color: #999999;
     cursor: pointer;
     padding: 4px 10px 4px 5px;
+    position: relative;
     border-left: 3px solid transparent;
 }
 .item:hover {
@@ -168,17 +172,42 @@ export default {
 }
 .item.isActive {
     background: #f5f5f5;
+    border-left: 3px solid green;   
 }
 .index {
     padding-right: 10px;
 }
 
-.content {
-    /* background: red; */
+.current-name {
+    height: 30px;
+    color: #999;
+    display: block;
+    font-size: 14px;
+    margin-top: 20px;
 }
 #history-content {
-    width: 960px;
-    background: #cccccc;
+    width: 1920px;
+    position: absolute;
+    border:1px solid #dddddd;
+    right: 0;
+    top: 45px;
+    height: 1080px;
+    margin:10px;
+    transform: scale(0.54) translate(825.5px, -464px);
 }
-
+.onData {
+    text-align: center;
+    font-size: 40px;
+    color: #ddd;
+    margin-top: 450px
+}
+.state.custom {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 14px;
+    background: darkgreen;
+    border-radius: 50%;
+    top: 9px;
+}
 </style>

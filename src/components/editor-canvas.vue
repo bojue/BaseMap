@@ -203,7 +203,7 @@ export default {
   props: {
     currentActiveIndex:Number, // 编辑状态管理
     edrawComps: Array, //绘制组件（图片）列表
-    configs:Object
+    configs:Object,
   },
   data() {
     return {
@@ -215,7 +215,7 @@ export default {
       rect:{
         x:0,
         y:0
-      }
+      },
     }
   },
   mounted:function() {
@@ -281,7 +281,7 @@ export default {
   font-size: 14px;
 }
 .screen {
-  position: absolute;
+  position: fixed;
   right: 30px;
   top:10px;
   cursor: pointer;
@@ -363,7 +363,7 @@ img {
     width: 1900px;
     height: 900px;
     background: #eeeeee;
-      transform: translate(100px, 200px);
+    transform: translate(100px, 200px);
 }
 #canvas.grid {
     background-image: linear-gradient(rgba(200,205,208,.3) 1px,transparent 0),
