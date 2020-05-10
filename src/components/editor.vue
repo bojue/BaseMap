@@ -526,7 +526,7 @@ export default {
           params.save_data_auto = params.save_data_auto.slice(0, 50);
         }
       }
-      console.log(state, obj)
+
       window.localStorage.setItem('bm_datas', JSON.stringify(params));
     },
     getStorageData() {

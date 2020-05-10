@@ -282,6 +282,7 @@ export default {
   background: #eee;
   min-height: 820px;
   padding: 0px;
+  border: 1px solid #cccc;
 }
 .setting-config {
     position: fixed;

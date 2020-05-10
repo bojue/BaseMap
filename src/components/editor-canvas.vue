@@ -281,7 +281,7 @@ export default {
   font-size: 14px;
 }
 .screen {
-  position: fixed;
+  position:fixed;
   right: 30px;
   top:10px;
   cursor: pointer;
@@ -360,8 +360,8 @@ img {
 }
 
 #canvas {
-    width: 1900px;
-    height: 900px;
+    width: 1920px;
+    height: 1080px;
     background: #eeeeee;
     transform: translate(100px, 200px);
 }
