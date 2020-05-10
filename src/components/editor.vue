@@ -450,6 +450,7 @@ export default {
     changeConfig(state, value){
       if(!this.configs[state]) return;
       this.configs[state] = value;
+      console.log(state,value)
     },
     multipArray(param) {
       let list = JSON.parse(JSON.stringify(this.eStates.multipleActiveArr));

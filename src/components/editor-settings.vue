@@ -300,6 +300,7 @@ export default {
   min-height: 820px;
   padding: 0px;
   border: 1px solid #cccc;
+  user-select:none;
 }
 .setting-config {
     position: fixed;

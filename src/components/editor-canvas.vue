@@ -10,11 +10,10 @@
       ref="canvas" 
       v-bind:style="{
         'transform':'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)',
-            background:'url(' + configs.backgroundUrl + ')'}"
-      v-bind:class="{
+            background:configs.backgroundUrl && 'url(' + configs.backgroundUrl + ')'}"
+        v-bind:class="{
         grid:configs.bg === 'grid'
         }" >
-      
       <!--遍历组件数组:图片-img,横线-lien_row,竖线-line_colu,柱子-pillar -->
       <div class="comp-item"
         v-for="(item, index) in edrawComps" :key="index"
