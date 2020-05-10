@@ -23,8 +23,7 @@
         {{"数据记录：" + list[currentIndex].updateTime }}</p>
       <div id="history-content">    
         <div class="onData" v-if="currentData.length ===0">
-            {{currentIndex === -1 ? '请选择记录' :'当前记录没有数据'}}
-        </div>
+            {{currentIndex === -1 ? '请选择记录' :'当前记录没有数据'}}</div>
         <div class="comp-item"
             v-for="(item, index) in currentData" :key="index"
             v-bind:style="{
@@ -94,8 +93,14 @@
                 height:item.style.height +'px',
             }">
         </div>
+        </div>
       </div>
-     </div>
+      <div class="btns">
+          <div class="btn apply"
+            @click="applyCurrentData()">应用</div>
+          <div class="btn close"
+            @click="close()">关闭</div>
+      </div>
     </div>
  </div>
 </template>
@@ -126,6 +131,12 @@ export default {
         data.isActive = true;
         this.currentData = data.data;
     },
+    applyCurrentData:function() {
+        this.$emit('applyHistory', this.currentData)
+    },
+    close:function() {
+        this.$emit('closeHistory')
+    }
   }
 }
 
@@ -209,5 +220,29 @@ export default {
     background: darkgreen;
     border-radius: 50%;
     top: 9px;
+}
+.btns {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+.btn {
+    width: 60px;
+    height: 20px;
+    display: inline-block;
+    margin: 10px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    text-align: center;
+    border:1px solid #cccccc;
+    cursor: pointer;
+    color: #666666;
+}
+.apply:hover {
+    color:#ffffff;
+    background: forestgreen;
+}
+.close:hover {
+    background: #ddd;
 }
 </style>

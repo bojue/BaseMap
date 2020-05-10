@@ -38,7 +38,9 @@
       v-if="activeHistoryBool"
       v-bind:list="historyCurrnetData"
       v-bind:currentIndex="currentHistoryIndex"
-      v-on:initState="initHistoryListState"></editor-history>
+      v-on:initState="initHistoryListState"
+      v-on:applyHistory="applyHistory"
+      v-on:closeHistory="closeHistory"></editor-history>
     <!-- 帮助 -->
     <editor-help/>
   </div>
@@ -547,6 +549,15 @@ export default {
           this.historyCurrnetData[i].isActive = false;
         }
       }
+    },
+    applyHistory(list) {
+      this.saveDateToStorage()
+      this.edrawComponents = list;
+      this.initCompState();
+      this.closeHistory();
+    },
+    closeHistory() {
+      this.activeHistoryBool = false;
     }
   }
 }
