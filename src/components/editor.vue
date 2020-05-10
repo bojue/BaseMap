@@ -517,7 +517,6 @@ export default {
       }
       if(state === 'custom') {
         params.save_data_custom.unshift(obj);
-        params.save_data_custom.unshift(obj);
         if(params.save_data_custom.length > 50) {
           params.save_data_custom = params.save_data_custom.slice(0, 50);
         }
