@@ -21,7 +21,10 @@
             @dragstart="dragStart($event, item)"
             @dragend="dragEnd($event, item)"
           >
-            <img class="icon" v-bind:src="item.icon" v-bind:style="item.styleObject" alt />
+            <img  v-if="!item.bgBool" class="icon" v-bind:src="item.icon" v-bind:style="item.styleObject" alt />
+            <span v-if="item.bgBool" class="icon" v-bind:style="{
+              background:item.styleObject.background
+            }"></span>
             <span class="name">{{item.name}}</span>
           </span>
         </div>
@@ -128,13 +131,67 @@ export default {
             {
               id: 1,
               type: "device",
-              name: "设备",
+              name: "设备-橙",
               icon: require("./../assets/comps/device.png"),
+              bgBool:true,
               defStyle: {
                 width: 25,
-                height: 25
+                height: 25,
+                background:'#ff8c00'
               },
               styleObject: {
+                background:'#ff8c00',
+                width: "22px",
+                height: "22px",
+                marginTop: "10px"
+              }
+            }, {
+              id: 1,
+              type: "device",
+              name: "设备-蓝",
+              icon: require("./../assets/comps/device.png"),
+              bgBool:true,
+              defStyle: {
+                width: 25,
+                height: 25,
+                background:'#5a8eda'
+              },
+              styleObject: {
+                background:'#5a8eda',
+                width: "22px",
+                height: "22px",
+                marginTop: "10px"
+              }
+            }, {
+              id: 1,
+              type: "device",
+              name: "设备-灰白",
+              icon: require("./../assets/comps/device.png"),
+              bgBool:true,
+              defStyle: {
+                width: 25,
+                height: 25,
+                background:'#d1cfd0'
+              },
+              styleObject: {
+                background:'#d1cfd0',
+                width: "22px",
+                height: "22px",
+                marginTop: "10px"
+              }
+            }, {
+              id: 1,
+              type: "device",
+              name: "设备-黑",
+              icon: require("./../assets/comps/device.png"),
+              bgBool:true,
+              defStyle: {
+                width: 25,
+                height: 25,
+                background:'#2f3c35'
+              },
+              styleObject: {
+                background:'#2f3c35',
                 width: "22px",
                 height: "22px",
                 marginTop: "10px"
@@ -426,7 +483,15 @@ export default {
 .item-comp .icon {
   position: relative;
   height: 32px;
+  width: 32px;
   padding: 2px;
+  display: inline-block;
+}
+.item-comp span.icon {
+  background: rgb(209, 207, 208);
+  width: 30px;
+  height: 30px;
+  margin-top: 2px;
 }
 
 .item-comp .name {
