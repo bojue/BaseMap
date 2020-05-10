@@ -199,7 +199,7 @@ export default {
   position: fixed;
   top: 110px;
   left: 177px;
-  z-index: 100000;
+  z-index: 11;
   user-select: none;
   font-size:14px;
   transform: rotate(90deg);

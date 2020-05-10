@@ -161,6 +161,7 @@ export default {
     grid-template-columns: 20% 80%;
     border: 1px solid #cccccc;
     border-radius: 5px;
+    z-index: 999;
 }
 .list {
     border-right:1px solid #cccccc;
