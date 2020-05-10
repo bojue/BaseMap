@@ -279,7 +279,7 @@ export default {
 .slide {
   position: fixed;
   top: 17px;
-  left: 513px;
+  left: 460px;
   z-index: 10000;
   user-select: none;
   font-size: 14px;
