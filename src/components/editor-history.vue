@@ -92,11 +92,7 @@
                 width:item.style.width +'px',
                 height:item.style.height +'px',
                 background:item.style.background
-            }"
-            v-bind:class="{
-                active:item.isActive, 
-                isShadow:item.style.isApplyShadow ==='true',
-                multipleActive:item.multipleActiveBool}">
+            }">
             </div>
         </div>
       </div>

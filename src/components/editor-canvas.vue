@@ -8,25 +8,33 @@
     }">
     <div id="canvas"
       ref="canvas" 
-      v-bind:style="{'transform':'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)'}"
-      v-bind:class="{grid:configs.bg === 'grid'}" >
+      v-bind:style="{
+        'transform':'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)',
+            background:'url(' + configs.backgroundUrl + ')'}"
+      v-bind:class="{
+        grid:configs.bg === 'grid'
+        }" >
       
       <!--遍历组件数组:图片-img,横线-lien_row,竖线-line_colu,柱子-pillar -->
       <div class="comp-item"
         v-for="(item, index) in edrawComps" :key="index"
         @click="selectItem($event, index)"
-        @dragstart="dragComp($event, item, 'start', index)"
-        @drag="dragComp($event, item, 'drag', index)"
-        @dragend="dragComp($event, item,'end', index)"
+        @dragstart="!configs.bgAllBool && item.style.isFixed === 'false' && dragComp($event, item, 'start', index)"
+        @drag="!configs.bgAllBool && item.style.isFixed === 'false' &&dragComp($event, item, 'drag', index)"
+        @dragend="!configs.bgAllBool && item.style.isFixed === 'false' &&dragComp($event, item,'end', index)"
         v-bind:style="{
             width:item.style.width +'px',
             height:item.style.height +'px',
             top:(item.style.top - rect.y) +'px',
             left:(item.style.left - rect.x) +'px',
             position:item.style.position,
+            borderWidth:item.style.borderWidth + 'px',
+            transform: 'rotate('+ item.style.rotate +'deg)'
         }"
-        v-bind:class="{active:item.isActive}"
-        v-bind:draggable="item.isActive">
+        v-bind:class="{
+          active:item.isActive,
+          roomActive:item.type === 'room'}"
+          v-bind:draggable="!configs.bgAllBool && item.isActive">
         <!-- 1.img -->
         <img class="comp-element comp-img icon"
           v-if="item.type === 'img'" 
@@ -111,6 +119,67 @@
             isShadow:item.style.isApplyShadow ==='true',
             multipleActive:item.multipleActiveBool}">
         </div>
+        
+        <!-- 辅助 -->	
+        <span 	
+          class="assist"	
+          v-if="!configs.bgAllBool && item.isActive && ['pillar'].indexOf(item.type) === -1">	
+          <span class="adR" 	
+            v-if="['line_colu'].indexOf(item.type) === -1"	
+            draggable="true"	
+            v-bind:style="{	
+              left:(item.style.width - 6 + item.style.borderWidth * 2) +'px',	
+              top:(item.style.height /2 - 6)+'px',	
+            }"	
+            @dragstart.stop="resizeByDragComp($event, item, 'start','r', index)"	
+            @drag.stop="resizeByDragComp($event, item, 'drag','r', index)"	
+            @dragend.stop="resizeByDragComp($event, item,'end', 'r', index)"></span>	
+
+          <span class="adL"	
+            v-if="['line_colu'].indexOf(item.type) === -1"	
+            draggable="true"	
+            v-bind:style="{	
+              left:(-6) +'px',	
+              top:(item.style.height /2 - 6)+'px',	
+            }"	
+            @dragstart.stop="resizeByDragComp($event, item, 'start','l', index)"	
+            @drag.stop="resizeByDragComp($event, item, 'drag','l', index)"	
+            @dragend.stop="resizeByDragComp($event, item,'end', 'l', index)"></span>	
+
+          <span class="adT"	
+            v-if="['line_row'].indexOf(item.type) === -1"	
+            draggable="true"	
+            v-bind:style="{	
+              left:(item.style.width /2 -6) +'px',	
+              top:(-6)+'px',	
+            }"	
+            @dragstart.stop="resizeByDragComp($event, item, 'start','t', index)"	
+            @drag.stop="resizeByDragComp($event, item, 'drag','t', index)"	
+            @dragend.stop="resizeByDragComp($event, item,'end', 't', index)"></span>	
+
+          <span class="adB"	
+            v-if="['line_row'].indexOf(item.type) === -1"	
+            draggable="true"	
+            v-bind:style="{	
+              left:(item.style.width /2 -6) +'px',	
+              top:(item.style.height - 6 + item.style.borderWidth * 2) +'px',	
+            }"	
+            @dragstart.stop="resizeByDragComp($event, item, 'start','b', index)"	
+            @drag.stop="resizeByDragComp($event, item, 'drag','b', index)"	
+            @dragend.stop="resizeByDragComp($event, item,'end', 'b', index)"></span>	
+
+          <span class="trans" 	
+            draggable="true"	
+            v-bind:style="{	
+              left:(item.style.width + 25) +'px',	
+              top:(item.style.height / 2 - 11)+'px',	
+            }"	
+            @dragstart.stop="trans($event, item, 'start', index)"	
+            @drag.stop="trans($event, item, 'drag', index)"	
+            @dragend.stop="trans($event, item,'end', index)">	
+            <img src="./../assets/icon/translate.svg" alt="">	
+          </span>	
+        </span>	
       </div>
   </div>
   <div class="slide" v-if="!configs.bgAllBool">
@@ -170,6 +239,18 @@ export default {
       } else {
         this.$emit('dragComp',event, comp, state, index, this.rect)
       }
+    },
+    resizeByDragComp:function(event, comp, arrow, state, index) {	
+      if(event && !event.clientX && !event.clientY) return;	
+      if(state === 'start') {	
+        this.$emit('resizeByDragComp',event, comp, arrow, state, index)	
+      } else {	
+        this.$emit('resizeByDragComp',event, comp, arrow, state, index)	
+      }	
+    },	
+    trans:function(event, comp, state, index) {	
+      if(event && !event.clientX && !event.clientY) return;	
+      this.$emit('trans',event, comp, state, index)	
     },
     screen:function() {
       this.$emit('screen')
@@ -348,5 +429,31 @@ img {
 }
 .comp-room-inset.isShadow {
   box-shadow: inset 0px 0px 26px -11px rgba(13,13,13,0.8);
+}
+.assist span {	
+  position: absolute;	
+  width: 10px;	
+  height: 10px;	
+  border:1px solid red;	
+  display: inline;	
+  background: #fff;	
+}	
+.assist .trans {	
+  width: 22px;	
+  height: 22px;	
+  border:none;	
+  background: transparent;	
+  border-radius: 50%;	
+  cursor: pointer;	
+}	
+.assist .trans img {	
+  width: 22px;	
+  height: 22px;	
+}	
+.adR, .adL {	
+  cursor: ew-resize;	
+}	
+.adT, .adB {	
+  cursor: ns-resize;	
 }
 </style>
