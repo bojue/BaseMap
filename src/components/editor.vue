@@ -191,7 +191,7 @@ export default {
     dragCurrentComp(event, comp, state, currentIndex, canvesRect) {
       if(event && (event.ctrlKey || event.metaKey && this.isMac())  ){
         console.log('多选处理')
-      } else {
+      } else { 
         this.eStates.copyByKeyBool = false;
         let _rect = document.getElementById('canvas').getClientRects()[0]
         let _l =_rect.left;
@@ -203,11 +203,16 @@ export default {
         }else if(state === 'drag'){
           let _left = event.clientX - comp.style.drag_start_x  - _l + canvesRect.x; 
           let _top = event.clientY - comp.style.drag_start_y - _t + canvesRect.y ;
-          console.log(_left , _l + canvesRect.x)
           if(_left <0 || _top < 0) return;
           comp.style.left = _left;
           comp.style.top = _top ;
-        } 
+        }
+        var dragIcon = document.createElement('img');
+        dragIcon.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+        dragIcon.width = 0;
+        dragIcon.height = 0;
+        dragIcon.opacity = 0;
+        event.dataTransfer.setDragImage(dragIcon,0, 0);
       }
     },
     resizeByDragComp(event, comp, state, arrow,currentIndex) {
@@ -430,6 +435,9 @@ export default {
     },
     changeConfig(state, value){
       if(!this.configs[state]) return;
+      if(state === 'bg') {
+        this.changeBgImg()
+      }
       this.configs[state] = value;
     },
     multipArray(param) {

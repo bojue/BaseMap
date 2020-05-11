@@ -184,7 +184,7 @@ export default {
             }, {
               id: 1,
               type: "device",
-              name: "设备-黑",
+              name: "机柜-黑",
               icon: require("./../assets/comps/device.png"),
               bgBool:true,
               defStyle: {

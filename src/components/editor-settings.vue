@@ -14,6 +14,7 @@
           id="filePicker"
           type="file" 
           placeholder="底图路径"
+          @click="changeFile"
           @change="changeFile"> 
       </div>
     </div>
@@ -284,6 +285,9 @@ export default {
     changeFile:function() {
       let that = this;
       let fileInput = document.getElementById("filePicker").files[0];
+      if(!fileInput) {
+        return;
+      }
       var reader = new FileReader();
       reader.readAsDataURL(fileInput);
       reader.onload = function() 
