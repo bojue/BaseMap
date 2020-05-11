@@ -327,6 +327,9 @@ export default {
   width: 300px;
   user-select: none;
 }
+.setting-element {
+  position:fixed;
+}
 
 .icon {
   width: 26px;

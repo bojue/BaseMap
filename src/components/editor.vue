@@ -127,13 +127,14 @@ export default {
       this.initCompState();
       item.isActive = true;
       item.multipleActiveBool=false;
+      let rect = document.getElementById('canvas').getClientRects()[0];
       let {width, height, borderRadius, rotate, borderWidth, background} = item.defStyle;
       let {clientX , clientY} = event;
       let _style = {
           width:width || 100,
           height:height || 100,
-          top: clientY || 100,
-          left:clientX || 100,
+          top: clientY  - rect.top + 60 || 100,
+          left:clientX + 213 - rect.left || 100,
           rotate: rotate || 0,
           drag_start_x: 0, //拖拽相对
           drag_start_y :0,
@@ -191,19 +192,22 @@ export default {
         console.log('多选处理')
       } else {
         this.eStates.copyByKeyBool = false;
+        let _rect = document.getElementById('canvas').getClientRects()[0]
+        let _l =_rect.left;
+        let _t =_rect.left;
         if(state === 'start') {
           this.eStates.currentActiveIndex = currentIndex;
-          comp.style.drag_start_x = event.clientX - comp.style.left;
-          comp.style.drag_start_y = event.clientY - comp.style.top;
+          comp.style.drag_start_x = event.clientX - comp.style.left - _l + canvesRect.x;
+          comp.style.drag_start_y = event.clientY - comp.style.top - _t + canvesRect.y;
         }else if(state === 'drag'){
-          let _left = event.clientX - comp.style.drag_start_x; 
-          let _top = event.clientY - comp.style.drag_start_y;
+          let _left = event.clientX - comp.style.drag_start_x  - _l + canvesRect.x; 
+          let _top = event.clientY - comp.style.drag_start_y - _t + canvesRect.y ;
           if(_left <0 || _top < 0) return;
           let left = (_left - canvesRect.x) >= 0 ? _left : canvesRect.x; // 处理left编辑问题
           let top = (_top - canvesRect.y) >= 0 ? _top : canvesRect.y; // 处理top边界问题
           comp.style.left = left;
-          comp.style.top = top;
-        }
+          comp.style.top = top ;
+        } 
       }
     },
     resizeByDragComp(event, comp, state, arrow,currentIndex) {
@@ -211,10 +215,12 @@ export default {
         console.log('多选处理')
       } else {
         this.eStates.copyByKeyBool = false;
+        let _l = document.getElementById('canvas').getClientRects()[0].left;
+        let _t = document.getElementById('canvas').getClientRects()[0].top;
         if(state === 'start') {
           this.eStates.currentActiveIndex = currentIndex;
           comp.style.drag_start_x = arrow === 'r' ? comp.style.left:
-                                    arrow === 'l' ?comp.style.left + comp.style.width :
+                                    arrow === 'l' ?comp.style.left + comp.style.width  :
                                     10;
           comp.style.drag_start_y = arrow === 'b' ? comp.style.top :
                                     arrow === 't' ?comp.style.top + comp.style.height :
@@ -223,17 +229,15 @@ export default {
           let _width = 0;
           let _top = 0;
           let _height = 0;
-          let _l = 0;
-          let _t = 0;
+     
           switch(arrow) {
             case 'r':
-              _l = document.getElementById('canvas').getClientRects()[0].left;
               _width = event.clientX - comp.style.drag_start_x + 213 - _l ; 
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 'l':
-              comp.style.left = event.clientX;
-              _width = comp.style.drag_start_x - event.clientX ; 
+              comp.style.left = event.clientX  + 213 - _l; 
+              _width = comp.style.drag_start_x - event.clientX;
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 't':
@@ -242,8 +246,6 @@ export default {
               comp.style.height = _height >= 10 ? _height : 10;
               break;
             case 'b':
-              _t = document.getElementById('canvas').getClientRects()[0].top;
-              console.log(_t)
               _top = event.clientY - comp.style.drag_start_y + 60 -_t;
               comp.style.height = _top >= 10 ? _top: 10;
               break;
@@ -255,16 +257,16 @@ export default {
           let _width = 0;
           let _top = 0;
           let _height = 0;
-          let _l = 0;
-          let _t = 0;
+          let _l = document.getElementById('canvas').getClientRects()[0].left;
+          let _t = document.getElementById('canvas').getClientRects()[0].top;
           switch(arrow) {
             case 'r':
-              _l = document.getElementById('canvas').getClientRects()[0].left;
+              _l = 
               _width = event.clientX - comp.style.drag_start_x + 213 - _l ; 
               comp.style.width = _width > 10 ? _width: 10;
               break;
             case 'l':
-              comp.style.left = event.clientX;
+              comp.style.left = event.clientX + 213 - _l; 
               _width = comp.style.drag_start_x - event.clientX ; 
               comp.style.width = _width >= 10 ? _width: 10;
               break;
@@ -274,7 +276,6 @@ export default {
               comp.style.height = _height >= 10 ? _height : 10;
               break;
             case 'b':
-              _t = document.getElementById('canvas').getClientRects()[0].top;
               _top = event.clientY - comp.style.drag_start_y + 60 -_t;
               comp.style.height = _top >= 10 ? _top: 10;
               break;
@@ -459,7 +460,6 @@ export default {
     changeConfig(state, value){
       if(!this.configs[state]) return;
       this.configs[state] = value;
-      console.log(state,value)
     },
     multipArray(param) {
       let list = JSON.parse(JSON.stringify(this.eStates.multipleActiveArr));

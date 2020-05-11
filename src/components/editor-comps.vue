@@ -1,6 +1,7 @@
 <template>
   <div id="comps">
-    <div class="tits">
+    <div class="flexed">
+       <div class="tits">
       <span
         class="title"
         v-for="(tit, index) in compTits"
@@ -45,6 +46,7 @@
         <span v-if="item.isActive" class="activeState"></span>
       </span>
       <span v-if="!elements.length" class="item item-element noElement">当前页面没有元素</span>
+    </div>
     </div>
   </div>
 </template>
@@ -429,6 +431,10 @@ export default {
   background: #ffffff;
   user-select: none;
   border: 1px solid #eeeeee;
+}
+.flexed {
+  position: fixed;
+  width: 200px;
 }
 .tits {
   font-size: 14px;

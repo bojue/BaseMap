@@ -359,8 +359,8 @@ img {
 }
 
 #canvas {
-    width: 1900px;
-    height: 900px;
+    width: 1920px;
+    height: 1080px;
     background: #eeeeee;
       transform: translate(100px, 200px);
 }
@@ -413,6 +413,7 @@ img {
   width: 15px;
   height: 15px;
   background: #fff;
+  z-index: 12;
 }
 .comp-pillar-shadow.isShadow {
   box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.4);
