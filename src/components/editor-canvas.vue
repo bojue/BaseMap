@@ -10,7 +10,7 @@
       ref="canvas" 
       v-bind:style="{
         'transform':'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)',
-            background:configs.backgroundUrl && 'url(' + configs.backgroundUrl + ')'}"
+        background:configs.backgroundUrl && 'url(' + configs.backgroundUrl + ')'}"
         v-bind:class="{
         grid:configs.bg === 'grid'
         }" >
@@ -112,6 +112,7 @@
           v-bind:style="{
             width:item.style.width +'px',
             height:item.style.height +'px',
+            background:item.style.background
           }"
           v-bind:class="{
             active:item.isActive, 
@@ -231,6 +232,7 @@ export default {
     },
     // 拖拽图片，注释了节流优化
     dragComp:function(event, comp, state, index) {
+      if(event && !event.clientX && !event.clientY) return;	
       if(state === 'start') {
         this.$emit('initCompsState',index);
         this.$emit('dragComp',event, comp, state, index, this.rect)
@@ -338,37 +340,41 @@ img {
   border:1px solid transparent;
 }
 .comp-item {
-  user-select: none;
   cursor: move;
-}
-.active {
-  z-index: 11;
+  z-index: 1;
 }
 .multipleActive {
   border:1px solid red ;
 }
 .comp-item .active {
   border:1px solid rgba(225,0,00,0.8);
+  z-index: 10;
 }
 .comp-item .comp-room.active {
   border:4px solid white;
+  z-index: 0;
   box-shadow: 1px 0px 8px 0px rgba(255,0,0,0.6);
 }
 .comp-device {
   background: yellowgreen;
 }
+.comp-device.isShadow {
+  box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.4)
+}
 
 #canvas {
-    width: 1900px;
-    height: 900px;
+    width: 1920px;
+    height: 1080px;
     background: #eeeeee;
-      transform: translate(100px, 200px);
+    transform: translate(100px, 200px);
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
 }
 #canvas.grid {
     background-image: linear-gradient(rgba(200,205,208,.3) 1px,transparent 0),
                       linear-gradient(90deg,rgba(200,205,208,.3),1px,transparent 0),
                       linear-gradient(#c8cdd0 1px,transparent 0),
-                      linear-gradient(90deg,#c8cdd0 1px,transparent 0);
+                      linear-gradient(90deg,      #c8cdd0 1px,transparent 0);
     background-size: 20px 20px,20px 20px,100px 100px,100px 100px;
 }
 .control {
@@ -413,6 +419,7 @@ img {
   width: 15px;
   height: 15px;
   background: #fff;
+  z-index: 12;
 }
 .comp-pillar-shadow.isShadow {
   box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.4);

@@ -53,6 +53,7 @@ import EditorCanvas from './editor-canvas';
 import EditorSettings from './editor-settings';
 import EditorHelp from './editor-help';
 import EditorHistory from './editor-history';
+import _ from 'lodash';  
 
 export default {
   name: 'Editor',
@@ -127,13 +128,14 @@ export default {
       this.initCompState();
       item.isActive = true;
       item.multipleActiveBool=false;
+      let rect = document.getElementById('canvas').getClientRects()[0];
       let {width, height, borderRadius, rotate, borderWidth, background} = item.defStyle;
       let {clientX , clientY} = event;
       let _style = {
           width:width || 100,
           height:height || 100,
-          top: clientY || 100,
-          left:clientX || 100,
+          top: clientY  - rect.top + 60 || 100,
+          left:clientX + 213 - rect.left || 100,
           rotate: rotate || 0,
           drag_start_x: 0, //拖拽相对
           drag_start_y :0,
@@ -189,21 +191,28 @@ export default {
     dragCurrentComp(event, comp, state, currentIndex, canvesRect) {
       if(event && (event.ctrlKey || event.metaKey && this.isMac())  ){
         console.log('多选处理')
-      } else {
+      } else { 
         this.eStates.copyByKeyBool = false;
+        let _rect = document.getElementById('canvas').getClientRects()[0]
+        let _l =_rect.left;
+        let _t =_rect.left;
         if(state === 'start') {
           this.eStates.currentActiveIndex = currentIndex;
-          comp.style.drag_start_x = event.clientX - comp.style.left;
-          comp.style.drag_start_y = event.clientY - comp.style.top;
+          comp.style.drag_start_x = event.clientX - comp.style.left - _l + canvesRect.x;
+          comp.style.drag_start_y = event.clientY - comp.style.top - _t + canvesRect.y;
         }else if(state === 'drag'){
-          let _left = event.clientX - comp.style.drag_start_x; 
-          let _top = event.clientY - comp.style.drag_start_y;
+          let _left = event.clientX - comp.style.drag_start_x  - _l + canvesRect.x; 
+          let _top = event.clientY - comp.style.drag_start_y - _t + canvesRect.y ;
           if(_left <0 || _top < 0) return;
-          let left = (_left - canvesRect.x) >= 0 ? _left : canvesRect.x; // 处理left编辑问题
-          let top = (_top - canvesRect.y) >= 0 ? _top : canvesRect.y; // 处理top边界问题
-          comp.style.left = left;
-          comp.style.top = top;
+          comp.style.left = _left;
+          comp.style.top = _top ;
         }
+        var dragIcon = document.createElement('img');
+        dragIcon.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+        dragIcon.width = 0;
+        dragIcon.height = 0;
+        dragIcon.opacity = 0;
+        event.dataTransfer.setDragImage(dragIcon,0, 0);
       }
     },
     resizeByDragComp(event, comp, state, arrow,currentIndex) {
@@ -211,62 +220,40 @@ export default {
         console.log('多选处理')
       } else {
         this.eStates.copyByKeyBool = false;
+        let _l = document.getElementById('canvas').getClientRects()[0].left;
+        let _t = document.getElementById('canvas').getClientRects()[0].top;
         if(state === 'start') {
           this.eStates.currentActiveIndex = currentIndex;
-          comp.style.drag_start_x = arrow === 'r' ? comp.style.left :
-                                    arrow === 'l' ?comp.style.left + comp.style.width :
+          comp.style.drag_start_x = arrow === 'r' ? comp.style.left:
+                                    arrow === 'l' ?comp.style.left + comp.style.width + _l - 213 :
                                     10;
-          comp.style.drag_start_y = arrow === 'b' ? comp.style.top :
-                                    arrow === 't' ?comp.style.top + comp.style.height :
+          comp.style.drag_start_y = arrow === 'b' ? comp.style.top  :
+                                    arrow === 't' ?comp.style.top + comp.style.height  :
                                     10;
         }else if(state === 'drag'){
           let _width = 0;
           let _top = 0;
           let _height = 0;
+     
           switch(arrow) {
             case 'r':
-              _width = event.clientX - comp.style.drag_start_x; 
+              _width = event.clientX - comp.style.drag_start_x + 213 - _l ; 
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 'l':
-              comp.style.left = event.clientX;
-              _width = comp.style.drag_start_x - event.clientX ; 
+              comp.style.left = event.clientX  + 213 - _l; 
+              _width = comp.style.drag_start_x - event.clientX;
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 't':
+              console.log(_t, 60)
               comp.style.top = event.clientY;
-              _height = comp.style.drag_start_y - event.clientY;
+              _height = comp.style.drag_start_y - event.clientY 
               comp.style.height = _height >= 10 ? _height : 10;
               break;
             case 'b':
-              _top = event.clientY - comp.style.drag_start_y;
-              comp.style.height = _top >= 10 ? _top: 10;
-              break;
-            default:
-              break
-          }
-
-        }else {
-          let _width = 0;
-          let _top = 0;
-          let _height = 0;
-          switch(arrow) {
-            case 'r':
-              _width = event.clientX - comp.style.drag_start_x; 
-              comp.style.width = _width > 10 ? _width: 10;
-              break;
-            case 'l':
-              comp.style.left = event.clientX;
-              _width = comp.style.drag_start_x - event.clientX ; 
-              comp.style.width = _width >= 10 ? _width: 10;
-              break;
-            case 't':
-              comp.style.top = event.clientY;
-              _height = comp.style.drag_start_y - event.clientY;
-              comp.style.height = _height >= 10 ? _height : 10;
-              break;
-            case 'b':
-               _top = event.clientY - comp.style.drag_start_y;
+              _top = _t >=0 ? (event.clientY - comp.style.drag_start_y) :event.clientY - comp.style.drag_start_y - _t  + 60;
+              console.log("t ==> ",_t, _top, comp.style.drag_start_y)
               comp.style.height = _top >= 10 ? _top: 10;
               break;
             default:
@@ -396,7 +383,6 @@ export default {
               item.style.top = val;
             }
             val = item.style.height + item.style.top + parseInt(this.configs.Isometric_colu);
-            console.log(i,  this.configs.Isometric_colu, val)
           }
         }     
       }else if(state === 'reSel') {
@@ -449,8 +435,10 @@ export default {
     },
     changeConfig(state, value){
       if(!this.configs[state]) return;
+      if(state === 'bg') {
+        this.changeBgImg()
+      }
       this.configs[state] = value;
-      console.log(state,value)
     },
     multipArray(param) {
       let list = JSON.parse(JSON.stringify(this.eStates.multipleActiveArr));
@@ -502,7 +490,6 @@ export default {
     },
     saveDateToStorage(data, state) {
       let saveData = data || this.edrawComponents;
-
       //存储优化，没有内容的页面不需要存储
       if(!saveData || Array.isArray(saveData) && saveData.length === 0) {
         return;
@@ -540,7 +527,8 @@ export default {
       if(params && typeof params === 'string') {
         params = JSON.parse(params)
       }
-      this.historyCurrnetData = [].concat(params.save_data_custom, params.save_data_auto);
+      let list = [].concat(params.save_data_custom, params.save_data_auto)
+      this.historyCurrnetData = _.orderBy(list, 'updateTime', "desc");
     },
     changeBgImg(url) {
       this.configs.backgroundUrl = url;

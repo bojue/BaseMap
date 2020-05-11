@@ -1,6 +1,7 @@
 <template>
   <div id="comps">
-    <div class="tits">
+    <div class="flexed">
+       <div class="tits">
       <span
         class="title"
         v-for="(tit, index) in compTits"
@@ -45,6 +46,7 @@
         <span v-if="item.isActive" class="activeState"></span>
       </span>
       <span v-if="!elements.length" class="item item-element noElement">当前页面没有元素</span>
+    </div>
     </div>
   </div>
 </template>
@@ -131,7 +133,7 @@ export default {
             {
               id: 1,
               type: "device",
-              name: "设备-橙",
+              name: "机柜-橙",
               icon: require("./../assets/comps/device.png"),
               bgBool:true,
               defStyle: {
@@ -148,7 +150,7 @@ export default {
             }, {
               id: 1,
               type: "device",
-              name: "设备-蓝",
+              name: "机柜-蓝",
               icon: require("./../assets/comps/device.png"),
               bgBool:true,
               defStyle: {
@@ -165,7 +167,7 @@ export default {
             }, {
               id: 1,
               type: "device",
-              name: "设备-灰白",
+              name: "机柜-灰白",
               icon: require("./../assets/comps/device.png"),
               bgBool:true,
               defStyle: {
@@ -182,7 +184,7 @@ export default {
             }, {
               id: 1,
               type: "device",
-              name: "设备-黑",
+              name: "机柜-黑",
               icon: require("./../assets/comps/device.png"),
               bgBool:true,
               defStyle: {
@@ -430,6 +432,10 @@ export default {
   user-select: none;
   border: 1px solid #eeeeee;
 }
+.flexed {
+  position: fixed;
+  width: 200px;
+}
 .tits {
   font-size: 14px;
   border-bottom: 1px dashed #cccccc;
@@ -468,14 +474,14 @@ export default {
 }
 .item-comp {
   cursor: pointer;
-  border: 1px solid #f5f5f5;
+  border: 1px solid #cccccc;
   margin-left: 1px;
   margin-top: 1px;
   text-align: center;
   background: #f4f5f5;
 }
 .item-comp:hover {
-  background: #eeeeee;
+  background: antiquewhite;
 }
 .item-comp:hover .name {
   color: #000 !important;
