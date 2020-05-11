@@ -213,7 +213,7 @@ export default {
         this.eStates.copyByKeyBool = false;
         if(state === 'start') {
           this.eStates.currentActiveIndex = currentIndex;
-          comp.style.drag_start_x = arrow === 'r' ? comp.style.left :
+          comp.style.drag_start_x = arrow === 'r' ? comp.style.left:
                                     arrow === 'l' ?comp.style.left + comp.style.width :
                                     10;
           comp.style.drag_start_y = arrow === 'b' ? comp.style.top :
@@ -223,9 +223,12 @@ export default {
           let _width = 0;
           let _top = 0;
           let _height = 0;
+          let _l = 0;
+          let _t = 0;
           switch(arrow) {
             case 'r':
-              _width = event.clientX - comp.style.drag_start_x; 
+              _l = document.getElementById('canvas').getClientRects()[0].left;
+              _width = event.clientX - comp.style.drag_start_x + 213 - _l ; 
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 'l':
@@ -239,7 +242,9 @@ export default {
               comp.style.height = _height >= 10 ? _height : 10;
               break;
             case 'b':
-              _top = event.clientY - comp.style.drag_start_y;
+              _t = document.getElementById('canvas').getClientRects()[0].top;
+              console.log(_t)
+              _top = event.clientY - comp.style.drag_start_y + 60 -_t;
               comp.style.height = _top >= 10 ? _top: 10;
               break;
             default:
@@ -250,9 +255,12 @@ export default {
           let _width = 0;
           let _top = 0;
           let _height = 0;
+          let _l = 0;
+          let _t = 0;
           switch(arrow) {
             case 'r':
-              _width = event.clientX - comp.style.drag_start_x; 
+              _l = document.getElementById('canvas').getClientRects()[0].left;
+              _width = event.clientX - comp.style.drag_start_x + 213 - _l ; 
               comp.style.width = _width > 10 ? _width: 10;
               break;
             case 'l':
@@ -266,7 +274,8 @@ export default {
               comp.style.height = _height >= 10 ? _height : 10;
               break;
             case 'b':
-               _top = event.clientY - comp.style.drag_start_y;
+              _t = document.getElementById('canvas').getClientRects()[0].top;
+              _top = event.clientY - comp.style.drag_start_y + 60 -_t;
               comp.style.height = _top >= 10 ? _top: 10;
               break;
             default:

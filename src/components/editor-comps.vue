@@ -475,7 +475,7 @@ export default {
   background: #f4f5f5;
 }
 .item-comp:hover {
-  background: #eeeeee;
+  background: antiquewhite;
 }
 .item-comp:hover .name {
   color: #000 !important;
