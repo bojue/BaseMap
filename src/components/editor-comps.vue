@@ -131,7 +131,7 @@ export default {
             {
               id: 1,
               type: "device",
-              name: "设备-橙",
+              name: "机柜-橙",
               icon: require("./../assets/comps/device.png"),
               bgBool:true,
               defStyle: {
@@ -148,7 +148,7 @@ export default {
             }, {
               id: 1,
               type: "device",
-              name: "设备-蓝",
+              name: "机柜-蓝",
               icon: require("./../assets/comps/device.png"),
               bgBool:true,
               defStyle: {
@@ -165,7 +165,7 @@ export default {
             }, {
               id: 1,
               type: "device",
-              name: "设备-灰白",
+              name: "机柜-灰白",
               icon: require("./../assets/comps/device.png"),
               bgBool:true,
               defStyle: {
@@ -468,7 +468,7 @@ export default {
 }
 .item-comp {
   cursor: pointer;
-  border: 1px solid #f5f5f5;
+  border: 1px solid #cccccc;
   margin-left: 1px;
   margin-top: 1px;
   text-align: center;

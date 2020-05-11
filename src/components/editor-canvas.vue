@@ -112,6 +112,7 @@
           v-bind:style="{
             width:item.style.width +'px',
             height:item.style.height +'px',
+            background:item.style.background
           }"
           v-bind:class="{
             active:item.isActive, 
@@ -338,20 +339,19 @@ img {
   border:1px solid transparent;
 }
 .comp-item {
-  user-select: none;
   cursor: move;
-}
-.active {
-  z-index: 11;
+  z-index: 1;
 }
 .multipleActive {
   border:1px solid red ;
 }
 .comp-item .active {
   border:1px solid rgba(225,0,00,0.8);
+  z-index: 10;
 }
 .comp-item .comp-room.active {
   border:4px solid white;
+  z-index: 0;
   box-shadow: 1px 0px 8px 0px rgba(255,0,0,0.6);
 }
 .comp-device {
