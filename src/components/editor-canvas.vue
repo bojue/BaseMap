@@ -232,6 +232,7 @@ export default {
     },
     // 拖拽图片，注释了节流优化
     dragComp:function(event, comp, state, index) {
+      if(event && !event.clientX && !event.clientY) return;	
       if(state === 'start') {
         this.$emit('initCompsState',index);
         this.$emit('dragComp',event, comp, state, index, this.rect)
