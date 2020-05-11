@@ -91,8 +91,9 @@
             v-bind:style="{
                 width:item.style.width +'px',
                 height:item.style.height +'px',
+                background:item.style.background
             }">
-        </div>
+            </div>
         </div>
       </div>
       <div class="btns">
@@ -145,17 +146,18 @@ export default {
 
 <style scoped>
 #history {
-    background: #ffffff;
-    width: 1300px;
-    height: 715px;
+      background: #ffffff;
+    width: 1000px;
+    height: 600px;
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translateX(-650px) translateY(-430px);
+    top: 40%;
+    transform: translateX(-500px) translateY(-355px);
     display: grid;
     grid-template-columns: 20% 80%;
-    border:1px solid #cccccc;
+    border: 1px solid #cccccc;
     border-radius: 5px;
+    z-index: 999;
 }
 .list {
     border-right:1px solid #cccccc;
@@ -167,12 +169,13 @@ export default {
     padding: 10px;
 }
 .list .uls {
-    height: 650px;
+    height: 530px;
     overflow-y: auto;
     scrollbar-color: red yellow;
 }
 .list .item {
     color: #999999;
+    font-size:13px;
     cursor: pointer;
     padding: 4px 10px 4px 5px;
     position: relative;
@@ -199,14 +202,16 @@ export default {
     margin-top: 20px;
 }
 #history-content {
-    width: 1920px;
+     width: 1920px;
     position: absolute;
-    border:1px solid #dddddd;
+    border: 1px solid #dddddd;
     right: 0;
     top: 45px;
     height: 1080px;
-    margin:10px;
-    transform: scale(0.54) translate(825.5px, -464px);
+    margin: 10px;
+    transform: scale(0.42) translate(1348px, -755px);
+    background: whitesmoke;
+
 }
 .onData {
     text-align: center;
@@ -219,7 +224,7 @@ export default {
     height: 10px;
     position: absolute;
     right: 14px;
-    background: darkgreen;
+    background: darkseagreen;
     border-radius: 50%;
     top: 9px;
 }
@@ -246,5 +251,43 @@ export default {
 }
 .close:hover {
     background: #ddd;
+}
+.comp-img.isShadow {
+  box-shadow: -1px 1px 10px 5px rgba(0,0,0,0.3);
+}
+.comp-line_colu {
+  width: 5px;
+  background: #ffffff;
+
+}
+.comp-line_colu.isShadow {
+  box-shadow: 0px 0px 14px -1px rgba(0,0,0,1);
+}
+.comp-line_row {
+  height: 5px;
+  background: #ffffff;
+}
+.comp-line_row.isShadow {
+  box-shadow: 0px 0px 14px -1px rgba(0,0,0,1);
+}
+.comp-pillar {
+  width: 15px;
+  height: 15px;
+  background: #fff;
+}
+.comp-pillar-shadow.isShadow {
+  box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.4);
+}
+.comp-room {
+  border: 4px solid #ffffff;
+}
+.comp-room.isShadow {
+  box-shadow: 1px 0px 8px 0px rgba(0,0,0,0.6);
+}
+.comp-room-inset {
+  display: inline-block;
+}
+.comp-room-inset.isShadow {
+  box-shadow: inset 0px 0px 26px -11px rgba(13,13,13,0.8);
 }
 </style>
