@@ -207,6 +207,7 @@ export default {
     right: 0;
     top: 45px;
     height: 1080px;
+    overflow: hidden;
     margin: 10px;
     transform: scale(0.42) translate(1348px, -755px);
     background: whitesmoke;

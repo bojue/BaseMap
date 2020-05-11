@@ -520,8 +520,7 @@ export default {
         params = JSON.parse(params)
       }
       let list = [].concat(params.save_data_custom, params.save_data_auto)
-      this.historyCurrnetData = _.orderBy(list, 'updateTime', "desc")
-      console.log(this.historyCurrnetData)
+      this.historyCurrnetData = _.orderBy(list, 'updateTime', "desc");
     },
     changeBgImg(url) {
       this.configs.backgroundUrl = url;

@@ -10,7 +10,7 @@
       ref="canvas" 
       v-bind:style="{
         'transform':'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)',
-            background:configs.backgroundUrl && 'url(' + configs.backgroundUrl + ')'}"
+        background:configs.backgroundUrl && 'url(' + configs.backgroundUrl + ')'}"
         v-bind:class="{
         grid:configs.bg === 'grid'
         }" >
@@ -363,7 +363,9 @@ img {
     width: 1920px;
     height: 1080px;
     background: #eeeeee;
-      transform: translate(100px, 200px);
+    transform: translate(100px, 200px);
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
 }
 #canvas.grid {
     background-image: linear-gradient(rgba(200,205,208,.3) 1px,transparent 0),

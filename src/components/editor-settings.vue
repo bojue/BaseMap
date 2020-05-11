@@ -92,11 +92,17 @@
       <div class="subs grid grid-2">
         <div class="subs-item">
           <label class="lab" for="">长</label>
-          <input class="val" type="number"  v-model="currentElement.style.width">
+          <input 
+            max="l920"
+            min="0"
+            class="val" type="number"  v-model="currentElement.style.width">
         </div>
          <div class="subs-item">
           <label class="lab" for="">宽</label>
-          <input class="val" type="number"  v-model="currentElement.style.height"> 
+          <input class="val" type="number" 
+            max="1080"
+            min="0"
+            v-model="currentElement.style.height"> 
         </div>
       </div>
     </div>
