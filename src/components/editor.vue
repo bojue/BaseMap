@@ -53,6 +53,7 @@ import EditorCanvas from './editor-canvas';
 import EditorSettings from './editor-settings';
 import EditorHelp from './editor-help';
 import EditorHistory from './editor-history';
+import _ from 'lodash';  
 
 export default {
   name: 'Editor',
@@ -377,7 +378,6 @@ export default {
               item.style.top = val;
             }
             val = item.style.height + item.style.top + parseInt(this.configs.Isometric_colu);
-            console.log(i,  this.configs.Isometric_colu, val)
           }
         }     
       }else if(state === 'reSel') {
@@ -482,7 +482,6 @@ export default {
     },
     saveDateToStorage(data, state) {
       let saveData = data || this.edrawComponents;
-
       //存储优化，没有内容的页面不需要存储
       if(!saveData || Array.isArray(saveData) && saveData.length === 0) {
         return;
@@ -520,7 +519,9 @@ export default {
       if(params && typeof params === 'string') {
         params = JSON.parse(params)
       }
-      this.historyCurrnetData = [].concat(params.save_data_custom, params.save_data_auto);
+      let list = [].concat(params.save_data_custom, params.save_data_auto)
+      this.historyCurrnetData = _.orderBy(list, 'updateTime', "desc")
+      console.log(this.historyCurrnetData)
     },
     changeBgImg(url) {
       this.configs.backgroundUrl = url;

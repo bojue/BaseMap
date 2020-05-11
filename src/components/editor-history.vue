@@ -10,7 +10,6 @@
                 }"
                 v-bind:title="item.type === 'custom' ? '用户保存于' + item.updateTime : '自动保存于' + item.updateTime"
                 @click="selectData(item, index)">
-                    <!-- <span class="index">{{index+1}}.</span> -->
                     <span class="name">{{item.updateTime | bm_time}}</span>
                     <span class="state" v-bind:class="{
                         custom:item.type === 'custom'
