@@ -345,7 +345,8 @@ export default {
               defStyle: {
                 width: 30,
                 height: 30,
-                borderRadius: "50"
+                borderRadius: "50",
+                isApplyShadow:'false'
               }
             },
             {
@@ -355,7 +356,8 @@ export default {
               icon: require("./../assets/comps/bangongzhuo.png"),
               defStyle: {
                 width: 120,
-                height: 70
+                height: 70,
+                isApplyShadow:'false'
               }
             },
             {
@@ -365,7 +367,8 @@ export default {
               icon: require("./../assets/comps/bangongzhuo2.png"),
               defStyle: {
                 width: 160,
-                height: 240
+                height: 240,
+                isApplyShadow:'false'
               }
             },
             {
@@ -375,7 +378,8 @@ export default {
               icon: require("./../assets/comps/bangongzhuo3.png"),
               defStyle: {
                 width: 120,
-                height: 120
+                height: 120,
+                isApplyShadow:'false'
               }
             },
              {

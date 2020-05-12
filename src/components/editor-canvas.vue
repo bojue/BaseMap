@@ -368,7 +368,7 @@ img {
     background: #eeeeee;
     transform: translate(100px, 200px);
     background-repeat: no-repeat !important;
-    background-size: cover !important;
+    background-size: 1920px 1080px;
 }
 #canvas.grid {
     background-image: linear-gradient(rgba(200,205,208,.3) 1px,transparent 0),
