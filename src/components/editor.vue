@@ -194,7 +194,7 @@ export default {
     dragCurrentComp(event, comp, state, currentIndex, canvesRect) {
       if(event && (event.ctrlKey || event.metaKey && this.isMac())  ){
         console.log('多选处理')
-      } else { 
+      } else {
         this.eStates.copyByKeyBool = false;
         let _rect = document.getElementById('canvas').getClientRects()[0]
         let _l =_rect.left;
@@ -203,6 +203,7 @@ export default {
           this.eStates.currentActiveIndex = currentIndex;
           comp.style.drag_start_x = event.clientX - comp.style.left - _l + canvesRect.x;
           comp.style.drag_start_y = event.clientY - comp.style.top - _t + canvesRect.y;
+          this.eliminateGhosting();
         }else if(state === 'drag'){
           let _left = event.clientX - comp.style.drag_start_x  - _l + canvesRect.x; 
           let _top = event.clientY - comp.style.drag_start_y - _t + canvesRect.y ;
@@ -211,13 +212,9 @@ export default {
           _top = Math.max(0, Math.min(_top, 1080));
           comp.style.left = _left;
           comp.style.top = _top ;
+          this.eliminateGhosting();
         }
-        var dragIcon = document.createElement('img');
-        dragIcon.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-        dragIcon.width = 0;
-        dragIcon.height = 0;
-        dragIcon.opacity = 0;
-        event.dataTransfer.setDragImage(dragIcon,0, 0);
+        
       }
     },
     resizeByDragComp(event, comp, state, arrow,currentIndex) {
@@ -563,6 +560,14 @@ export default {
     },
     closeHistory() {
       this.activeHistoryBool = false;
+    },
+    eliminateGhosting(event) {
+      let dragIcon = document.createElement('img');
+      dragIcon.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+      dragIcon.width = 0;
+      dragIcon.height = 0;
+      dragIcon.opacity = 0;
+      event.dataTransfer.setDragImage(dragIcon,0, 0);
     }
   }
 }
