@@ -213,7 +213,7 @@ export default {
           comp.style.top = _top ;
         }
         if(['start', 'drag'].indexOf(state) > -1) {
-          this.eliminateGhosting(); // 消除拖拽鬼影
+          this.eliminateGhosting(event); // 消除拖拽鬼影
         } 
         
       }
