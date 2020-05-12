@@ -40,8 +40,8 @@
       <img  
         @click="saveData()" 
         src="./../assets/icon/save.svg" 
-        alt="历史记录" 
-        title="历史记录">
+        alt="保存" 
+        title="保存">
       <img  
         @click="getHistory()" 
         src="./../assets/icon/history.svg" 
