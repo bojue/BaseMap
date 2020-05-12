@@ -103,6 +103,7 @@
             v-bind:style="{
               width:item.style.width +'px',
               height:item.style.height +'px',
+              background:item.style.bgiBool === 'true' ? 'url('+ item.backgroundImage +')' :null
             }"></span>
         </div>
         

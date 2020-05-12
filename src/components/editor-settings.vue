@@ -130,6 +130,19 @@
         </div>
       </div>
     </div>
+    <div class="item" v-if="currentElement.type === 'room'">
+      <label for="" class="title">材质</label>
+      <div class="subs">
+        <div class="subs-item">
+          <input class="val-cb"
+            type="checkbox" v-model="currentElement.style.bgiBool"
+            true-value=true
+            false-value=false
+          >
+          <span class="val">应用材质</span>
+        </div>
+      </div>
+    </div>
     <div class="item">
       <label for="" class="title">圆角</label>
       <div class="subs">

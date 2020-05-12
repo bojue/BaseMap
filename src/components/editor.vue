@@ -129,7 +129,7 @@ export default {
       item.isActive = true;
       item.multipleActiveBool=false;
       let rect = document.getElementById('canvas').getClientRects()[0];
-      let {width, height, borderRadius, rotate, borderWidth, background, isApplyShadow} = item.defStyle;
+      let {width, height, borderRadius, rotate, borderWidth, background, isApplyShadow, bgiBool} = item.defStyle;
       let {clientX , clientY} = event;
       let _style = {
           width:width || 100,
@@ -144,6 +144,7 @@ export default {
           isApplyShadow:isApplyShadow  === undefined || isApplyShadow === null ? 'true' : 'false',
           position:'absolute',
           isFixed:"false",
+          bgiBool:bgiBool || false, //材质
           borderRadius:borderRadius || 0
       }
       _style.left =Math.max(0,  Math.min(_style.left, 1920));
@@ -254,12 +255,12 @@ export default {
             case 't':
               comp.style.top = event.clientY;
               _height = comp.style.drag_start_y - event.clientY;
-              _height =Math.max(60,  Math.min(_height, 1920));
+              _height =Math.max(10,  Math.min(_height, 1920));
               comp.style.height = _height >= 10 ? _height : 10;
               break;
             case 'b':
               _top = _t >=0 ? (event.clientY - comp.style.drag_start_y) :event.clientY - comp.style.drag_start_y - _t  + 60;
-              _top = Math.max(60, Math.min(_top, 1920));
+              _top = Math.max(10, Math.min(_top, 1920));
               comp.style.height = _top >= 10 ? _top: 10;
               break;
             default:
