@@ -146,6 +146,8 @@ export default {
           isFixed:"false",
           borderRadius:borderRadius || 0
       }
+      _style.left = Math.min(_style.left, 1920);
+      _style.top = Math.min(_style.top, 1080);
       item.style = _style;
       this.edrawComponents.push(item);
       this.eStates.currentActiveIndex = this.edrawComponents.length -1;
@@ -204,6 +206,8 @@ export default {
           let _left = event.clientX - comp.style.drag_start_x  - _l + canvesRect.x; 
           let _top = event.clientY - comp.style.drag_start_y - _t + canvesRect.y ;
           if(_left <0 || _top < 0) return;
+          _left = Math.min(_left, 1920);
+          _top = Math.min(_top, 1080);
           comp.style.left = _left;
           comp.style.top = _top ;
         }
@@ -238,22 +242,24 @@ export default {
           switch(arrow) {
             case 'r':
               _width = event.clientX - comp.style.drag_start_x + 213 - _l ; 
+              _width = Math.min(_width, 1920);
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 'l':
               comp.style.left = event.clientX  + 213 - _l; 
               _width = comp.style.drag_start_x - event.clientX;
+              _width = Math.min(_width, 1920);
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 't':
-              console.log(_t, 60)
               comp.style.top = event.clientY;
-              _height = comp.style.drag_start_y - event.clientY 
+              _height = comp.style.drag_start_y - event.clientY;
+              _height = Math.min(_height, 1920);
               comp.style.height = _height >= 10 ? _height : 10;
               break;
             case 'b':
               _top = _t >=0 ? (event.clientY - comp.style.drag_start_y) :event.clientY - comp.style.drag_start_y - _t  + 60;
-              console.log("t ==> ",_t, _top, comp.style.drag_start_y)
+              _top = Math.min(_top, 1920);
               comp.style.height = _top >= 10 ? _top: 10;
               break;
             default:
@@ -346,6 +352,7 @@ export default {
       let _style = _currComp.style;
       let _h = this.configs.Isometric_colu > 1? this.configs.Isometric_colu : 1;
       _copy.style.top = _style.height + _style.top + _h;
+      _copy.style.top = Math.min(_copy.style.top, 1080);
       _copy.isActive = true;
       this.edrawComponents.push(_copy);
       this.eStates.currentActiveIndex = this.edrawComponents.length - 1; //更新激活组件的下标
@@ -372,6 +379,7 @@ export default {
               item.style.left = val;
             }
             val = item.style.left + item.style.width + parseInt(this.configs.Isometric_row);
+            val = Math.min(val, 1920);
           }
         } else {
           this.eStates.multipleActiveArr =  this.eStates.multipleActiveArr.sort(function(a,b){
@@ -383,6 +391,7 @@ export default {
               item.style.top = val;
             }
             val = item.style.height + item.style.top + parseInt(this.configs.Isometric_colu);
+            val = Math.min(val, 1080);
           }
         }     
       }else if(state === 'reSel') {
