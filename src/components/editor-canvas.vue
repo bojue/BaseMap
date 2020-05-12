@@ -12,6 +12,7 @@
         'transform':'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)',
         background:configs.backgroundUrl && 'url(' + configs.backgroundUrl + ')'}"
         v-bind:class="{
+        other:configs.bg !== 'grid',
         grid:configs.bg === 'grid'
         }" >
       <!--遍历组件数组:图片-img,横线-lien_row,竖线-line_colu,柱子-pillar -->
@@ -364,12 +365,14 @@ img {
 }
 
 #canvas {
-    width: 1920px;
-    height: 1080px;
-    background: #eeeeee;
-    transform: translate(100px, 200px);
-    background-repeat: no-repeat !important;
-    background-size: 1920px 1080px;
+  width: 1920px;
+  height: 1080px;
+  background: #eeeeee;
+  transform: translate(100px, 200px);
+}
+#canvas.other {
+  background-repeat: no-repeat !important;
+  background-size: 1920px 1080px;
 }
 #canvas.grid {
     background-image: linear-gradient(rgba(200,205,208,.3) 1px,transparent 0),
