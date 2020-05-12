@@ -203,7 +203,6 @@ export default {
           this.eStates.currentActiveIndex = currentIndex;
           comp.style.drag_start_x = event.clientX - comp.style.left - _l + canvesRect.x;
           comp.style.drag_start_y = event.clientY - comp.style.top - _t + canvesRect.y;
-          this.eliminateGhosting();
         }else if(state === 'drag'){
           let _left = event.clientX - comp.style.drag_start_x  - _l + canvesRect.x; 
           let _top = event.clientY - comp.style.drag_start_y - _t + canvesRect.y ;
@@ -212,8 +211,10 @@ export default {
           _top = Math.max(0, Math.min(_top, 1080));
           comp.style.left = _left;
           comp.style.top = _top ;
-          this.eliminateGhosting();
         }
+        if(['start', 'drag'].indexOf(state) > -1) {
+          this.eliminateGhosting(); // 消除拖拽鬼影
+        } 
         
       }
     },
