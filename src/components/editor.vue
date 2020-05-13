@@ -295,6 +295,8 @@ export default {
     kaydownFun(event) {
       if(event.key === 'v' && document.activeElement.nodeName === 'INPUT') {
         return;
+      }else if(event.key === 'c' &&  document.activeElement.nodeName === 'INPUT') {
+        document.activeElement.blur();
       }
       if(event.target.nodeName === 'INPUT' && this.eStates.copyByKeyBool) {
          this.eStates.copyByKeyBool = false;
