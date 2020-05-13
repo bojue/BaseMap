@@ -293,11 +293,17 @@ export default {
     },
     // 键盘事件
     kaydownFun(event) {
+      if(event.key === 'v' && document.activeElement.nodeName === 'INPUT') {
+        return;
+      }
+      if(event.target.nodeName === 'INPUT' && this.eStates.copyByKeyBool) {
+         this.eStates.copyByKeyBool = false;
+      }
       if(event.key === 'c') {
         this.eStates.copyByKeyBool = true;
       }else if(this.eStates.copyByKeyBool && event.key === 'v') {
         this.copyCurrentComp();
-      }else {
+      }else if(event.target.nodeName !== 'INPUT'){
         if(['ArrowUp','ArrowDown','ArrowLeft',"ArrowRight"].indexOf(event['code'])> -1) {
           event.preventDefault();
           if(this.eStates.currentActiveIndex > -1 && this.eStates.multipleActiveArr.length === 0) {
@@ -352,7 +358,7 @@ export default {
       let _copy = JSON.parse(JSON.stringify(_currComp));
       let _style = _currComp.style;
       let _h = this.configs.Isometric_colu > 1? this.configs.Isometric_colu : 1;
-      _copy.style.top = _style.height + _style.top + _h;
+      _copy.style.top = parseInt(_style.height) + parseInt(_style.top) + parseInt(_h);
       _copy.style.top = Math.max(0, Math.min(_copy.style.top, 1080));
       _copy.isActive = true;
       this.edrawComponents.push(_copy);
