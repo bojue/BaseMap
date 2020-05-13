@@ -94,14 +94,14 @@
         <div class="subs-item">
           <label class="lab" for="">长</label>
           <input 
-            max="l920"
+            max="2130"
             min="0"
             class="val" type="number"  v-model="currentElement.style.width">
         </div>
          <div class="subs-item">
           <label class="lab" for="">宽</label>
           <input class="val" type="number" 
-            max="1080"
+            max="1140"
             min="0"
             v-model="currentElement.style.height"> 
         </div>
