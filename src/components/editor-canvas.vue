@@ -130,8 +130,10 @@
             v-if="['line_colu'].indexOf(item.type) === -1"	
             draggable="true"	
             v-bind:style="{	
-              left:(item.style.width - 3 + item.style.borderWidth * 2) +'px',	
-              top:(item.style.height /2 - 3)+'px',	
+              left:(item.style.width -  configs.dragIconSize + item.style.borderWidth * 2) +'px',	
+              top:(item.style.height /2 -  configs.dragIconSize)+'px',	
+              width: (configs.dragIconSize * 2)+ 'px',
+              height: (configs.dragIconSize * 2) +'px'
             }"	
             @dragstart.stop="resizeByDragComp($event, item, 'start','r', index)"	
             @drag.stop="resizeByDragComp($event, item, 'drag','r', index)"	
@@ -141,8 +143,10 @@
             v-if="['line_colu'].indexOf(item.type) === -1"	
             draggable="true"	
             v-bind:style="{	
-              left:(-3) +'px',	
-              top:(item.style.height /2 - 3)+'px',	
+              left:(- configs.dragIconSize) +'px',	
+              top:(item.style.height /2 -  configs.dragIconSize)+'px',	
+              width: (configs.dragIconSize * 2)+ 'px',
+              height: (configs.dragIconSize * 2) +'px'
             }"	
             @dragstart.stop="resizeByDragComp($event, item, 'start','l', index)"	
             @drag.stop="resizeByDragComp($event, item, 'drag','l', index)"	
@@ -152,8 +156,10 @@
             v-if="['line_row'].indexOf(item.type) === -1"	
             draggable="true"	
             v-bind:style="{	
-              left:(item.style.width /2 -3) +'px',	
-              top:(-3)+'px',	
+              left:(item.style.width /2 - configs.dragIconSize) +'px',	
+              top:(- configs.dragIconSize)+'px',	
+              width: (configs.dragIconSize * 2)+ 'px',
+              height: (configs.dragIconSize * 2) +'px'
             }"	
             @dragstart.stop="resizeByDragComp($event, item, 'start','t', index)"	
             @drag.stop="resizeByDragComp($event, item, 'drag','t', index)"	
@@ -163,8 +169,10 @@
             v-if="['line_row'].indexOf(item.type) === -1"	
             draggable="true"	
             v-bind:style="{	
-              left:(item.style.width /2 -3) +'px',	
-              top:(item.style.height - 3 + item.style.borderWidth * 2) +'px',	
+              left:(item.style.width /2 - configs.dragIconSize) +'px',	
+              top:(item.style.height -  configs.dragIconSize + item.style.borderWidth * 2) +'px',	
+              width: (configs.dragIconSize * 2)+ 'px',
+              height: (configs.dragIconSize * 2) +'px'
             }"	
             @dragstart.stop="resizeByDragComp($event, item, 'start','b', index)"	
             @drag.stop="resizeByDragComp($event, item, 'drag','b', index)"	

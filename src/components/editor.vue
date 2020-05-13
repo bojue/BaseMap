@@ -74,6 +74,7 @@ export default {
           pageName:'底图',
           spacing:10,
           scale:1,
+          dragIconSize:2,
           Isometric_row:10,
           Isometric_colu:10,
           dowloadImgType:'png',
