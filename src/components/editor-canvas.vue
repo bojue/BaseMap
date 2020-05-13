@@ -125,13 +125,13 @@
         <!-- 辅助 -->	
         <span 	
           class="assist"	
-          v-if="!configs.bgAllBool && item.isActive && ['pillar'].indexOf(item.type) === -1 && '1'===configs.scale">	
+          v-if="!configs.bgAllBool && item.isActive && ['pillar'].indexOf(item.type) === -1">	
           <span class="adR" 	
             v-if="['line_colu'].indexOf(item.type) === -1"	
             draggable="true"	
             v-bind:style="{	
-              left:(item.style.width - 6 + item.style.borderWidth * 2) +'px',	
-              top:(item.style.height /2 - 6)+'px',	
+              left:(item.style.width - 3 + item.style.borderWidth * 2) +'px',	
+              top:(item.style.height /2 - 3)+'px',	
             }"	
             @dragstart.stop="resizeByDragComp($event, item, 'start','r', index)"	
             @drag.stop="resizeByDragComp($event, item, 'drag','r', index)"	
@@ -141,8 +141,8 @@
             v-if="['line_colu'].indexOf(item.type) === -1"	
             draggable="true"	
             v-bind:style="{	
-              left:(-6) +'px',	
-              top:(item.style.height /2 - 6)+'px',	
+              left:(-3) +'px',	
+              top:(item.style.height /2 - 3)+'px',	
             }"	
             @dragstart.stop="resizeByDragComp($event, item, 'start','l', index)"	
             @drag.stop="resizeByDragComp($event, item, 'drag','l', index)"	
@@ -152,8 +152,8 @@
             v-if="['line_row'].indexOf(item.type) === -1"	
             draggable="true"	
             v-bind:style="{	
-              left:(item.style.width /2 -6) +'px',	
-              top:(-6)+'px',	
+              left:(item.style.width /2 -3) +'px',	
+              top:(-3)+'px',	
             }"	
             @dragstart.stop="resizeByDragComp($event, item, 'start','t', index)"	
             @drag.stop="resizeByDragComp($event, item, 'drag','t', index)"	
@@ -163,8 +163,8 @@
             v-if="['line_row'].indexOf(item.type) === -1"	
             draggable="true"	
             v-bind:style="{	
-              left:(item.style.width /2 -6) +'px',	
-              top:(item.style.height - 6 + item.style.borderWidth * 2) +'px',	
+              left:(item.style.width /2 -3) +'px',	
+              top:(item.style.height - 3 + item.style.borderWidth * 2) +'px',	
             }"	
             @dragstart.stop="resizeByDragComp($event, item, 'start','b', index)"	
             @drag.stop="resizeByDragComp($event, item, 'drag','b', index)"	
@@ -193,7 +193,7 @@
     step="0.1" 
     name="vol" 
     min="0.7" 
-    max="1.2">
+    max="1.5">
   </div>
   <div class="screen" v-if="configs.bgAllBool">
     <img @click="screen" src="./../assets/icon/screen_cancel.svg" alt="右对齐" title="右对齐">
@@ -442,8 +442,8 @@ img {
 }
 .assist span {	
   position: absolute;	
-  width: 10px;	
-  height: 10px;	
+  width: 6px;	
+  height: 6px;	
   border:1px solid red;	
   display: inline;	
   background: #fff;	
