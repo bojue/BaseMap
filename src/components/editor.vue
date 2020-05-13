@@ -156,7 +156,7 @@ export default {
     },
     initComponentState(current, event) {
       if(current === undefined || current === null || current === -1) return;
-      if(event && (event.ctrlKey || event.metaKey && this.isMac()) && event.button === 0 ) {
+      if(event && (event.shiftKey || event.metaKey && this.isMac()) && event.button === 0 ) {
         this.edrawComponents[current].isActive = false;
         if(this.eStates.currentActiveIndex > -1) {
           this.eStates.currentActiveIndex = -1;
@@ -191,9 +191,9 @@ export default {
       }
       this.eStates.copyByKeyBool = false;
     },
-    // 组件拖拽：ctrlkey === true 处理多选
+    // 组件拖拽：shiftKey === true 处理多选
     dragCurrentComp(event, comp, state, currentIndex, canvesRect) {
-      if(event && (event.ctrlKey || event.metaKey && this.isMac())  ){
+      if(event && (event.shiftKey || event.metaKey && this.isMac())  ){
         console.log('多选处理')
       } else {
         this.eStates.copyByKeyBool = false;
@@ -220,7 +220,7 @@ export default {
       }
     },
     resizeByDragComp(event, comp, state, arrow,currentIndex) {
-      if(event && (event.ctrlKey || event.metaKey && this.isMac())  ){
+      if(event && (event.shiftKey || event.metaKey && this.isMac())  ){
         console.log('多选处理')
       } else {
         this.eStates.copyByKeyBool = false;
@@ -336,7 +336,8 @@ export default {
     },
     // 多选事件
     mousedownFun(event) {
-      if((!event.ctrlKey || !event.metaKey && this.isMac()) && event.button === 0 
+      console.log(event)
+      if((!event.shiftKey || !event.metaKey && this.isMac()) && event.button === 0 
         && event.target.id==='canvas' 
         && !event.target.classList.contains('comp-element')) {
         this.eStates.copyByKeyBool = false;

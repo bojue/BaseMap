@@ -21,11 +21,11 @@
             </div>
             <div class="item">
                 <span class="name"><code>win</code>多选</span>
-                <span class="val"><code>Ctrl</code>+点击</span>
+                <span class="val"><code>Shift</code>+点击</span>
             </div>
             <div class="item">
                 <span class="name"><code>win</code>取消多选</span>
-                <span class="val"><code>Ctrl</code>+点击</span>
+                <span class="val"><code>Shift</code>+点击</span>
              </div>
              <div class="item">
                 <span class="name"><code>mac</code>多选</span>
