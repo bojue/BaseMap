@@ -125,7 +125,7 @@
         <!-- 辅助 -->	
         <span 	
           class="assist"	
-          v-if="!configs.bgAllBool && item.isActive && ['pillar'].indexOf(item.type) === -1">	
+          v-if="!configs.bgAllBool && item.isActive && ['pillar'].indexOf(item.type) === -1 && '1'===configs.scale">	
           <span class="adR" 	
             v-if="['line_colu'].indexOf(item.type) === -1"	
             draggable="true"	
@@ -190,10 +190,10 @@
     class="slider" 
     v-model="configs.scale" 
     id="vol" 
-    step="0.01" 
+    step="0.1" 
     name="vol" 
     min="0.7" 
-    max="1.0">
+    max="1.2">
   </div>
   <div class="screen" v-if="configs.bgAllBool">
     <img @click="screen" src="./../assets/icon/screen_cancel.svg" alt="右对齐" title="右对齐">
