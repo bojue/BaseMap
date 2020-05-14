@@ -517,7 +517,6 @@ export default {
       if(!saveData || Array.isArray(saveData) && saveData.length === 0) {
         return;
       }
-      console.log(saveData, state)
       let obj = {
         data: saveData,
         type: state || 'auto',
@@ -527,20 +526,21 @@ export default {
         this.initStorageData();
       }
 
-       console.log("---->  ",obj, state)
-
       let params = window.localStorage.getItem('bm_datas');
       if(params && typeof params === 'string') {
         params = JSON.parse(params)
       }
-      console.log(state, obj)
+      console.log(params)
+      console.log(params.save_data_auto)
+      console.log(params.save_data_custom);
+      console.log(Array.isArray(params.save_data_auto))
       if(state === 'custom') {
-         params.save_data_custom = params.save_data_custom.unshift(obj);
+        params.save_data_custom.unshift(obj);
         if(params.save_data_custom.length > 50) {
           params.save_data_custom = params.save_data_custom.slice(0, 50);
         }
       } else {
-         params.save_data_auto = params.save_data_auto.unshift(obj);
+         params.save_data_auto.unshift(obj);
         if(params.save_data_auto.length > 50) {
           params.save_data_auto = params.save_data_auto.slice(0, 50);
         }
@@ -569,7 +569,10 @@ export default {
       if(Array.isArray(this.historyCurrnetData)) {
         let len = this.historyCurrnetData.length;
         for(let i=0;i<len;i++) {
-          this.historyCurrnetData[i].isActive = false;
+          console.log(this.historyCurrnetData[i])
+            if(this.historyCurrnetData[i]) {
+             this.historyCurrnetData[i].isActive = false;
+           }
         }
       }
     },
