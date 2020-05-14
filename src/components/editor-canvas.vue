@@ -353,6 +353,9 @@ img {
   cursor: move;
   z-index: 1;
 }
+.comp-element img {
+  z-index: -1;
+}
 .multipleActive {
   border:1px solid red ;
 }

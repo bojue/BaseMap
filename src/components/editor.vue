@@ -8,7 +8,6 @@
     
     <!-- 画布 -->
     <editor-canvas 
-
       v-bind:configs="configs"
       v-bind:edrawComps="edrawComponents"
       v-bind:currentActiveIndex="eStates.currentActiveIndex"
@@ -344,7 +343,12 @@ export default {
     },
     // 多选事件
     mousedownFun(event) {
-      console.log(event)
+      this.eliminateGhosting(event); // 消除拖拽鬼影
+      if(event && event.shiftKey && this.eStates.currentActiveIndex > -1) {
+        this.edrawComponents[this.eStates.currentActiveIndex].isActive = false;
+        this.eStates.currentActiveIndex = -1;
+      }
+      console.log(this.eStates)
       if((!event.shiftKey || !event.metaKey && this.isMac()) && event.button === 0 
         && event.target.id==='canvas' 
         && !event.target.classList.contains('comp-element')) {
@@ -578,7 +582,10 @@ export default {
       dragIcon.width = 0;
       dragIcon.height = 0;
       dragIcon.opacity = 0;
-      event.dataTransfer.setDragImage(dragIcon,0, 0);
+      if(event && event.dataTransfer) {
+        event.dataTransfer.setDragImage(dragIcon,0, 0);
+      }
+
     }
   }
 }
