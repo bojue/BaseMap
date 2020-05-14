@@ -363,7 +363,8 @@ export default {
       _currComp.isActive = false;
       let _copy = JSON.parse(JSON.stringify(_currComp));
       let _style = _currComp.style;
-      let _h = this.configs.Isometric_colu > 1? this.configs.Isometric_colu : 1;
+      let _val = 10;
+      let _h = _val;
       _copy.style.top = parseInt(_style.height) + parseInt(_style.top) + parseInt(_h);
       _copy.style.top = Math.max(0, Math.min(_copy.style.top, 1080));
       _copy.isActive = true;
@@ -516,6 +517,7 @@ export default {
       if(!saveData || Array.isArray(saveData) && saveData.length === 0) {
         return;
       }
+      console.log(saveData, state)
       let obj = {
         data: saveData,
         type: state || 'auto',
@@ -524,17 +526,21 @@ export default {
       if(!window.localStorage.getItem('bm_datas')) {
         this.initStorageData();
       }
+
+       console.log("---->  ",obj, state)
+
       let params = window.localStorage.getItem('bm_datas');
       if(params && typeof params === 'string') {
         params = JSON.parse(params)
       }
+      console.log(state, obj)
       if(state === 'custom') {
-        params.save_data_custom.unshift(obj);
+         params.save_data_custom = params.save_data_custom.unshift(obj);
         if(params.save_data_custom.length > 50) {
           params.save_data_custom = params.save_data_custom.slice(0, 50);
         }
       } else {
-        params.save_data_auto.unshift(obj);
+         params.save_data_auto = params.save_data_auto.unshift(obj);
         if(params.save_data_auto.length > 50) {
           params.save_data_auto = params.save_data_auto.slice(0, 50);
         }
