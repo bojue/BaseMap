@@ -530,10 +530,6 @@ export default {
       if(params && typeof params === 'string') {
         params = JSON.parse(params)
       }
-      console.log(params)
-      console.log(params.save_data_auto)
-      console.log(params.save_data_custom);
-      console.log(Array.isArray(params.save_data_auto))
       if(state === 'custom') {
         params.save_data_custom.unshift(obj);
         if(params.save_data_custom.length > 50) {
