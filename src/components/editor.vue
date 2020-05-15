@@ -118,7 +118,6 @@ export default {
     },
     leaving(event) {
       this.saveConfigs();
-      console.log("save",this.webConfig , this.webConfig.auto)
       this.saveDateToStorage();
       console.log(event.returnValue)
       // let message = "内容更改，注意截图缓存"; 
@@ -540,7 +539,7 @@ export default {
       if(!window.localStorage.getItem('bm_datas')) {
         this.initStorageData();
       }
-
+      // this.getConfig();
       let params = window.localStorage.getItem('bm_datas');
       if(params && typeof params === 'string') {
         params = JSON.parse(params)

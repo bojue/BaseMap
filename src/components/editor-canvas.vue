@@ -121,6 +121,27 @@
             isShadow:item.style.isApplyShadow ==='true',
             multipleActive:item.multipleActiveBool}">
         </div>
+
+        <!-- 7.文本 -->
+        <div class="comp-element device comp-text"
+          v-if="item.type === 'text'"
+          v-bind:style="{
+            width:item.style.width +'px',
+            height:item.style.height +'px',
+            background:item.style.background
+          }"
+          v-bind:class="{
+            active:item.isActive, 
+            isShadow:item.style.isApplyShadow ==='true',
+            multipleActive:item.multipleActiveBool}">
+            <div      
+              v-bind:style="{
+              width:item.style.width +'px',
+              height:item.style.height +'px',
+              background:item.style.background
+            }"
+            v-bind:contenteditable='item.style.isApplyShadow'></div>
+        </div>
         
         <!-- 辅助 -->	
         <span 	
@@ -476,5 +497,10 @@ img {
 }	
 .adT, .adB {	
   cursor: ns-resize;	
+}
+.comp-text {
+  text-align: center;
+  font-size: 14px;
+  columns: #4f4f4f;
 }
 </style>

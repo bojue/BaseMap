@@ -94,6 +94,27 @@
                 background:item.style.background
             }">
             </div>
+
+            <!-- 7.文本 -->
+            <div class="comp-element device comp-text"
+              v-if="item.type === 'text'"
+              v-bind:style="{
+                width:item.style.width +'px',
+                height:item.style.height +'px',
+                background:item.style.background
+              }"
+              v-bind:class="{
+                active:item.isActive, 
+                isShadow:item.style.isApplyShadow ==='true',
+                multipleActive:item.multipleActiveBool}">
+                <div      
+                  v-bind:style="{
+                  width:item.style.width +'px',
+                  height:item.style.height +'px',
+                  background:item.style.background
+                }"
+                v-bind:contenteditable='item.style.isApplyShadow'></div>
+            </div>
         </div>
       </div>
       <div class="btns">
@@ -330,5 +351,10 @@ export default {
 }
 .comp-room-inset.isShadow {
   box-shadow: inset 0px 0px 26px -11px rgba(13,13,13,0.8);
+}
+.comp-text {
+  text-align: center;
+  font-size: 14px;
+  columns: #4f4f4f;
 }
 </style>
