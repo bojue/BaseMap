@@ -34,13 +34,15 @@
       v-on:getHistory="getStorageData"
       v-on:changeBgImg="changeBgImg"></editor-settings>
     
-    <editor-history
+    <editor-history 
       v-if="activeHistoryBool"
       v-bind:list="historyCurrnetData"
       v-bind:currentIndex="currentHistoryIndex"
       v-on:initState="initHistoryListState"
       v-on:applyHistory="applyHistory"
-      v-on:closeHistory="closeHistory"></editor-history>
+      v-on:closeHistory="closeHistory"
+      v-on:clerarHistoryData="clearStorageData"
+      ></editor-history>
     <!-- 帮助 -->
     <editor-help/>
   </div>
@@ -541,11 +543,15 @@ export default {
           params.save_data_auto = params.save_data_auto.slice(0, 50);
         }
       }
-
       window.localStorage.setItem('bm_datas', JSON.stringify(params));
+      if(this.activeHistoryBool) {
+        this.getStorageData(true);
+      }
     },
-    getStorageData() {
-      this.activeHistoryBool = !this.activeHistoryBool;
+    getStorageData(reloadBool) {
+      if(!reloadBool) {
+        this.activeHistoryBool = !this.activeHistoryBool;
+      }
       this.currentHistoryIndex = -1;
       let params = window.localStorage.getItem('bm_datas');
       if(params && typeof params === 'string') {
@@ -554,11 +560,12 @@ export default {
       let list = [].concat(params.save_data_custom, params.save_data_auto)
       this.historyCurrnetData = _.orderBy(list, 'updateTime', "desc");
     },
-    changeBgImg(url) {
-      this.configs.backgroundUrl = url;
-    },
     clearStorageData() {
       this.initStorageData(true);
+      this.getStorageData(true);
+    },
+    changeBgImg(url) {
+      this.configs.backgroundUrl = url;
     },
     initHistoryListState(index) {
       this.currentHistoryIndex = index > -1 ? index : -1;
@@ -580,6 +587,9 @@ export default {
     },
     closeHistory() {
       this.activeHistoryBool = false;
+    },
+    clerarHistoryData(){
+      this.initStorageData(true);
     },
     eliminateGhosting(event) {
       let dragIcon = document.createElement('img');

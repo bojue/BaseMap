@@ -1,10 +1,10 @@
 <template>
  <div id="history"> 
     <div class="list">
-        <div class="title">历史列表</div>
+        <div class="title">历史列表 <span class="nums">{{list.length}}条</span></div>
         <div class="uls" v-if="list">
             <div class="item" 
-                v-for="(item, index) in list " :key="index"
+                v-for="(item, index) in list " :key="item.updateTime "
                 v-bind:class="{
                     isActive:item.isActive
                 }"
@@ -20,6 +20,7 @@
     <div class="content">
       <p class="current-name" v-if="currentIndex > -1">
         {{"数据记录：" + list[currentIndex].updateTime }}</p>
+      <img class="closeIcon"  @click="close()" src="./../assets/icon/close.svg" alt="">
       <div id="history-content">    
         <div class="onData" v-if="currentData.length ===0">
             {{currentIndex === -1 ? '请选择记录' :'当前记录没有数据'}}</div>
@@ -96,6 +97,8 @@
         </div>
       </div>
       <div class="btns">
+          <div class="btn clerar"
+            @click="clerarHistoryData()">全部清除</div>
           <div class="btn apply"
             @click="applyCurrentData()">应用</div>
           <div class="btn close"
@@ -136,6 +139,9 @@ export default {
     },
     close:function() {
         this.$emit('closeHistory')
+    },
+    clerarHistoryData:function() {
+      this.$emit('clerarHistoryData')
     }
   }
 }
@@ -158,14 +164,23 @@ export default {
     border-radius: 5px;
     z-index: 999;
 }
+
 .list {
-    border-right:1px solid #cccccc;
-    margin: 10px;
+  border-right:1px solid #cccccc;
+  margin: 10px;
 }
 .list .title {
-    font-size: 16px;
-    border-bottom: 1px solid #cccccc;
-    padding: 10px;
+  font-size: 16px;
+  border-bottom: 1px solid #cccccc;
+  padding: 10px;
+}
+.list .title .nums {
+  font-size: 12px;
+  color: #aaa;
+  padding: 0 10px;
+  position: absolute;
+  left: 127px;
+  top: 23px;
 }
 .list .uls {
     height: 530px;
@@ -201,7 +216,7 @@ export default {
     margin-top: 20px;
 }
 #history-content {
-     width: 1920px;
+    width: 1920px;
     position: absolute;
     border: 1px solid #dddddd;
     right: 0;
@@ -212,6 +227,21 @@ export default {
     transform: scale(0.42) translate(1348px, -755px);
     background: whitesmoke;
 
+}
+.closeIcon {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  padding: 2px;
+  border: 1px solid #cccccc;
+  cursor: pointer;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.closeIcon:hover {
+  opacity: 1;
 }
 .onData {
     text-align: center;
@@ -234,16 +264,27 @@ export default {
     bottom: 10px;
 }
 .btn {
-    width: 60px;
-    height: 20px;
-    display: inline-block;
-    margin: 10px;
-    padding: 6px 10px;
-    border-radius: 5px;
-    text-align: center;
-    border:1px solid #cccccc;
-    cursor: pointer;
-    color: #666666;
+  width: 60px;
+  height: 24px;
+  line-height: 24px;
+  display: inline-block;
+  margin: 10px;
+  padding: 4px 2px;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid #cccccc;
+  cursor: pointer;
+  color: #666666;
+}
+.clerar {
+  position: absolute;
+  left: -600px;
+  width: 90px;
+  color:rgba(255,0,0,.4)
+}
+.clerar:hover {
+  color: #ffffff;
+  background: rgba(255,0,0);
 }
 .apply:hover {
     color:#ffffff;
