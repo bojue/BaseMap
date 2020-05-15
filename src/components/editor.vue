@@ -362,7 +362,6 @@ export default {
         this.edrawComponents[this.eStates.currentActiveIndex].isActive = false;
         this.eStates.currentActiveIndex = -1;
       }
-      console.log(this.eStates)
       if((!event.shiftKey || !event.metaKey && this.isMac()) && event.button === 0 
         && event.target.id==='canvas' 
         && !event.target.classList.contains('comp-element')) {
@@ -544,15 +543,20 @@ export default {
       if(params && typeof params === 'string') {
         params = JSON.parse(params)
       }
+      if(!this.webConfig) {
+        this.initConfig();
+        this.getConfig();
+      }
+      console.log(this.webConfig)
       if(state === 'custom') {
         params.save_data_custom.unshift(obj);
-        this.webConfig.custom = parseInt(this.webConfig.custom) > 20 ? parseInt(this.webConfig.custom) : 20;
+        this.webConfig.custom = parseInt(this.webConfig.custom) > 100 ? parseInt(this.webConfig.custom) : 100;
         if(params.save_data_custom.length >  this.webConfig.custom) {
           params.save_data_custom = params.save_data_custom.slice(0, this.webConfig.custom);
         }
       } else {
         params.save_data_auto.unshift(obj);
-        this.webConfig.auto = parseInt(this.webConfig.auto) > 20 ? parseInt(this.webConfig.auto) : 20;
+        this.webConfig.auto = parseInt(this.webConfig.auto) > 100 ? parseInt(this.webConfig.auto) : 100;
         if(params.save_data_auto.length >  this.webConfig.auto) {
           params.save_data_auto = params.save_data_auto.slice(0,  this.webConfig.auto);
         }
@@ -596,13 +600,9 @@ export default {
       }
       if(params && typeof params === 'string') {
         params = JSON.parse(params);
-        for(let item in params) {
-          let obj = params[item];
-          obj = parseInt(obj) > 20 ? parseInt(obj) : 20;  
-        }
       }
-      console.log(this.webConfig)
-      this.webConfig = params;
+      this.webConfig.custom = params.custom || 100;
+      this.webConfig.auto = params.auto || 100;
     },
     changeBgImg(url) {
       this.configs.backgroundUrl = url;
@@ -619,7 +619,6 @@ export default {
       }
     },
     applyHistory(list) {
-      this.saveDateToStorage()
       this.edrawComponents = list;
       this.initCompState();
       this.closeHistory();
