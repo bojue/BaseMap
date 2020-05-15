@@ -1,14 +1,21 @@
 <template>
   <div id="comps">
     <div class="flexed">
-       <div class="tits">
-      <span
-        class="title"
-        v-for="(tit, index) in compTits"
-        :key="index"
-        @click="selCategory(tit)"
-        v-bind:class="{active: tit['isActive']}"
-      >{{tit.name}}</span>
+      <div class="tits">
+        <span
+          class="title"
+          v-for="(tit, index) in compTits"
+          :key="index"
+          @click="selCategory(tit)"
+          v-bind:class="{active: tit['isActive']}"
+        >
+        {{tit.name}}
+        </span>
+        <span class="title setconfig"   
+          @click="selCategory('setConfig')"
+          v-bind:class="{active: currentCategory === 'setConfig'}" title="全局设置">
+          <img src="./../assets/icon/setting.svg" alt="设置">
+        </span>
     </div>
     <div class="comps" v-if="currentCategory === 'tools'">
       <div class="sub-comps" v-for="(sub, index) in devices" :key="index">
@@ -47,6 +54,24 @@
       </span>
       <span v-if="!elements.length" class="item item-element noElement">当前页面没有元素</span>
     </div>
+    <div class="setConfigs" v-if="currentCategory === 'setConfig' && webConfig">
+      <div class="set-item">
+        <div class="title">
+          历史存储
+        </div>
+        <div class="uls">
+          <div class="sub-item">
+            <label for="">自动存储个数</label>
+            <input type="number" v-model="webConfig.auto">
+          </div>
+          <div class="sub-item">
+            <label for="">手动存储个数</label>
+            <input type="number" v-model="webConfig.custom">
+          </div>
+        </div>
+        
+      </div>
+    </div>
     </div>
   </div>
 </template>
@@ -55,7 +80,8 @@
 export default {
   name: "EditorComps",
   props: {
-    elements: Array
+    elements: Array,
+    webConfig:Object
   },
   data() {
     return {
@@ -68,7 +94,7 @@ export default {
           isActive: true
         },
         {
-          id: 1,
+          id: 2,
           name: "元素",
           type: "elements",
           isActive: false
@@ -414,13 +440,20 @@ export default {
 
     // Tab切换，目前只有一个组件库:tools
     selCategory: function(categroy) {
+      if(categroy === 'setConfig') {
+        this.currentCategory = categroy;
+      }else {
+        this.currentCategory = categroy.type;
+      }
       if (categroy.isActive) return;
-      this.currentCategory = categroy.type;
       let len = this.compTits.length;
       for (let i = 0; i < len; i++) {
         this.compTits[i].isActive = false;
       }
-      categroy.isActive = true;
+      if(Object.prototype.hasOwnProperty.call(categroy,'isActive')) {
+        categroy.isActive = true;
+      }
+
     },
 
     // 元素选择
@@ -458,6 +491,17 @@ export default {
   color: #ffffff;
   background: #cccccc;
   border-bottom: 1px solid #cccccc;
+}
+.tits .setconfig {
+  position: absolute;
+  right: 0px;
+  height: 19px;
+  text-align: center;
+  width: 20px;
+}
+.setconfig img {
+  width: 20px;
+  height: 20px;
 }
 
 /* 组件库 */
@@ -567,5 +611,27 @@ export default {
 .noElement {
   text-align: center;
   color: #000;
+}
+
+.setConfigs {
+  margin: 10px;
+}
+.set-item .title{
+  font-size: 16px;
+  color: #777777;
+  height: 40px;
+  line-height: 40px;
+}
+.uls .sub-item {
+  display: inline-grid;
+  grid-template-columns: 110px 70px;
+}
+.sub-item label {
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+  color: #aaa;
+  text-align: left;
+  margin-left: 5px;
 }
 </style>

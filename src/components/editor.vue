@@ -3,6 +3,7 @@
     <!-- 组件库 -->
     <editor-comps 
       v-bind:elements="edrawComponents"
+      v-bind:webConfig="webConfig"
       v-on:initCompsState="initComponentState" 
       v-on:selectComp="selectComp"></editor-comps>
     
@@ -61,7 +62,12 @@ export default {
   created:function() {
     this.initStorageData();
     this.initBindingEvent();
+    this.initData
   },
+  mounted:function() {
+    this.getConfig();
+  },
+  
   data(){
      return {
         eStates:{
@@ -82,7 +88,11 @@ export default {
           bgAllBool:false,
           window_w:1920,
           window_h:900,
-          backgroundUrl:""
+          backgroundUrl:"",
+        },
+        webConfig: {
+          custom: 30,
+          auto:30,
         },
         historyCurrnetData:[],
         currentHistoryIndex:-1,
@@ -99,6 +109,7 @@ export default {
   methods: {
     initData() {
       this.activeHistoryBool = false;
+      this.getConfig();
     },
     initBindingEvent() {
       document.addEventListener('keydown', this.kaydownFun, false);
@@ -106,6 +117,8 @@ export default {
       window.addEventListener('beforeunload', this.leaving);
     },
     leaving(event) {
+      this.saveConfigs();
+      console.log("save",this.webConfig , this.webConfig.auto)
       this.saveDateToStorage();
       console.log(event.returnValue)
       // let message = "内容更改，注意截图缓存"; 
@@ -511,7 +524,7 @@ export default {
           save_data_auto:[],
           save_data_custom:[]
       }
-      window.localStorage.setItem('bm_datas', JSON.stringify(params))
+      window.localStorage.setItem('bm_datas', JSON.stringify(params));
     },
     saveDateToStorage(data, state) {
       let saveData = data || this.edrawComponents;
@@ -534,13 +547,15 @@ export default {
       }
       if(state === 'custom') {
         params.save_data_custom.unshift(obj);
-        if(params.save_data_custom.length > 50) {
-          params.save_data_custom = params.save_data_custom.slice(0, 50);
+        this.webConfig.custom = parseInt(this.webConfig.custom) > 20 ? parseInt(this.webConfig.custom) : 20;
+        if(params.save_data_custom.length >  this.webConfig.custom) {
+          params.save_data_custom = params.save_data_custom.slice(0, this.webConfig.custom);
         }
       } else {
-         params.save_data_auto.unshift(obj);
-        if(params.save_data_auto.length > 50) {
-          params.save_data_auto = params.save_data_auto.slice(0, 50);
+        params.save_data_auto.unshift(obj);
+        this.webConfig.auto = parseInt(this.webConfig.auto) > 20 ? parseInt(this.webConfig.auto) : 20;
+        if(params.save_data_auto.length >  this.webConfig.auto) {
+          params.save_data_auto = params.save_data_auto.slice(0,  this.webConfig.auto);
         }
       }
       window.localStorage.setItem('bm_datas', JSON.stringify(params));
@@ -560,9 +575,35 @@ export default {
       let list = [].concat(params.save_data_custom, params.save_data_auto)
       this.historyCurrnetData = _.orderBy(list, 'updateTime', "desc");
     },
+    initConfig() {
+      if(window.localStorage.getItem('bm_datas')) return;
+      let params = {
+        custom:50,
+        auto:50,
+      }
+      window.localStorage.setItem('configs', JSON.stringify(params));
+    },
     clearStorageData() {
       this.initStorageData(true);
       this.getStorageData(true);
+    },
+    saveConfigs() {
+      window.localStorage.setItem('configs', JSON.stringify(this.webConfig));
+    },
+    getConfig() {
+      let params = window.localStorage.getItem('configs');
+      if(!params) {
+        this.initConfig();
+      }
+      if(params && typeof params === 'string') {
+        params = JSON.parse(params);
+        for(let item in params) {
+          let obj = params[item];
+          obj = parseInt(obj) > 20 ? parseInt(obj) : 20;  
+        }
+      }
+      console.log(this.webConfig)
+      this.webConfig = params;
     },
     changeBgImg(url) {
       this.configs.backgroundUrl = url;
@@ -572,7 +613,6 @@ export default {
       if(Array.isArray(this.historyCurrnetData)) {
         let len = this.historyCurrnetData.length;
         for(let i=0;i<len;i++) {
-          console.log(this.historyCurrnetData[i])
             if(this.historyCurrnetData[i]) {
              this.historyCurrnetData[i].isActive = false;
            }
