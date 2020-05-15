@@ -288,9 +288,10 @@ export default {
         let _y = event.clientY - comp.style.top - comp.style.height / 2;
         comp.style.rotate = this.calcAngleDegrees(_x, _y);
     },
-    changeTextVal(event, item, index) {
-      console.log(event, item, index);
-      item.value = event.target.innerHTML;
+    changeTextVal(event, item) {
+      if(event && item) {
+         item.value = event.target.innerText;
+      }
     },
     // 组件删除
     delComp(index, state) {

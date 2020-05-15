@@ -141,7 +141,7 @@
               fontSize:item.style.fontSize+'px',
               background:item.style.background
             }"
-            v-on:blur="changeTextVal($event,item, index)"
+            v-on:blur="changeTextVal($event,item)"
             v-bind:contenteditable='item.style.isApplyShadow'>
               {{item.value}}
             </div>
@@ -291,8 +291,8 @@ export default {
     screen:function() {
       this.$emit('screen')
     },
-    changeTextVal:function(event,item, index) {
-      this.$emit('changeTextVal',event, item, index)	
+    changeTextVal:function(event,item) {
+      this.$emit('changeTextVal',event, item)	
     }
   }
 }
