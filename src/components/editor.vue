@@ -17,6 +17,7 @@
       v-on:dragComp="dragCurrentComp"
       v-on:resizeByDragComp="resizeByDragComp"
       v-on:trans="transComp"
+      v-on:changeTextVal="changeTextVal"
       v-on:screen="screen"></editor-canvas>
 
     <!-- 组件设置 -->
@@ -159,7 +160,8 @@ export default {
           position:'absolute',
           isFixed:"false",
           bgiBool:bgiBool || false, //材质
-          borderRadius:borderRadius || 0
+          borderRadius:borderRadius || 0,
+          fontSize: 14,
       }
       _style.left =Math.max(0,  Math.min(_style.left, 2130));
       _style.top =Math.max(0,  Math.min(_style.top, 1140));
@@ -285,6 +287,10 @@ export default {
         let _x = event.clientX - comp.style.left - comp.style.width / 2;
         let _y = event.clientY - comp.style.top - comp.style.height / 2;
         comp.style.rotate = this.calcAngleDegrees(_x, _y);
+    },
+    changeTextVal(event, item, index) {
+      console.log(event, item, index);
+      item.value = event.target.innerHTML;
     },
     // 组件删除
     delComp(index, state) {
@@ -547,7 +553,6 @@ export default {
         this.initConfig();
         this.getConfig();
       }
-      console.log(this.webConfig)
       if(state === 'custom') {
         params.save_data_custom.unshift(obj);
         this.webConfig.custom = parseInt(this.webConfig.custom) > 100 ? parseInt(this.webConfig.custom) : 100;
@@ -575,7 +580,7 @@ export default {
       if(params && typeof params === 'string') {
         params = JSON.parse(params)
       }
-      let list = [].concat(params.save_data_custom, params.save_data_auto)
+      let list = [].concat(params.save_data_custom, params.save_data_auto);
       this.historyCurrnetData = _.orderBy(list, 'updateTime', "desc");
     },
     initConfig() {
@@ -612,7 +617,7 @@ export default {
       if(Array.isArray(this.historyCurrnetData)) {
         let len = this.historyCurrnetData.length;
         for(let i=0;i<len;i++) {
-            if(this.historyCurrnetData[i]) {
+            if(this.historyCurrnetData && this.historyCurrnetData[i]) {
              this.historyCurrnetData[i].isActive = false;
            }
         }

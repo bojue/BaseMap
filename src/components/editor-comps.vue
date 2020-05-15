@@ -103,7 +103,17 @@ export default {
       devices: [
         {
           name: "基础",
-          list: [
+          list: [{
+              id: 2,
+              type: "text",
+              name: "文本",
+              value:"文本",
+              icon: require("./../assets/comps/text.png"),
+              defStyle: {
+                width: 100,
+                height: 40
+              }
+            },
             {
               id: 1,
               type: "room",
@@ -419,16 +429,7 @@ export default {
                 width: 100,
                 height: 40
               }
-            }, {
-              id: 2,
-              type: "text",
-              name: "文本",
-              icon: require("./../assets/comps/text.png"),
-              defStyle: {
-                width: 100,
-                height: 40
-              }
-            },
+            }, 
           ]
         }
       ]

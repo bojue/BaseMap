@@ -138,9 +138,13 @@
               v-bind:style="{
               width:item.style.width +'px',
               height:item.style.height +'px',
+              fontSize:item.style.fontSize+'px',
               background:item.style.background
             }"
-            v-bind:contenteditable='item.style.isApplyShadow'></div>
+            v-on:blur="changeTextVal($event,item, index)"
+            v-bind:contenteditable='item.style.isApplyShadow'>
+              {{item.value}}
+            </div>
         </div>
         
         <!-- 辅助 -->	
@@ -286,6 +290,9 @@ export default {
     },
     screen:function() {
       this.$emit('screen')
+    },
+    changeTextVal:function(event,item, index) {
+      this.$emit('changeTextVal',event, item, index)	
     }
   }
 }

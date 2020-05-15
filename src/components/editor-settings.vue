@@ -107,6 +107,18 @@
         </div>
       </div>
     </div>
+    <div class="item"  v-if="currentElement.type === 'text'">
+      <label for="" class="title">字体</label>
+      <div class="subs grid grid-1">
+        <div class="subs-item">
+          <label class="lab" for="">大小</label>
+          <input 
+            max="50"
+            min="12"
+            class="val" type="number"  v-model="currentElement.style.fontSize">
+        </div>
+      </div>
+    </div>
     <div class="item">
       <label for="" class="title">旋转</label>
       <div class="subs grid grid-1">
@@ -307,13 +319,9 @@ export default {
       {
         that.$emit('changeBgImg', this.result)
       }
-    
-
     }
   }
 }
-
-
 </script>
 
 <style scoped>
