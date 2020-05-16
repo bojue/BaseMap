@@ -339,7 +339,10 @@ export default {
         }
       }
       if(event.key === 'Delete' || this.isMac() && event.key === 'Backspace')  {
-        this.delComp();
+        console.log(event.target)
+        if(!(event.target.innerHTML && event.target.contentEditable)) {
+          this.delComp();
+        }
       }
     },
     arrowItem(arrow, obj) {

@@ -107,7 +107,7 @@ export default {
               id: 2,
               type: "text",
               name: "文本",
-              value:"文本",
+              value:"",
               icon: require("./../assets/comps/text.png"),
               defStyle: {
                 width: 100,
