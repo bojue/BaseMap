@@ -11,11 +11,11 @@
         >
         {{tit.name}}
         </span>
-        <span class="title setconfig"   
+        <!-- <span class="title setconfig"   
           @click="selCategory('setConfig')"
           v-bind:class="{active: currentCategory === 'setConfig'}" title="全局设置">
           <img src="./../assets/icon/setting.svg" alt="设置">
-        </span>
+        </span> -->
     </div>
     <div class="comps" v-if="currentCategory === 'tools'">
       <div class="sub-comps" v-for="(sub, index) in devices" :key="index">

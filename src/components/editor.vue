@@ -93,7 +93,7 @@ export default {
         },
         webConfig: {
           custom: 30,
-          auto:30,
+          auto:1,
         },
         historyCurrnetData:[],
         currentHistoryIndex:-1,
@@ -339,7 +339,6 @@ export default {
         }
       }
       if(event.key === 'Delete' || this.isMac() && event.key === 'Backspace')  {
-        console.log(event.target)
         if(!(event.target.innerHTML && event.target.contentEditable)) {
           this.delComp();
         }
@@ -559,13 +558,11 @@ export default {
       }
       if(state === 'custom') {
         params.save_data_custom.unshift(obj);
-        this.webConfig.custom = parseInt(this.webConfig.custom) > 100 ? parseInt(this.webConfig.custom) : 100;
         if(params.save_data_custom.length >  this.webConfig.custom) {
           params.save_data_custom = params.save_data_custom.slice(0, this.webConfig.custom);
         }
       } else {
         params.save_data_auto.unshift(obj);
-        this.webConfig.auto = parseInt(this.webConfig.auto) > 100 ? parseInt(this.webConfig.auto) : 100;
         if(params.save_data_auto.length >  this.webConfig.auto) {
           params.save_data_auto = params.save_data_auto.slice(0,  this.webConfig.auto);
         }
@@ -598,23 +595,6 @@ export default {
     clearStorageData() {
       this.initStorageData(true);
       this.getStorageData(true);
-    },
-    saveConfigs() {
-      window.localStorage.setItem('configs', JSON.stringify(this.webConfig));
-    },
-    getConfig() {
-      let params = window.localStorage.getItem('configs');
-      if(!params) {
-        this.initConfig();
-      }
-      if(params && typeof params === 'string') {
-        params = JSON.parse(params);
-      }
-      this.webConfig.custom = params.custom || 100;
-      this.webConfig.auto = params.auto || 100;
-    },
-    changeBgImg(url) {
-      this.configs.backgroundUrl = url;
     },
     initHistoryListState(index) {
       this.currentHistoryIndex = index > -1 ? index : -1;
