@@ -582,7 +582,7 @@ export default {
     _saveWebStorage(params, delSaveBool) {
       let seccMessage = delSaveBool ? "删除成功": "保存成功";
       let errMessage  = delSaveBool ? "删除失败": 
-                        JSON.stringify(params).length > (1024 * 1024 * 5 - 100) ? '数据超过历史数据最大值，请删除历史不需要的数据重新存储' :"保存数据出错";
+                        encodeURIComponent(JSON.stringify(params).length) > (1024 * 1024 * 5 - 100) ? '数据超过历史数据最大值，请删除历史不需要的数据重新存储' :"保存数据出错";
       try {
         window.localStorage.setItem('bm_datas', JSON.stringify(params));
         this.saveDataInfo("success",seccMessage);
