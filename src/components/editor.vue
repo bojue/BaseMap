@@ -95,7 +95,7 @@ export default {
         },
         webConfig: {
           custom: 30,
-          auto:30,
+          auto:20,
         },
         historyCurrnetData:[],
         currentHistoryIndex:-1,
@@ -194,7 +194,6 @@ export default {
         this.eStates.currentActiveIndex = current;
         this.edrawComponents[current].isActive = true;
       }
-
     },
     // 初始化画布内组件状态
     initCompState() {
