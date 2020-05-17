@@ -43,6 +43,7 @@
       v-on:initState="initHistoryListState"
       v-on:applyHistory="applyHistory"
       v-on:closeHistory="closeHistory"
+      v-on:deleteHistoryData="deleteHistoryData"
       v-on:clerarHistoryData="clearStorageData"
       ></editor-history>
     <!-- 帮助 -->
@@ -51,6 +52,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import EditorComps from './editor-comps';
 import EditorCanvas from './editor-canvas';
 import EditorSettings from './editor-settings';
@@ -66,7 +68,7 @@ export default {
     this.initData
   },
   mounted:function() {
-    this.getConfig();
+
   },
   
   data(){
@@ -93,7 +95,7 @@ export default {
         },
         webConfig: {
           custom: 30,
-          auto:1,
+          auto:30,
         },
         historyCurrnetData:[],
         currentHistoryIndex:-1,
@@ -110,7 +112,6 @@ export default {
   methods: {
     initData() {
       this.activeHistoryBool = false;
-      this.getConfig();
     },
     initBindingEvent() {
       document.addEventListener('keydown', this.kaydownFun, false);
@@ -118,12 +119,11 @@ export default {
       window.addEventListener('beforeunload', this.leaving);
     },
     leaving(event) {
-      this.saveConfigs();
-      this.saveDateToStorage();
-      console.log(event.returnValue)
-      // let message = "内容更改，注意截图缓存"; 
-      // event.returnValue = message;
-      // return message;
+      // this.saveDateToStorage();
+      // console.log(event.returnValue)
+      let message = "内容更改，注意截图缓存"; 
+      event.returnValue = message;
+      return message;
     },
     download:function() {
       //TODO:页面下载
@@ -547,14 +547,12 @@ export default {
       if(!window.localStorage.getItem('bm_datas')) {
         this.initStorageData();
       }
-      // this.getConfig();
       let params = window.localStorage.getItem('bm_datas');
       if(params && typeof params === 'string') {
         params = JSON.parse(params)
       }
       if(!this.webConfig) {
         this.initConfig();
-        this.getConfig();
       }
       if(state === 'custom') {
         params.save_data_custom.unshift(obj);
@@ -567,10 +565,8 @@ export default {
           params.save_data_auto = params.save_data_auto.slice(0,  this.webConfig.auto);
         }
       }
-      window.localStorage.setItem('bm_datas', JSON.stringify(params));
-      if(this.activeHistoryBool) {
-        this.getStorageData(true);
-      }
+      this._saveWebStorage(params);
+      this.currentHistoryIndex = -1;
     },
     getStorageData(reloadBool) {
       if(!reloadBool) {
@@ -584,6 +580,20 @@ export default {
       let list = [].concat(params.save_data_custom, params.save_data_auto);
       this.historyCurrnetData = _.orderBy(list, 'updateTime', "desc");
     },
+    _saveWebStorage(params, delSaveBool) {
+      let seccMessage = delSaveBool ? "删除成功": "保存成功";
+      let errMessage  = delSaveBool ? "删除失败": 
+                        JSON.stringify(params).length > 5242800 ? '数据超过历史数据最大值，请删除历史不需要的数据重新存储' :"保存数据出错";
+      try {
+        window.localStorage.setItem('bm_datas', JSON.stringify(params));
+        this.saveDataInfo("success",seccMessage);
+      }catch {
+        this.saveDataInfo('error',errMessage)
+      }
+      if(this.activeHistoryBool) {
+        this.getStorageData(true);
+      }
+    },
     initConfig() {
       if(window.localStorage.getItem('bm_datas')) return;
       let params = {
@@ -592,9 +602,48 @@ export default {
       }
       window.localStorage.setItem('configs', JSON.stringify(params));
     },
+    deleteHistoryData(index) {
+      let currentData = this.historyCurrnetData[index];
+      if(currentData) {
+        delete currentData.isActive;
+      }
+      if(!window.localStorage.getItem('bm_datas')) {
+        this.initStorageData();
+      }
+      let params = window.localStorage.getItem('bm_datas');
+      if(params && typeof params === 'string') {
+        params = JSON.parse(params);
+      }
+      if(params) {
+        let c = params.save_data_custom
+        let len_c =  c.length;
+        let hasBool = false;
+        for(let i=0;i<len_c;i++) {
+          let item = c[i];
+          if(item && currentData && item.updateTime === currentData.updateTime) {
+            params.save_data_custom.splice(i, 1);
+            hasBool = true;
+          }
+        }
+        if(!hasBool) {
+          let a = params.save_data_auto;
+          let len_a = a.length;
+          for(let i=0;i<len_a;i++) {
+            let item = a[i];
+            if(item && currentData && item.updateTime === currentData.updateTime) {
+              params.save_data_auto.splice(i, 1);
+            }
+          }
+        }
+        this._saveWebStorage(params, true)
+      }
+    },
     clearStorageData() {
       this.initStorageData(true);
       this.getStorageData(true);
+    },
+    changeBgImg(url) {
+      this.configs.backgroundUrl = url;
     },
     initHistoryListState(index) {
       this.currentHistoryIndex = index > -1 ? index : -1;
@@ -628,7 +677,16 @@ export default {
         event.dataTransfer.setDragImage(dragIcon,0, 0);
       }
 
-    }
+    },
+    saveDataInfo:function(state, msgs) {
+      let type = state || 'success';
+      let msg = msgs || '数据保存成功！';
+      Vue.$toast.open({
+        type:type,
+        message:msg,
+        position:'top-right'
+      });
+    },
   }
 }
 </script>

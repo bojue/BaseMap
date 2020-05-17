@@ -249,7 +249,6 @@
 </template>
        
 <script>
-import Vue from 'vue';
 
 export default {
   props: {
@@ -287,25 +286,10 @@ export default {
       this.$emit('getHistory')
     },
     saveData:function() {
-      try {
-        this.$emit('saveDateToStorage', null , 'custom');
-        this.saveDataInfo();
-      }catch {
-        this.saveDataInfo('error','保存数据出错！')
-      }
-
+      this.$emit('saveDateToStorage', null , 'custom');
     },
     download:function() {
       this.$emit('download')
-    },
-    saveDataInfo:function(state, msgs) {
-      let type = state || 'success';
-      let msg = msgs || '数据保存成功！';
-      Vue.$toast.open({
-        type:type,
-        message:msg,
-        position:'top-right'
-      });
     },
     changeFile:function() {
       let that = this;

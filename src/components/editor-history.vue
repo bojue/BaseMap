@@ -119,6 +119,8 @@
       <div class="btns">
           <div class="btn clerar"
             @click="clerarHistoryData()">全部清除</div>
+          <div class="btn delete"
+            @click="deleteCurrnetData()">删除</div>
           <div class="btn apply"
             @click="applyCurrentData()">应用</div>
           <div class="btn close"
@@ -150,15 +152,18 @@ export default {
   },
   methods: {
     selectData:function(data, index) {
-        this.$emit('initState', index)
-        data.isActive = true;
-        this.currentData = data.data;
+      this.$emit('initState', index)
+      data.isActive = true;
+      this.currentData = data.data;
     },
     applyCurrentData:function() {
-        this.$emit('applyHistory', this.currentData)
+      this.$emit('applyHistory', this.currentData)
     },
     close:function() {
-        this.$emit('closeHistory')
+      this.$emit('closeHistory')
+    },
+    deleteCurrnetData:function() {
+      this.$emit("deleteHistoryData", this.currentIndex)
     },
     clerarHistoryData:function() {
       this.$emit('clerarHistoryData')
@@ -296,15 +301,18 @@ export default {
   cursor: pointer;
   color: #666666;
 }
-.clerar {
+.delete , .clerar {
   position: absolute;
   left: -600px;
   width: 90px;
   color:rgba(255,0,0,.4)
 }
-.clerar:hover {
+.delete:hover, .clerar:hover {
   color: #ffffff;
   background: rgba(255,0,0);
+}
+.delete {
+  left: -114px;
 }
 .apply:hover {
     color:#ffffff;
