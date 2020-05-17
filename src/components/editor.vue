@@ -94,8 +94,8 @@ export default {
           backgroundUrl:"",
         },
         webConfig: {
-          custom: 30,
-          auto:20,
+          custom: 25,
+          auto:5,
         },
         historyCurrnetData:[],
         currentHistoryIndex:-1,
