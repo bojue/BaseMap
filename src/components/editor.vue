@@ -288,8 +288,10 @@ export default {
         comp.style.rotate = this.calcAngleDegrees(_x, _y);
     },
     changeTextVal(event, item) {
+      let val = event.target.innerText;
       if(event && item) {
-         item.value = event.target.innerText;
+        item.value = val;
+        event.target.innerText = item.value;
       }
     },
     // 组件删除
@@ -338,7 +340,7 @@ export default {
         }
       }
       if(event.key === 'Delete' || this.isMac() && event.key === 'Backspace')  {
-        if(!(event.target.innerHTML && event.target.contentEditable)) {
+        if(!(event.target.innerHTML && event.target.contentEditable) || event.target.contentEditable === 'inherit') {
           this.delComp();
         }
       }

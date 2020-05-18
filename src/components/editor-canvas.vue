@@ -141,7 +141,6 @@
               fontSize:item.style.fontSize+'px',
               background:item.style.background
             }"
-            v-on:input="changeTextVal($event,item)"
             v-on:blur="changeTextVal($event,item)"
             v-bind:contenteditable='item.style.isApplyShadow'>
               {{item.value}}

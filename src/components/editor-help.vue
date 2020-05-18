@@ -34,7 +34,11 @@
             <div class="item">
                 <span class="name"><code>mac</code>取消多选</span>
                 <span class="val"><code>Comm</code>+点击</span>
-             </div>
+            </div>
+            <div class="item">
+                 <span class="name">删除</span>
+                 <span class="val"><code>Delete</code></span>
+            </div>
          </div>
      </div>
  </div>
@@ -101,12 +105,12 @@ export default {
 }
 
 .datas .item {
-    height: 20px;
-    line-height: 20px;
+    height: 30px;
+    line-height: 30px;
 }
 code {
     color:dodgerblue;
-    padding: 2px 4px;
+    padding: 2px;
 }
 .github img {
     position: fixed;

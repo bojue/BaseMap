@@ -23,28 +23,62 @@
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'colu')">
             <label for="">垂直间距:</label>
             <input type="number" min="0" max="20" v-model="configs.Isometric_colu">
-            <img class="img" src="./../assets/icon/lsometric_colu.svg" alt="垂直等距" title="垂直等距">
+            <img class="img" 
+              v-bind:src="img.dispersion_v" 
+              @mouseenter="img.dispersion_v=img.dispersion_v_hover" 
+              @mouseleave="img.dispersion_v=img.dispersion_v_def" 
+              alt="垂直等距" 
+              title="垂直等距">
           </div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'row')">
             <label for="">水平间距:</label>
             <input type="number" min="0" max="20" v-model="configs.Isometric_row">
-            <img class="img" src="./../assets/icon/lsometric_row.svg" alt="水平等距" title="水平等距">
+            <img class="img" 
+              v-bind:src="img.dispersion_l" 
+              @mouseenter="img.dispersion_l=img.dispersion_l_hover" 
+              @mouseleave="img.dispersion_l=img.dispersion_l_def"
+              alt="水平等距" 
+              title="水平等距">
           </div>
-          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'l')"><img src="./../assets/icon/align-l.svg" alt="左对齐" title="左对齐"></div>
-          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 't')"><img src="./../assets/icon/align-t.svg" alt="上对齐" title="上对齐"></div>
-          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'b')"><img src="./../assets/icon/align-b.svg" alt="下对齐" title="下对齐"></div>
-          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'r')"><img src="./../assets/icon/align-r.svg" alt="右对齐" title="右对齐"></div>
+          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'l')">
+            <img         
+              v-bind:src="img.l" 
+              @mouseenter="img.l=img.l_hover" 
+              @mouseleave="img.l=img.l_def"  
+              alt="左对齐" 
+              title="左对齐"></div>
+          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 't')">
+            <img
+              v-bind:src="img.t" 
+              @mouseenter="img.t=img.t_hover" 
+              @mouseleave="img.t=img.t_def"  
+              alt="上对齐" title="上对齐"></div>
+          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'b')">
+            <img 
+              v-bind:src="img.b" 
+              @mouseenter="img.b=img.b_hover" 
+              @mouseleave="img.b=img.b_def"   alt="下对齐" title="下对齐"></div>
+          <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'r')">
+            <img
+              v-bind:src="img.r" 
+              @mouseenter="img.r=img.r_hover" 
+              @mouseleave="img.r=img.r_def"  
+              alt="右对齐" title="右对齐"></div>
         </div>
     </div>
     <div class="aligin-item contrls">
       <img  
         @click="saveData()" 
-        src="./../assets/icon/save.svg" 
+        v-bind:src="img.save" 
+        @mouseenter="img.save=img.save_hover" 
+        @mouseleave="img.save=img.save_def" 
         alt="保存" 
         title="保存">
       <img  
         @click="getHistory()" 
-        src="./../assets/icon/history.svg" 
+        v-bind:src="img.history" 
+        @mouseenter="img.history=img.history_hover" 
+        @mouseleave="img.history=img.history_def" 
         alt="历史记录" 
         title="历史记录"></div>
     <div 
@@ -207,20 +241,6 @@
         </div>
       </div>
   </div>
-  <!-- <div class="item del-item">
-    <img class="del"  
-      v-bind:class="{
-        delDef:currentActiveIndex === -1
-      }"
-      @click="setMultipleState('reSel')" src="./../assets/icon/reSel.svg" alt="反选" title="反选">
-  </div>
-  <div class="item del-item">
-    <img class="del"  
-      v-bind:class="{
-        delDef:currentActiveIndex === -1
-      }"
-      @click="setMultipleState('clear')" src="./../assets/icon/clear.svg" alt="清空多选" title="清空多选">
-  </div> -->
   <div class="item del-item">
     <img class="del"  
       v-bind:class="{
@@ -261,6 +281,32 @@ export default {
     return {
       multipleApplyShadow:'true',
       multipleApplyBorderRadius:'0',
+      img: {
+        l:require('./../assets/icon/align/l.png'),
+        l_def:require('./../assets/icon/align/l.png'),
+        l_hover:require('./../assets/icon/align/l_h.png'),
+        r:require('./../assets/icon/align/r.png'),
+        r_def:require('./../assets/icon/align/r.png'),
+        r_hover:require('./../assets/icon/align/r_h.png'),
+        t:require('./../assets/icon/align/t.png'),
+        t_def:require('./../assets/icon/align/t.png'),
+        t_hover:require('./../assets/icon/align/t_h.png'),
+        b:require('./../assets/icon/align/b.png'),
+        b_def:require('./../assets/icon/align/b.png'),
+        b_hover:require('./../assets/icon/align/b_h.png'),
+        dispersion_l:require('./../assets/icon/align/dispersion_l.png'),
+        dispersion_l_def:require('./../assets/icon/align/dispersion_l.png'),
+        dispersion_l_hover:require('./../assets/icon/align/dispersion_l_h.png'),
+        dispersion_v:require('./../assets/icon/align/dispersion_v.png'),
+        dispersion_v_def:require('./../assets/icon/align/dispersion_v.png'),
+        dispersion_v_hover:require('./../assets/icon/align/dispersion_v_h.png'),
+        save:require('./../assets/icon/save.png'),
+        save_def:require('./../assets/icon/save.png'),
+        save_hover:require('./../assets/icon/save_h.png'),
+        history:require('./../assets/icon/history.png'),
+        history_def:require('./../assets/icon/history.png'),
+        history_hover:require('./../assets/icon/history_h.png'),
+      }
     }
   },
   mounted:function() {
@@ -405,6 +451,9 @@ export default {
   cursor: pointer;
   position: relative;
   margin-top: 5px;
+}
+.aligin-item img:hover {
+  color: red;
 }
 .aligin-item.screen {
   z-index: 9999;
