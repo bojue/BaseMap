@@ -380,6 +380,7 @@ img {
 .comp-item {
   cursor: move;
   z-index: 1;
+  user-select: none;
 }
 .comp-element img {
   z-index: -1;
