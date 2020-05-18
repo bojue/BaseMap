@@ -20,25 +20,21 @@
                  <span class="val"><code>Ctrl</code>+<code>v</code></span>
             </div>
             <div class="item">
-                <span class="name"><code>win</code>多选</span>
-                <span class="val"><code>Shift</code>+点击</span>
-            </div>
-            <div class="item">
-                <span class="name"><code>win</code>取消多选</span>
-                <span class="val"><code>Shift</code>+点击</span>
-             </div>
-             <div class="item">
-                <span class="name"><code>mac</code>多选</span>
-                <span class="val"><code>Comm</code>+点击</span>
-            </div>
-            <div class="item">
-                <span class="name"><code>mac</code>取消多选</span>
-                <span class="val"><code>Comm</code>+点击</span>
-            </div>
-            <div class="item">
                  <span class="name">删除</span>
                  <span class="val"><code>Delete</code></span>
             </div>
+            <div class="item">
+                 <span class="name">位置</span>
+                 <span class="val"><code>↑ ↓ ← →</code></span>
+            </div>
+            <div class="item">
+                <span class="name">多选</span>
+                <span class="val"><code>Shift</code>/<code>Comm</code> +点击</span>
+            </div>
+            <div class="item">
+                <span class="name">取消</span>
+                <span class="val"><code>Shift</code>/<code>Comm</code> +点击</span>
+             </div>
          </div>
      </div>
  </div>
@@ -96,7 +92,9 @@ export default {
     padding: 10px;
 }
 .title {
-    margin: 10px 3px;
+    margin: 5px 3px;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 10px;
 }
 .datas {
     color: #666666;
@@ -107,6 +105,10 @@ export default {
 .datas .item {
     height: 30px;
     line-height: 30px;
+}
+.item .name {
+    color:#888;
+    padding-right: 10px;
 }
 code {
     color:dodgerblue;
