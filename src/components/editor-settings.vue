@@ -20,6 +20,14 @@
     </div>
     <div class="config-item aligins">
         <div class="aligin">
+          <div class="aligin-item">
+            <img class="img" 
+              v-bind:src="img.region" 
+              @mouseenter="img.region=img.region_hover" 
+              @mouseleave="img.region=img.region_def" 
+              alt="区域选择" 
+              title="区域选择">
+          </div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'colu')">
             <label for="">垂直间距:</label>
             <input type="number" min="0" max="500" v-model="configs.Isometric_colu">
@@ -306,6 +314,9 @@ export default {
         history:require('./../assets/icon/history.png'),
         history_def:require('./../assets/icon/history.png'),
         history_hover:require('./../assets/icon/history_h.png'),
+        region:require('./../assets/icon/align/region.png'),
+        region_def:require('./../assets/icon/align/region.png'),
+        region_hover:require('./../assets/icon/align/region_h.png'),
       }
     }
   },
@@ -445,7 +456,7 @@ export default {
   display: grid;
   margin-left: 40px;
   text-align: center;
-  grid-template-columns:160px 160px 50px 50px 50px 50px;
+  grid-template-columns:50px 150px 150px 50px 50px 50px 50px;
 }
 .aligin-item  {
   cursor: pointer;
