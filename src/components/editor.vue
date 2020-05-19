@@ -706,7 +706,7 @@ export default {
   margin-top: 60px;
   padding: 0;
   position: relative;
-  color: #2c3e50;
+  color: #333;
   display: grid;
   grid-template-columns: 205px auto 205px;
 }
