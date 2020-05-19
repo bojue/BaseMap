@@ -250,6 +250,20 @@ export default {
               styleObject: {
                 width: "25px"
               }
+            },{
+              id: 4,
+              type: "img",
+              name: "冷机2",
+              icon: require("./../assets/comps/lengji.jpg"),
+              defStyle: {
+                width: 30,
+                height: 50
+              },
+              styleObject: {
+                width: "20px",
+                height: "35px",
+                marginTop: "0px"
+              }
             },
             {
               id: 4,
@@ -316,21 +330,6 @@ export default {
               type: "img",
               name: "风机",
               icon: require("./../assets/comps/fengji.jpg"),
-              defStyle: {
-                width: 30,
-                height: 50
-              },
-              styleObject: {
-                width: "20px",
-                height: "35px",
-                marginTop: "0px"
-              }
-            },
-            {
-              id: 4,
-              type: "img",
-              name: "冷机",
-              icon: require("./../assets/comps/lengji.jpg"),
               defStyle: {
                 width: 30,
                 height: 50
@@ -497,9 +496,10 @@ export default {
   display: inline-block;
   padding: 5px 10px;
   margin-bottom: -1px;
+  color: #666;
 }
 .tits .title.active {
-  color: #ffffff;
+  color: #000;
   background: #cccccc;
   border-bottom: 1px solid #cccccc;
 }

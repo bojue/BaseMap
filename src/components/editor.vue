@@ -398,6 +398,7 @@ export default {
     },
     // 多选操作:反选/清空多选/属性应用
     setMultipleState:function(state, value) {
+      console.log(state, value)
       if(state === 'Isometric') {
         for(let i = this.eStates.multipleActiveArr.length-1;i>=0;i--) {
           let obj = this.eStates.multipleActiveArr[i];
@@ -504,7 +505,7 @@ export default {
       }else if(param === 'bottom') {
         let _bottom = resObj.style.top + resObj.style.height;
         for(let i=0;i<len;i++) {
-          this.eStates.multipleActiveArr[i].style.top = _bottom - this.eStates.multipleActiveArr[i].style.height;
+          this.eStates.multipleActiveArr[i].style.top = Math.min(parseInt( _bottom - parseInt(this.eStates.multipleActiveArr[i].style.height)));
         }
       }else if(param === 'right') {
         let _right = resObj.style.left + resObj.style.width;

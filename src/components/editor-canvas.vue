@@ -80,10 +80,12 @@
           v-if="item.type === 'pillar'"
           v-bind:style="{
             height:item.style.height +'px',
-            with:item.style.width +'px'
+            width:item.style.width +'px'
           }"
           v-bind:class="{
             active:item.isActive, 
+            height:item.style.height +'px',
+            width:item.style.width +'px',
             isShadow:item.style.isApplyShadow ==='true',
             multipleActive:item.multipleActiveBool}">
 
@@ -151,7 +153,7 @@
         <!-- 辅助 -->	
         <span 	
           class="assist"	
-          v-if="!configs.bgAllBool && item.isActive && ['pillar'].indexOf(item.type) === -1">	
+          v-if="!configs.bgAllBool && item.isActive">	
           <span class="adR" 	
             v-if="['line_colu'].indexOf(item.type) === -1"	
             draggable="true"	

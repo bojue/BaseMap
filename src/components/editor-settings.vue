@@ -21,12 +21,12 @@
     <div class="config-item aligins">
         <div class="aligin">
           <div class="aligin-item">
-            <img class="img" 
+            <!-- <img class="img" 
               v-bind:src="img.region" 
               @mouseenter="img.region=img.region_hover" 
               @mouseleave="img.region=img.region_def" 
               alt="区域选择" 
-              title="区域选择">
+              title="区域选择"> -->
           </div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'colu')">
             <label for="">垂直间距:</label>
