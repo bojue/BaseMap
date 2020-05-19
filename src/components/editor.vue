@@ -34,7 +34,8 @@
       v-on:screen="screen"
       v-on:saveDateToStorage="saveDateToStorage"
       v-on:getHistory="getStorageData"
-      v-on:changeBgImg="changeBgImg"></editor-settings>
+      v-on:changeBgImg="changeBgImg"
+      v-on:selColor="selColor"></editor-settings>
     
     <editor-history 
       v-if="activeHistoryBool"
@@ -144,7 +145,7 @@ export default {
       item.isActive = true;
       item.multipleActiveBool=false;
       let rect = document.getElementById('canvas').getClientRects()[0];
-      let {width, height, borderRadius, rotate, borderWidth, background, isApplyShadow, bgiBool} = item.defStyle;
+      let {width, height, borderRadius, rotate, borderWidth, background, isApplyShadow, bgiBool, color} = item.defStyle;
       let {clientX , clientY} = event;
       let _style = {
           width:width || 100,
@@ -162,6 +163,7 @@ export default {
           bgiBool:bgiBool || false, //材质
           borderRadius:borderRadius || 0,
           fontSize: 14,
+          color: color
       }
       _style.left =Math.max(0,  Math.min(_style.left, 2130));
       _style.top =Math.max(0,  Math.min(_style.top, 1140));
@@ -517,6 +519,11 @@ export default {
     calcAngleDegrees(x, y) {
       let val =  Math.atan2(y, x) * 180 / Math.PI;
       return Math.ceil(val);
+    },
+    selColor(comp, color) {
+      if(this.eStates.currentActiveIndex > -1 && this.edrawComponents[this.eStates.currentActiveIndex]) {
+        this.edrawComponents[this.eStates.currentActiveIndex].style.color = color;
+      }
     },
     screen:function() {
       this.configs.bgAllBool = !this.configs.bgAllBool;

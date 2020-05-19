@@ -139,7 +139,8 @@
               width:item.style.width +'px',
               height:item.style.height +'px',
               fontSize:item.style.fontSize+'px',
-              background:item.style.background
+              background:item.style.background,
+              color:item.style.color
             }"
             v-on:blur="changeTextVal($event,item)"
             v-bind:contenteditable='item.style.isApplyShadow'>
@@ -509,6 +510,6 @@ img {
 .comp-text {
   text-align: center;
   font-size: 14px;
-  columns: #4f4f4f;
+  color: #4f4f4f;
 }
 </style>

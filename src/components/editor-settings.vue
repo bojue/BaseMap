@@ -159,6 +159,16 @@
             min="12"
             class="val" type="number"  v-model="currentElement.style.fontSize">
         </div>
+        <div class="subs-item full">
+          <label class="lab" for="">颜色</label>
+          <div class="cols">
+            <span class="col-item" v-for="(color, index) in colors" :key="index" v-bind:style="{
+              background:color
+            }"
+            v-bind:title="color"
+            @click="selColor(color)"></span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="item">
@@ -289,6 +299,19 @@ export default {
     return {
       multipleApplyShadow:'true',
       multipleApplyBorderRadius:'0',
+      colors:[
+        '#d81e06', 
+        '#ff7f00',
+        '#ffff00',
+        '#00ca98', 
+        '#0007ff',
+        '#13227a',
+        '#ffffff',
+        '#dbdbdb',
+        '#bfbfbf',
+        '#4f4f4f',
+        '#2c2c2c',
+        '#000000'],
       img: {
         l:require('./../assets/icon/align/l.png'),
         l_def:require('./../assets/icon/align/l.png'),
@@ -324,6 +347,9 @@ export default {
 
   },
   methods: {
+    selColor:function(color) {
+      this.$emit('selColor',this.currentElement, color);
+    },
     delMultipComp:function(comp, index) {
       this.$emit('delMultipComp', comp, index);
     },
@@ -644,6 +670,19 @@ export default {
   right: 10px;
   top: 6px;
 }
-
+.cols {
+  padding: 5px;
+  height: 53px;
+}
+.col-item {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: red;
+    cursor: pointer;
+}
+.subs-item.full {
+ grid-template-columns: 40px 70%;
+}
 
 </style>

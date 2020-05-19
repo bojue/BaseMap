@@ -111,7 +111,8 @@
                   width:item.style.width +'px',
                   height:item.style.height +'px',
                   fontSize:item.style.fontSize+'px',
-                  background:item.style.background
+                  background:item.style.background,
+                  color:item.style.color || '#4f4f4f'
                 }">{{item.value}}</div>
             </div>
         </div>
