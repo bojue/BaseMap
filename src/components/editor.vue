@@ -398,7 +398,6 @@ export default {
     },
     // 多选操作:反选/清空多选/属性应用
     setMultipleState:function(state, value) {
-      console.log(state, value)
       if(state === 'Isometric') {
         for(let i = this.eStates.multipleActiveArr.length-1;i>=0;i--) {
           let obj = this.eStates.multipleActiveArr[i];
@@ -411,26 +410,26 @@ export default {
         let val = 0;
         if(value === 'row') {
           this.eStates.multipleActiveArr =  this.eStates.multipleActiveArr.sort(function(a,b){
-            return a.style.left - b.style.left;
+            return parseInt(a.style.left) - parseInt(b.style.left);
           })
           for(let i=0;i< len;i++) {
             let item = this.eStates.multipleActiveArr[i];
             if(i>0) {
               item.style.left = val;
             }
-            val = item.style.left + item.style.width + parseInt(this.configs.Isometric_row);
+            val = parseInt(item.style.left) + parseInt(item.style.width) + parseInt(this.configs.Isometric_row);
             val = Math.max(0, Math.min(val, 2130));
           }
         } else {
           this.eStates.multipleActiveArr =  this.eStates.multipleActiveArr.sort(function(a,b){
-            return a.style.top - b.style.top ;
+            return parseInt(a.style.top) - parseInt(b.style.top) ;
           })
           for(let i=0;i< len;i++) {
             let item = this.eStates.multipleActiveArr[i];
             if(i>0) {
               item.style.top = val;
             }
-            val = item.style.height + item.style.top + parseInt(this.configs.Isometric_colu);
+            val = parseInt(item.style.height) + parseInt(item.style.top) + parseInt(this.configs.Isometric_colu);
             val = Math.max(0,  Math.min(val, 1140));
           }
         }     
@@ -492,25 +491,26 @@ export default {
     multipArray(param) {
       let list = JSON.parse(JSON.stringify(this.eStates.multipleActiveArr));
       list.sort(function(a, b) {
-        return ['top', 'left'].indexOf(param) > -1 ? a.style[param] - b.style[param]:
-          param === 'bottom' ?  b.style.top + b.style.height - (a.style.top + a.style.height) :
-          b.style.left + b.style.width - (a.style.left + a.style.width) 
+        return ['top', 'left'].indexOf(param) > -1 ? parseInt(a.style[param]) - parseInt(b.style[param]):
+          param === 'bottom' ? parseInt(b.style.top) + parseInt(b.style.height) - (parseInt(a.style.top) + parseInt(a.style.height)) :
+          parseInt(b.style.left) + parseInt(b.style.width) - (parseInt(a.style.left) + parseInt(a.style.width)) 
       });
       let len = this.eStates.multipleActiveArr.length;
       let resObj = list[0];
       if(['top', 'left'].indexOf(param) > -1) {
         for(let i=0;i<len;i++) {
-          this.eStates.multipleActiveArr[i].style[param] = parseInt(resObj.style[param]);
+          this.eStates.multipleActiveArr[i].style[param] = resObj.style[param];
         }
       }else if(param === 'bottom') {
-        let _bottom = parseInt(parseInt(resObj.style.top) + parseInt(resObj.style.height));
+        let _bottom = parseInt( resObj.style.top )+ parseInt(resObj.style.height);
         for(let i=0;i<len;i++) {
-          this.eStates.multipleActiveArr[i].style.top = Math.min(parseInt( _bottom - parseInt(this.eStates.multipleActiveArr[i].style.height)), 1080);
+          console.log(_bottom, this.eStates.multipleActiveArr[i].style.height, _bottom- this.eStates.multipleActiveArr[i].style.height)
+          this.eStates.multipleActiveArr[i].style.top = _bottom - this.eStates.multipleActiveArr[i].style.height;
         }
       }else if(param === 'right') {
-        let _right = parseInt(parseInt(resObj.style.left) + parseInt(resObj.style.width));
+        let _right = parseInt(resObj.style.left) + parseInt(resObj.style.width);
         for(let i=0;i<len;i++) {
-          this.eStates.multipleActiveArr[i].style.left = Math.min(parseInt(_right) - parseInt(this.eStates.multipleActiveArr[i].style.width), 1920);
+          this.eStates.multipleActiveArr[i].style.left = _right - this.eStates.multipleActiveArr[i].style.width;
         }
       }
     },
@@ -706,7 +706,7 @@ export default {
   margin-top: 60px;
   padding: 0;
   position: relative;
-  color: #333;
+  color: #2c3e50;
   display: grid;
   grid-template-columns: 205px auto 205px;
 }
