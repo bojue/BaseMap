@@ -503,12 +503,12 @@ export default {
           this.eStates.multipleActiveArr[i].style[param] = parseInt(resObj.style[param]);
         }
       }else if(param === 'bottom') {
-        let _bottom = resObj.style.top + resObj.style.height;
+        let _bottom = parseInt(parseInt(resObj.style.top) + parseInt(resObj.style.height));
         for(let i=0;i<len;i++) {
           this.eStates.multipleActiveArr[i].style.top = Math.min(parseInt( _bottom - parseInt(this.eStates.multipleActiveArr[i].style.height)), 1080);
         }
       }else if(param === 'right') {
-        let _right = resObj.style.left + resObj.style.width;
+        let _right = parseInt(parseInt(resObj.style.left) + parseInt(resObj.style.width));
         for(let i=0;i<len;i++) {
           this.eStates.multipleActiveArr[i].style.left = Math.min(parseInt(_right) - parseInt(this.eStates.multipleActiveArr[i].style.width), 1920);
         }

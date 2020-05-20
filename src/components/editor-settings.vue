@@ -162,7 +162,7 @@
         <div class="subs-item full">
           <label class="lab" for="">颜色</label>
           <div class="cols">
-            <span class="col-item" v-for="(color, index) in colors" :key="index" v-bind:style="{
+            <span class="col-item" v-bind:class="{active: currentElement.style && currentElement.style.color === color}" v-for="(color, index) in colors" :key="index" v-bind:style="{
               background:color
             }"
             v-bind:title="color"
@@ -680,9 +680,14 @@ export default {
     display: inline-block;
     background: red;
     cursor: pointer;
+    margin: 1px;
 }
 .subs-item.full {
- grid-template-columns: 40px 70%;
+ grid-template-columns: 40px 80%;
+}
+.full .active {
+  margin: 0;
+  border:1px solid #ffffff;
 }
 
 </style>
