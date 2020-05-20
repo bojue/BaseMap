@@ -510,7 +510,7 @@ export default {
       }else if(param === 'right') {
         let _right = resObj.style.left + resObj.style.width;
         for(let i=0;i<len;i++) {
-          this.eStates.multipleActiveArr[i].style.left = parseInt(_right) - parseInt(this.eStates.multipleActiveArr[i].style.width);
+          this.eStates.multipleActiveArr[i].style.left = Math.min(parseInt(_right) - parseInt(this.eStates.multipleActiveArr[i].style.width), 1920);
         }
       }
     },
