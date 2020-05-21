@@ -109,7 +109,7 @@ export default {
               type: "room",
               name: "房间",
               icon: require("./../assets/comps/room.png"),
-              backgroundImage:require("./../assets/comps/floor.svg") || require("./../assets/comps/floor.jpg"),
+              backgroundImage:require("./../assets/comps/floor.jpg"),
               bgiBool:false,
               defStyle: {
                 width: 120,

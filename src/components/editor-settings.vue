@@ -68,7 +68,7 @@
         </div>
     </div>
     <div class="aligin-item contrls">
-      <img  
+      <!-- <img  
         @click="downloadJSON()" 
         v-bind:src="img.output" 
         @mouseenter="img.output=img.output_hover" 
@@ -81,7 +81,7 @@
         @mouseenter="img.save=img.save_hover" 
         @mouseleave="img.save=img.save_def" 
         alt="导入" 
-        title="导入">
+        title="导入"> -->
       <img  
         @click="saveData()" 
         v-bind:src="img.save" 
