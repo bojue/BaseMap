@@ -244,8 +244,8 @@ export default {
               name: "冷机",
               icon: require("./../assets/comps/lengji.png"),
               defStyle: {
-                width: 50,
-                height: 64
+                width: 40,
+                height: 100
               },
               styleObject: {
                 width: "25px"
@@ -256,8 +256,8 @@ export default {
               name: "冷机2",
               icon: require("./../assets/comps/lengji.jpg"),
               defStyle: {
-                width: 30,
-                height: 50
+                width: 40,
+                height: 80
               },
               styleObject: {
                 width: "20px",
@@ -316,13 +316,13 @@ export default {
               name: "二次泵",
               icon: require("./../assets/comps/ercibeng.jpg"),
               defStyle: {
-                width: 110,
-                height: 40
+                width: 60,
+                height: 120
               },
               styleObject: {
-                width: "45px",
-                height: "20px",
-                marginTop: "10px"
+                width: "26px",
+                height: "40px",
+                marginTop: "0px"
               }
             },
             {
@@ -331,13 +331,13 @@ export default {
               name: "风机",
               icon: require("./../assets/comps/fengji.jpg"),
               defStyle: {
-                width: 30,
+                width: 70,
                 height: 50
               },
               styleObject: {
-                width: "20px",
-                height: "35px",
-                marginTop: "0px"
+                width: "44px",
+                height: "30px",
+                marginTop: "5px"
               }
             },
             {
@@ -369,6 +369,26 @@ export default {
                 height: "20px",
                 marginTop: "10px"
               }
+            },
+            {
+              id: 2,
+              type: "img",
+              name: "室外机",
+              icon: require("./../assets/comps/shiwaiji.jpg"),
+              defStyle: {
+                width: 80,
+                height: 80
+              }
+            },
+             {
+              id: 2,
+              type: "img",
+              name: "闸机",
+              icon: require("./../assets/comps/zhaji.png"),
+              defStyle: {
+                width: 100,
+                height: 40
+              }
             }
           ]
         },
@@ -380,6 +400,18 @@ export default {
               type: "img",
               name: "灭火器",
               icon: require("./../assets/comps/miehuoqi.png"),
+              defStyle: {
+                width: 30,
+                height: 30,
+                borderRadius: "50",
+                isApplyShadow:'false'
+              }
+            },
+            {
+              id: 2,
+              type: "img",
+              name: "钢瓶",
+              icon: require("./../assets/comps/gangping.png"),
               defStyle: {
                 width: 30,
                 height: 30,
@@ -429,7 +461,38 @@ export default {
                 width: 100,
                 height: 40
               }
-            }, 
+            },    {
+              id: 2,
+              type: "img",
+              name: "楼梯2",
+              icon: require("./../assets/comps/louti.jpg"),
+              defStyle: {
+                width: 100,
+                height: 80
+              }
+            },
+           
+              {
+              id: 2,
+              type: "img",
+              name: "前台",
+              icon: require("./../assets/comps/qiantai.png"),
+              defStyle: {
+                width: 130,
+                height: 200
+              }
+            },
+             {
+              id: 2,
+              type: "img",
+              name: "监控中心",
+              icon: require("./../assets/comps/jiankongzhongxin.png"),
+              defStyle: {
+                width: 180,
+                height: 80
+              }
+            }
+             
           ]
         }
       ]
