@@ -245,10 +245,11 @@ export default {
               icon: require("./../assets/comps/lengji.png"),
               defStyle: {
                 width: 40,
-                height: 100
+                height: 150
               },
               styleObject: {
-                width: "25px"
+                width: "20px",
+                height:"35px"
               }
             },{
               id: 4,
@@ -331,8 +332,8 @@ export default {
               name: "风机",
               icon: require("./../assets/comps/fengji.jpg"),
               defStyle: {
-                width: 70,
-                height: 50
+                width: 160,
+                height: 130
               },
               styleObject: {
                 width: "44px",
@@ -387,7 +388,8 @@ export default {
               icon: require("./../assets/comps/zhaji.png"),
               defStyle: {
                 width: 100,
-                height: 40
+                height: 40,
+                isApplyShadow:'false'
               }
             }
           ]
@@ -479,7 +481,8 @@ export default {
               icon: require("./../assets/comps/qiantai.png"),
               defStyle: {
                 width: 130,
-                height: 200
+                height: 200,
+                isApplyShadow:'false'
               }
             },
              {
@@ -489,7 +492,8 @@ export default {
               icon: require("./../assets/comps/jiankongzhongxin.png"),
               defStyle: {
                 width: 180,
-                height: 80
+                height: 80,
+                isApplyShadow:'false'
               }
             }
              

@@ -378,7 +378,7 @@ export default {
 }
 
 img {
-  border:1px solid transparent;
+  /* border:1px solid transparent; */
 }
 .comp-item {
   cursor: move;
