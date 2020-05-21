@@ -6,7 +6,6 @@
       <span class="baseMap">BaseMap</span>
     </div>
     <div class="config-item bg">
-      <div class="name">背景</div>
       <div class="bgs">
         <img class="bg-item" src="./../assets/icon/bg-gray.svg"  @click="changeBg('bg', 'gray')" alt="">
         <img class="bg-item" src="./../assets/icon/bg-grid.svg"   @click="changeBg('bg', 'grid')" alt="">
@@ -21,12 +20,6 @@
     <div class="config-item aligins">
         <div class="aligin">
           <div class="aligin-item">
-            <!-- <img class="img" 
-              v-bind:src="img.region" 
-              @mouseenter="img.region=img.region_hover" 
-              @mouseleave="img.region=img.region_def" 
-              alt="区域选择" 
-              title="区域选择"> -->
           </div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'colu')">
             <label for="">垂直间距:</label>
@@ -75,6 +68,20 @@
         </div>
     </div>
     <div class="aligin-item contrls">
+      <img  
+        @click="downloadJSON()" 
+        v-bind:src="img.output" 
+        @mouseenter="img.output=img.output_hover" 
+        @mouseleave="img.output=img.output_def" 
+        alt="导出" 
+        title="导出">
+      <img  
+        @click="saveData()" 
+        v-bind:src="img.save" 
+        @mouseenter="img.save=img.save_hover" 
+        @mouseleave="img.save=img.save_def" 
+        alt="导入" 
+        title="导入">
       <img  
         @click="saveData()" 
         v-bind:src="img.save" 
@@ -340,6 +347,9 @@ export default {
         region:require('./../assets/icon/align/region.png'),
         region_def:require('./../assets/icon/align/region.png'),
         region_hover:require('./../assets/icon/align/region_h.png'),
+        output:require('./../assets/icon/contr/output.png'),
+        output_def:require('./../assets/icon/contr/output.png'),
+        output_hover:require('./../assets/icon/contr/output_h.png'),
       }
     }
   },
@@ -371,8 +381,8 @@ export default {
     saveData:function() {
       this.$emit('saveDateToStorage', null , 'custom');
     },
-    download:function() {
-      this.$emit('download')
+    downloadJSON:function() {
+      this.$emit('downloadJSON')
     },
     changeFile:function() {
       let that = this;
@@ -441,7 +451,7 @@ export default {
   top: 0px;
   font-size: 14px;
   width: 130px;
-  left: 230px;
+  left: 200px;
 }
 .bg .name {
   position: absolute;
@@ -472,7 +482,7 @@ export default {
 }
 .aligins {
   position: absolute;
-  right: 487px;
+  right: 570px;
   top:0px;
   cursor: pointer;
 }
@@ -504,13 +514,13 @@ export default {
   position: absolute;
   right: 80px;
   text-align: center;
-  width: 120px;
+  width: 200px;
   height: 59px;
   top: -4px;
   border-right:1px solid #cccccc;
 }
 .contrls img {
-  margin: 22px 10px ;
+  margin: 20px 10px ;
 }
 .aligin-item label {
     padding: 2px 4px;
