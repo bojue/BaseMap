@@ -6,6 +6,9 @@
 
 ![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/demo.png)
 
+## 底图说明
+
+业务需要以及重构到 `2980x1440`像素大小的底图支持
 
 ## 功能点
 
