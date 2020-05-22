@@ -4,12 +4,15 @@
     v-bind:style="{
       width:configs.bgAllBool ? configs.window_w +'px' : 'auto',
       height:configs.bgAllBool ? configs.window_h +'px' : 'auto',
-      left:configs.bgAllBool && 0
+      left:configs.bgAllBool && 0,
+      
     }">
     <div id="canvas"
       ref="canvas" 
       v-bind:style="{
-        'transform':'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)',
+        'transform':!configs.bgAllBool ?
+        'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)':
+        'scale(0.64) translate(-829px, -386px)',
         background:configs.backgroundUrl && 'url(' + configs.backgroundUrl + ')'}"
         v-bind:class="{
         other:configs.bg !== 'grid',
@@ -314,7 +317,7 @@ export default {
 #content, #canvas {
   position: relative;
   width: 100%;
-  height: 822px;
+  min-height: 822px;
   background: whitesmoke;
   overflow: auto;
 }
@@ -408,10 +411,12 @@ img {
 }
 
 #canvas {
-  width: 1920px;
-  height: 1080px;
+  width: 2980px;
+  height: 1440px;
   background: #eeeeee;
   transform: translate(100px, 200px);
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
 }
 #canvas.other {
   background-repeat: no-repeat !important;

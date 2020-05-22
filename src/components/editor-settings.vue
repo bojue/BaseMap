@@ -22,7 +22,7 @@
           <div class="aligin-item">
           </div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'colu')">
-            <label for="">垂直间距:</label>
+            <label for="">间距:</label>
             <input type="number" min="0" max="500" v-model="configs.Isometric_colu">
             <img class="img" 
               v-bind:src="img.dispersion_v" 
@@ -32,7 +32,7 @@
               title="垂直等距">
           </div>
           <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'row')">
-            <label for="">水平间距:</label>
+            <label for="">间距:</label>
             <input type="number" min="0" max="500" v-model="configs.Isometric_row">
             <img class="img" 
               v-bind:src="img.dispersion_l" 

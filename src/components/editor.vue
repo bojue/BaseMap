@@ -90,8 +90,8 @@ export default {
           Isometric_colu:10,
           dowloadImgType:'png',
           bgAllBool:false,
-          window_w:1920,
-          window_h:900,
+          width: 2945,
+          height: 1445,
           backgroundUrl:"",
         },
         webConfig: {
@@ -165,8 +165,8 @@ export default {
           fontSize: 14,
           color: color
       }
-      _style.left =Math.max(0,  Math.min(_style.left, 2130));
-      _style.top =Math.max(0,  Math.min(_style.top, 1140));
+      _style.left =Math.max(0,  Math.min(_style.left, this.configs.width));
+      _style.top =Math.max(0,  Math.min(_style.top, this.configs.height));
       item.style = _style;
       this.edrawComponents.push(item);
       this.eStates.currentActiveIndex = this.edrawComponents.length -1;
@@ -224,8 +224,8 @@ export default {
           let _left = event.clientX - comp.style.drag_start_x  - _l + canvesRect.x; 
           let _top = event.clientY - comp.style.drag_start_y - _t + canvesRect.y ;
           if(_left <0 || _top < 0) return;
-          _left =Math.max(0,  Math.min(_left, 2130));
-          _top = Math.max(0, Math.min(_top, 1140));
+          _left =Math.max(0,  Math.min(_left, this.configs.width));
+          _top = Math.max(0, Math.min(_top, this.configs.height));
           comp.style.left = _left;
           comp.style.top = _top ;
         }
@@ -258,24 +258,24 @@ export default {
           switch(arrow) {
             case 'r':
               _width = event.clientX - comp.style.drag_start_x + 213 - _l ; 
-              _width = Math.min(_width, 2130);
+              _width = Math.min(_width, this.configs.width);
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 'l':
               comp.style.left = event.clientX  + 213 - _l; 
               _width = comp.style.drag_start_x - event.clientX;
-              _width =Math.max(0,  Math.min(_width, 2130));
+              _width =Math.max(0,  Math.min(_width, this.configs.width));
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 't':
               comp.style.top = event.clientY;
               _height = comp.style.drag_start_y - event.clientY;
-              _height =Math.max(10,  Math.min(_height, 2130));
+              _height =Math.max(10,  Math.min(_height, this.configs.width));
               comp.style.height = _height >= 10 ? _height : 10;
               break;
             case 'b':
               _top = _t >=0 ? (event.clientY - comp.style.drag_start_y) :event.clientY - comp.style.drag_start_y - _t  + 60;
-              _top = Math.max(10, Math.min(_top, 2130));
+              _top = Math.max(10, Math.min(_top, this.configs.width));
               comp.style.height = _top >= 10 ? _top: 10;
               break;
             default:
@@ -391,7 +391,7 @@ export default {
       let _val = 10;
       let _h = _val;
       _copy.style.top = parseInt(_style.height) + parseInt(_style.top) + parseInt(_h);
-      _copy.style.top = Math.max(0, Math.min(_copy.style.top, 1080));
+      _copy.style.top = Math.max(0, Math.min(_copy.style.top, this.configs.height));
       _copy.isActive = true;
       this.edrawComponents.push(_copy);
       this.eStates.currentActiveIndex = this.edrawComponents.length - 1; //更新激活组件的下标
@@ -418,7 +418,7 @@ export default {
               item.style.left = val;
             }
             val = parseInt(item.style.left) + parseInt(item.style.width) + parseInt(this.configs.Isometric_row);
-            val = Math.max(0, Math.min(val, 2130));
+            val = Math.max(0, Math.min(val, this.configs.width));
           }
         } else {
           this.eStates.multipleActiveArr =  this.eStates.multipleActiveArr.sort(function(a,b){
@@ -430,7 +430,7 @@ export default {
               item.style.top = val;
             }
             val = parseInt(item.style.height) + parseInt(item.style.top) + parseInt(this.configs.Isometric_colu);
-            val = Math.max(0,  Math.min(val, 1140));
+            val = Math.max(0,  Math.min(val, this.configs.height));
           }
         }     
       }else if(state === 'reSel') {
@@ -529,8 +529,10 @@ export default {
     screen:function() {
       this.configs.bgAllBool = !this.configs.bgAllBool;
       if(this.configs.bgAllBool) {
-        this.configs.window_w = window.screen.width > 1500 ? window.screen.width : 1500;
-        this.configs.window_h = window.screen.height > 800 ? window.screen.height : 800;
+        // this.configs.window_w = window.screen.width > 1500 ? window.screen.width : 1500;
+        // this.configs.window_h = window.screen.height > 800 ? window.screen.height : 800;
+        this.configs.window_w = 2985;
+        this.configs.window_h = 1445
         this.configs.scale = 1;
       }
     },
