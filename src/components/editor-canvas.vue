@@ -454,14 +454,14 @@ img {
   box-shadow: -1px 1px 10px 5px rgba(0,0,0,0.3);
 }
 .comp-line_colu {
-  width: 5px;
+  width: 7px;
   background: #ffffff;
 }
 .comp-line_colu.isShadow {
   box-shadow: 0px 0px 14px -1px rgba(0,0,0,1);
 }
 .comp-line_row {
-  height: 5px;
+  height: 7px;
   background: #ffffff;
 }
 .comp-line_row.isShadow {
@@ -477,7 +477,7 @@ img {
   box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.4);
 }
 .comp-room {
-  border: 4px solid #ffffff;
+  border: 6px solid #ffffff;
 }
 .comp-room.isShadow {
   box-shadow: 1px 0px 8px 0px rgba(0,0,0,0.6);

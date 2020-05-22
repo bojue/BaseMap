@@ -92,6 +92,8 @@ export default {
           bgAllBool:false,
           width: 2945,
           height: 1445,
+          maxWidth:3145,
+          maxHieght:1445,
           backgroundUrl:"",
         },
         webConfig: {
@@ -165,8 +167,8 @@ export default {
           fontSize: 14,
           color: color
       }
-      _style.left =Math.max(0,  Math.min(_style.left, this.configs.width));
-      _style.top =Math.max(0,  Math.min(_style.top, this.configs.height));
+      _style.left =Math.max(0,  Math.min(_style.left, this.configs.maxWidth));
+      _style.top =Math.max(0,  Math.min(_style.top, this.configs.maxHieght));
       item.style = _style;
       this.edrawComponents.push(item);
       this.eStates.currentActiveIndex = this.edrawComponents.length -1;
@@ -224,8 +226,8 @@ export default {
           let _left = event.clientX - comp.style.drag_start_x  - _l + canvesRect.x; 
           let _top = event.clientY - comp.style.drag_start_y - _t + canvesRect.y ;
           if(_left <0 || _top < 0) return;
-          _left =Math.max(0,  Math.min(_left, this.configs.width));
-          _top = Math.max(0, Math.min(_top, this.configs.height));
+          _left =Math.max(0,  Math.min(_left, this.configs.maxWidth));
+          _top = Math.max(0, Math.min(_top, this.configs.maxHieght));
           comp.style.left = _left;
           comp.style.top = _top ;
         }
@@ -264,18 +266,18 @@ export default {
             case 'l':
               comp.style.left = event.clientX  + 213 - _l; 
               _width = comp.style.drag_start_x - event.clientX;
-              _width =Math.max(0,  Math.min(_width, this.configs.width));
+              _width =Math.max(0,  Math.min(_width, this.configs.maxWidth));
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 't':
               comp.style.top = event.clientY;
               _height = comp.style.drag_start_y - event.clientY;
-              _height =Math.max(10,  Math.min(_height, this.configs.width));
+              _height =Math.max(10,  Math.min(_height, this.configs.maxWidth));
               comp.style.height = _height >= 10 ? _height : 10;
               break;
             case 'b':
               _top = _t >=0 ? (event.clientY - comp.style.drag_start_y) :event.clientY - comp.style.drag_start_y - _t  + 60;
-              _top = Math.max(10, Math.min(_top, this.configs.width));
+              _top = Math.max(10, Math.min(_top, this.configs.maxWidth));
               comp.style.height = _top >= 10 ? _top: 10;
               break;
             default:
@@ -391,7 +393,7 @@ export default {
       let _val = 10;
       let _h = _val;
       _copy.style.top = parseInt(_style.height) + parseInt(_style.top) + parseInt(_h);
-      _copy.style.top = Math.max(0, Math.min(_copy.style.top, this.configs.height));
+      _copy.style.top = Math.max(0, Math.min(_copy.style.top, this.configs.maxHieght));
       _copy.isActive = true;
       this.edrawComponents.push(_copy);
       this.eStates.currentActiveIndex = this.edrawComponents.length - 1; //更新激活组件的下标
@@ -418,7 +420,7 @@ export default {
               item.style.left = val;
             }
             val = parseInt(item.style.left) + parseInt(item.style.width) + parseInt(this.configs.Isometric_row);
-            val = Math.max(0, Math.min(val, this.configs.width));
+            val = Math.max(0, Math.min(val, this.configs.maxWidth));
           }
         } else {
           this.eStates.multipleActiveArr =  this.eStates.multipleActiveArr.sort(function(a,b){
@@ -430,7 +432,7 @@ export default {
               item.style.top = val;
             }
             val = parseInt(item.style.height) + parseInt(item.style.top) + parseInt(this.configs.Isometric_colu);
-            val = Math.max(0,  Math.min(val, this.configs.height));
+            val = Math.max(0,  Math.min(val, this.configs.maxHieght));
           }
         }     
       }else if(state === 'reSel') {
