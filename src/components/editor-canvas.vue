@@ -5,7 +5,6 @@
       width:configs.bgAllBool ? configs.window_w +'px' : 'auto',
       height:configs.bgAllBool ? configs.window_h +'px' : 'auto',
       left:configs.bgAllBool && 0,
-      
     }">
     <div id="canvas"
       ref="canvas" 
@@ -13,7 +12,10 @@
         'transform':!configs.bgAllBool ?
         'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)':
         'scale(0.64) translate(-829px, -386px)',
-        background:configs.backgroundUrl && 'url(' + configs.backgroundUrl + ')'}"
+        'background':configs.backgroundUrl && 'url(' + configs.backgroundUrl + ')',
+        'background-repeat':configs.backgroundUrl && 'no-repeat !important',
+        'background-size':configs.backgroundUrl && 'contain !important'
+        }"
         v-bind:class="{
         other:configs.bg !== 'grid',
         grid:configs.bg === 'grid'
@@ -415,8 +417,8 @@ img {
   height: 1440px;
   background: #eeeeee;
   transform: translate(100px, 200px);
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
+  /* background-size: contain !important;
+  background-repeat: no-repeat !important; */
 }
 #canvas.other {
   background-repeat: no-repeat !important;
