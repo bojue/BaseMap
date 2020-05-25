@@ -178,6 +178,15 @@
         </div>
       </div>
     </div>
+    <div class="item" v-if="currentElement.type === 'aisle'">
+      <label for="" class="title">透明度</label>
+      <div class="subs grid grid-1 grid-1-1">
+        <div class="subs-item">
+          <label class="lab" for="">{{currentElement.style.opacity}}</label>
+          <input type="range" min="0.2" max="1.0" step="0.1" v-model="currentElement.style.opacity">
+        </div>
+      </div>
+    </div>
     <div class="item">
       <label for="" class="title">旋转</label>
       <div class="subs grid grid-1">
@@ -598,6 +607,10 @@ export default {
 }
 .grid-1 .subs-item .lab {
   width: 40px;
+}
+.grid-1-1 .subs-item{
+  display: grid;
+  grid-template-columns: 40px 70%;
 }
 .grid-2 {
   grid-template-columns: 50% 50%;

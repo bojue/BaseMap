@@ -11,11 +11,6 @@
         >
         {{tit.name}}
         </span>
-        <!-- <span class="title setconfig"   
-          @click="selCategory('setConfig')"
-          v-bind:class="{active: currentCategory === 'setConfig'}" title="全局设置">
-          <img src="./../assets/icon/setting.svg" alt="设置">
-        </span> -->
     </div>
     <div class="comps" v-if="currentCategory === 'tools'">
       <div class="sub-comps" v-for="(sub, index) in devices" :key="index">
@@ -31,7 +26,10 @@
           >
             <img  v-if="!item.bgBool" class="icon" v-bind:src="item.icon" v-bind:style="item.styleObject" alt />
             <span v-if="item.bgBool" class="icon" v-bind:style="{
-              background:item.styleObject.background
+              background:item.styleObject.background,
+              border:item.styleObject.border,
+              width:item.type === 'aisle' && item.styleObject.width,
+              height:item.type === 'aisle' && item.styleObject.height
             }"></span>
             <span class="name">{{item.name}}</span>
           </span>
@@ -233,9 +231,30 @@ export default {
               },
               styleObject: {
                 background:'#2f3c35',
+                width: "18px",
+                height: "18px",
+                marginTop: "10px"
+              }
+            }, {
+              id: 1,
+              type: "aisle",
+              name: "冷通道",
+              icon: require("./../assets/comps/device.png"),
+              bgBool:true,
+              defStyle: {
+                width: 25,
+                height: 25,
+                border:'2px solid #000000',
+                background:'#007fff',
+                opacity:0.5
+              },
+              styleObject: {
+                border:'2px solid #000000',
+                background:'#007fff',
                 width: "22px",
                 height: "22px",
-                marginTop: "10px"
+                marginTop: "10px",
+                opacity:0.5
               }
             },
             {

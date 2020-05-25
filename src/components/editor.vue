@@ -147,7 +147,18 @@ export default {
       item.isActive = true;
       item.multipleActiveBool=false;
       let rect = document.getElementById('canvas').getClientRects()[0];
-      let {width, height, borderRadius, rotate, borderWidth, background, isApplyShadow, bgiBool, color} = item.defStyle;
+      let {
+        width, 
+        height, 
+        borderRadius, 
+        rotate, 
+        borderWidth, 
+        background, 
+        isApplyShadow, 
+        bgiBool, 
+        color,
+        border,
+        opacity } = item.defStyle;
       let {clientX , clientY} = event;
       let _style = {
           width:width || 100,
@@ -164,7 +175,9 @@ export default {
           isFixed:"false",
           bgiBool:bgiBool || false, //材质
           borderRadius:borderRadius || 0,
+          border:border ,
           fontSize: 14,
+          opacity:opacity,
           color: color
       }
       _style.left =Math.max(0,  Math.min(_style.left, this.configs.maxWidth));

@@ -4,7 +4,7 @@
     v-bind:style="{
       width:configs.bgAllBool ? configs.window_w +'px' : 'auto',
       height:configs.bgAllBool ? configs.window_h +'px' : 'auto',
-      left:configs.bgAllBool && 0,
+      left:configs.bgAllBool && 0
     }">
     <div id="canvas"
       ref="canvas" 
@@ -24,9 +24,9 @@
       <div class="comp-item"
         v-for="(item, index) in edrawComps" :key="index"
         @click="selectItem($event, index)"
-        @dragstart="!configs.bgAllBool && item.style.isFixed === 'false' && dragComp($event, item, 'start', index)"
-        @drag="!configs.bgAllBool && item.style.isFixed === 'false' &&dragComp($event, item, 'drag', index)"
-        @dragend="!configs.bgAllBool && item.style.isFixed === 'false' &&dragComp($event, item,'end', index)"
+        @dragstart="item.style.isFixed === 'false' && dragComp($event, item, 'start', index)"
+        @drag="item.style.isFixed === 'false' &&dragComp($event, item, 'drag', index)"
+        @dragend=" item.style.isFixed === 'false' &&dragComp($event, item,'end', index)"
         v-bind:style="{
             width:item.style.width +'px',
             height:item.style.height +'px',
@@ -39,7 +39,7 @@
         v-bind:class="{
           active:item.isActive,
           roomActive:item.type === 'room'}"
-          v-bind:draggable="!configs.bgAllBool && item.isActive">
+          v-bind:draggable="item.isActive">
         <!-- 1.img -->
         <img class="comp-element comp-img icon"
           v-if="item.type === 'img'" 
@@ -93,7 +93,6 @@
             width:item.style.width +'px',
             isShadow:item.style.isApplyShadow ==='true',
             multipleActive:item.multipleActiveBool}">
-
         </div>
 
         <!-- 5.盒子 -->
@@ -154,11 +153,27 @@
               {{item.value}}
             </div>
         </div>
+
+        <!-- 8.冷通道 -->
+        <div class="comp-element line comp-pillar comp-pillar-shadow "
+          v-if="item.type === 'aisle'"
+          v-bind:style="{
+            height:item.style.height +'px',
+            width:item.style.width +'px',
+            border:item.style.border,
+            opacity:item.style.opacity,
+            background:item.style.background,
+            isShadow:item.style.isApplyShadow ==='true',
+          }"
+          v-bind:class="{
+            active:item.isActive, 
+            multipleActive:item.multipleActiveBool}">
+        </div>
         
         <!-- 辅助 -->	
         <span 	
           class="assist"	
-          v-if="!configs.bgAllBool && item.isActive">	
+          v-if="item.isActive">	
           <span class="adR" 	
             v-if="['line_colu'].indexOf(item.type) === -1"	
             draggable="true"	
