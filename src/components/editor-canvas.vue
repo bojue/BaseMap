@@ -29,13 +29,14 @@
         @drag="item.style.isFixed === 'false' &&dragComp($event, item, 'drag', index)"
         @dragend=" item.style.isFixed === 'false' &&dragComp($event, item,'end', index)"
         v-bind:style="{
-            width:item.style.width +'px',
-            height:item.style.height +'px',
-            top:(item.style.top - rect.y) +'px',
-            left:(item.style.left - rect.x) +'px',
-            position:item.style.position,
-            borderWidth:item.style.borderWidth + 'px',
-            transform: 'rotate('+ item.style.rotate +'deg)'
+          width:item.style.width +'px',
+          height:item.style.height +'px',
+          top:(item.style.top - rect.y) +'px',
+          left:(item.style.left - rect.x) +'px',
+          position:item.style.position,
+          borderWidth:item.style.borderWidth + 'px',
+          transform: 'rotate('+ item.style.rotate +'deg)',
+          'z-index':item.type === 'room' && '-1'
         }"
         v-bind:class="{
           active:item.isActive,
