@@ -9,6 +9,7 @@
       <div class="bgs">
         <img class="bg-item" src="./../assets/icon/bg-gray.svg"  @click="changeBg('bg', 'gray')" alt="">
         <img class="bg-item" src="./../assets/icon/bg-grid.svg"   @click="changeBg('bg', 'grid')" alt="">
+            <img class="bg-item" src="./../assets/icon/floor3.png"   @click="changeBg('bg', 'floor')" alt="">
         <input class="baseMapImgUrl" 
           id="filePicker"
           type="file" 

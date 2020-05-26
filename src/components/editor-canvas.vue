@@ -13,12 +13,13 @@
         'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)':
         'scale(0.64) translate(-829px, -386px)',
         'background':configs.backgroundUrl && 'url(' + configs.backgroundUrl + ')',
-        'background-repeat':configs.backgroundUrl && 'no-repeat !important',
-        'background-size':configs.backgroundUrl && 'contain !important'
+        'background-repeat':configs.backgroundUrl && ' no-repeat !important',
+        'background-size':configs.backgroundUrl && ' contain !important'
         }"
         v-bind:class="{
-        other:configs.bg !== 'grid',
-        grid:configs.bg === 'grid'
+        other:configs.bg === 'grey',
+        grid:configs.bg === 'grid',
+        floor:configs.bg === 'floor'
         }" >
       <!--遍历组件数组:图片-img,横线-lien_row,竖线-line_colu,柱子-pillar -->
       <div class="comp-item"
@@ -415,6 +416,9 @@ img {
   border:1px solid rgba(225,0,00,0.8);
   z-index: 10;
 }
+.comp-item .comp-room {
+  z-index: 0;
+}
 .comp-item .comp-room.active {
   border:4px solid white;
   z-index: 0;
@@ -445,6 +449,9 @@ img {
                       linear-gradient(#c8cdd0 1px,transparent 0),
                       linear-gradient(90deg,      #c8cdd0 1px,transparent 0);
     background-size: 20px 20px,20px 20px,100px 100px,100px 100px;
+}
+#canvas.floor {
+  background:url("./../assets/icon/floor3.png")
 }
 .control {
   position: fixed;

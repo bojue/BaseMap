@@ -107,7 +107,7 @@ export default {
               type: "room",
               name: "房间",
               icon: require("./../assets/comps/room.png"),
-              backgroundImage:require("./../assets/comps/floor.jpg"),
+              backgroundImage:require("./../assets/icon/floor3.png"),
               bgiBool:false,
               defStyle: {
                 width: 120,
@@ -242,8 +242,8 @@ export default {
               icon: require("./../assets/comps/device.png"),
               bgBool:true,
               defStyle: {
-                width: 25,
-                height: 25,
+                width: 100,
+                height: 30,
                 border:'2px solid #000000',
                 background:'#007fff',
                 opacity:0.5
