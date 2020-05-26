@@ -92,8 +92,8 @@ export default {
           bgAllBool:false,
           width: 2945,
           height: 1445,
-          maxWidth:3145,
-          maxHieght:1445,
+          maxWidth:3445,
+          maxHieght:1505,
           backgroundUrl:"",
         },
         webConfig: {
