@@ -10,8 +10,8 @@
       ref="canvas" 
       v-bind:style="{
         'transform':!configs.bgAllBool ?
-        'scale('+configs.scale+')  translate('+ -(1-configs.scale) * 950+'px,'+ -(1-configs.scale) * 400+'px)':
-        'scale(0.64) translate(-829px, -386px)',
+        'scale('+configs.scale+')':
+        'scale(0.64) ',
         'background':configs.backgroundUrl && 'url(' + configs.backgroundUrl + ')',
         'background-repeat':configs.backgroundUrl && ' no-repeat !important',
         'background-size':configs.backgroundUrl && ' contain !important'
@@ -244,14 +244,16 @@
   </div>
   <div class="slide" v-if="!configs.bgAllBool">
     <input 
-    type="range" 
-    class="slider" 
-    v-model="configs.scale" 
-    id="vol" 
-    step="0.1" 
-    name="vol" 
-    min="0.7" 
-    max="1.5">
+      type="range" 
+      v-bind:title="configs.scale"
+      v-bind:class="{'disScale':configs.scale ==1}"
+      class="slider" 
+      v-model="configs.scale" 
+      id="vol" 
+      step="0.1" 
+      name="vol" 
+      min="0.7" 
+      max="1.5">
   </div>
   <div class="screen" v-if="configs.bgAllBool">
     <img @click="screen" src="./../assets/icon/screen_cancel.svg" alt="右对齐" title="右对齐">
@@ -339,6 +341,7 @@ export default {
   min-height: 822px;
   background: whitesmoke;
   overflow: auto;
+  transform-origin: top left;
 }
 .slide {
   position: fixed;
@@ -398,6 +401,12 @@ export default {
   background: #ccc;
   cursor: pointer;
 }
+.disScale::-webkit-slider-thumb {
+  background: yellowgreen !important;
+}
+.disScale::-moz-range-thumb {
+  background: yellowgreen !important;
+}
 
 img {
   /* border:1px solid transparent; */
@@ -436,7 +445,7 @@ img {
   width: 2980px;
   height: 1440px;
   background: #eeeeee;
-  transform: translate(100px, 200px);
+  transform-origin: top left;
   /* background-size: contain !important;
   background-repeat: no-repeat !important; */
 }
