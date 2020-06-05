@@ -179,6 +179,21 @@
         </div>
       </div>
     </div>
+    <div class="item"  v-if="currentElement.type === 'device'">
+      <div class="subs grid grid-1">
+        <div class="subs-item full">
+
+          <label class="lab" for="">背景</label>
+          <div class="cols">
+            <span class="col-item" v-bind:class="{active: currentElement.style && currentElement.style.background === color}" v-for="(color, index) in backgrounds" :key="index" v-bind:style="{
+              background:color
+            }"
+            v-bind:title="color"
+            @click="selBackground(color)"></span>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="item" v-if="currentElement.type === 'aisle'">
       <label for="" class="title">透明度</label>
       <div class="subs grid grid-1 grid-1-1">
@@ -329,6 +344,21 @@ export default {
         '#4f4f4f',
         '#2c2c2c',
         '#000000'],
+      backgrounds:[
+        '#FF8c00', 
+        '#2f3035',
+        '#5e8ad1',
+        '#d1cfd0', 
+        '#dbdbdb',
+        '#ffffff',
+        '#d81e06',
+        '#ffff00',
+        '#7fff00',
+        '#00ca98',
+        '#26c9ff',
+        '#13227A',
+        "#000000"
+      ],
       img: {
         l:require('./../assets/icon/align/l.png'),
         l_def:require('./../assets/icon/align/l.png'),
@@ -369,6 +399,9 @@ export default {
   methods: {
     selColor:function(color) {
       this.$emit('selColor',this.currentElement, color);
+    },
+    selBackground:function(bgColor) {
+      this.$emit('selBackground', this.currentElement, bgColor)
     },
     delMultipComp:function(comp, index) {
       this.$emit('delMultipComp', comp, index);

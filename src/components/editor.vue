@@ -35,7 +35,8 @@
       v-on:saveDateToStorage="saveDateToStorage"
       v-on:getHistory="getStorageData"
       v-on:changeBgImg="changeBgImg"
-      v-on:selColor="selColor"></editor-settings>
+      v-on:selColor="selColor"
+      v-on:selBackground="selBackground"></editor-settings>
     
     <editor-history 
       v-if="activeHistoryBool"
@@ -539,6 +540,11 @@ export default {
     selColor(comp, color) {
       if(this.eStates.currentActiveIndex > -1 && this.edrawComponents[this.eStates.currentActiveIndex]) {
         this.edrawComponents[this.eStates.currentActiveIndex].style.color = color;
+      }
+    },
+    selBackground(comp, bgColor) {
+      if(this.eStates.currentActiveIndex > -1 && this.edrawComponents[this.eStates.currentActiveIndex]) {
+        this.edrawComponents[this.eStates.currentActiveIndex].style.background = bgColor;
       }
     },
     screen:function() {
