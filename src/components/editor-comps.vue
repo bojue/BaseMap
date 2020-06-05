@@ -235,7 +235,28 @@ export default {
                 height: "18px",
                 marginTop: "10px"
               }
-            }, 
+            }, {
+              id: 1,
+              type: "aisle",
+              name: "冷通道",
+              icon: require("./../assets/comps/device.png"),
+              bgBool:true,
+              defStyle: {
+                width: 100,
+                height: 30,
+                border:'2px solid #000000',
+                background:'#007fff',
+                opacity:0.5
+              },
+              styleObject: {
+                border:'2px solid #000000',
+                background:'#007fff',
+                width: "22px",
+                height: "22px",
+                marginTop: "10px",
+                opacity:0.5
+              }
+            },
             {
               id: 3,
               type: "img",
@@ -292,27 +313,6 @@ export default {
                 width: "20px",
                 height: "35px",
                 marginTop: "0px"
-              }
-            },{
-              id: 1,
-              type: "aisle",
-              name: "冷通道",
-              icon: require("./../assets/comps/device.png"),
-              bgBool:true,
-              defStyle: {
-                width: 100,
-                height: 30,
-                border:'2px solid #000000',
-                background:'#007fff',
-                opacity:0.5
-              },
-              styleObject: {
-                border:'2px solid #000000',
-                background:'#007fff',
-                width: "22px",
-                height: "22px",
-                marginTop: "10px",
-                opacity:0.5
               }
             },
             {

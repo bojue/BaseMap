@@ -234,10 +234,11 @@ export default {
         let _t =_rect.left;
         if(state === 'start') {
           this.eStates.currentActiveIndex = currentIndex;
+          console.log( event.clientX , comp.style.left , _l , canvesRect.x, this.configs.scale)
           comp.style.drag_start_x = event.clientX - comp.style.left - _l + canvesRect.x;
           comp.style.drag_start_y = event.clientY - comp.style.top - _t + canvesRect.y;
         }else if(state === 'drag'){
-          let _left = event.clientX - comp.style.drag_start_x  - _l + canvesRect.x; 
+          let _left = event.clientX  - comp.style.drag_start_x  - _l + canvesRect.x; 
           let _top = event.clientY - comp.style.drag_start_y - _t + canvesRect.y ;
           if(_left <0 || _top < 0) return;
           _left =Math.max(0,  Math.min(_left, this.configs.maxWidth));
@@ -273,24 +274,24 @@ export default {
      
           switch(arrow) {
             case 'r':
-              _width = event.clientX - comp.style.drag_start_x + 213 - _l ; 
-              _width = Math.min(_width, this.configs.width);
+              _width = parseInt((event.clientX- _l) /this.configs.scale) - comp.style.drag_start_x  + 213; 
+              _width = Math.min(_width, this.configs.width) ;
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 'l':
-              comp.style.left = event.clientX  + 213 - _l; 
-              _width = comp.style.drag_start_x - event.clientX;
+              comp.style.left = (event.clientX - _l)/this.configs.scale + 213 ; 
+              _width = comp.style.drag_start_x - event.clientX /this.configs.scale ;
               _width =Math.max(0,  Math.min(_width, this.configs.maxWidth));
               comp.style.width = _width >= 10 ? _width: 10;
               break;
             case 't':
-              comp.style.top = event.clientY;
-              _height = comp.style.drag_start_y - event.clientY;
+              comp.style.top = (event.clientY -_t )/ this.configs.scale + 60;
+              _height = comp.style.drag_start_y - event.clientY /this.configs.scale;
               _height =Math.max(10,  Math.min(_height, this.configs.maxWidth));
               comp.style.height = _height >= 10 ? _height : 10;
               break;
             case 'b':
-              _top = _t >=0 ? (event.clientY - comp.style.drag_start_y) :event.clientY - comp.style.drag_start_y - _t  + 60;
+              _top = _t >=0 ? ((event.clientY - _t) / this.configs.scale- comp.style.drag_start_y + 60) :event.clientY - comp.style.drag_start_y - _t  + 60;
               _top = Math.max(10, Math.min(_top, this.configs.maxWidth));
               comp.style.height = _top >= 10 ? _top: 10;
               break;
