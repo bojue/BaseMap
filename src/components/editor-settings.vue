@@ -349,7 +349,6 @@ export default {
         '#2f3035',
         '#5e8ad1',
         '#d1cfd0', 
-        '#dbdbdb',
         '#ffffff',
         '#d81e06',
         '#ffff00',
@@ -357,8 +356,7 @@ export default {
         '#00ca98',
         '#26c9ff',
         '#13227A',
-        "#000000"
-      ],
+        "#000"],
       img: {
         l:require('./../assets/icon/align/l.png'),
         l_def:require('./../assets/icon/align/l.png'),
