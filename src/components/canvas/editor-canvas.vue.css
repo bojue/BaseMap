@@ -35,7 +35,7 @@
   #rangeNums .item.t {
     top: 93px;
   }
-  .line {
+  #rangeNums .line {
     display: inline-block;
     width: 10px;
     height: 2px;
