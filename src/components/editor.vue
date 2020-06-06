@@ -164,8 +164,8 @@ export default {
       let _style = {
           width:width || 100,
           height:height || 100,
-          top: clientY  - rect.top + 60 || 100,
-          left:clientX + 213 - rect.left || 100,
+          top: (clientY  - rect.top + 60 || 100)/ this.configs.scale,
+          left:(clientX +213 - rect.left || 100) / this.configs.scale,
           rotate: rotate || 0,
           drag_start_x: 0, //拖拽相对
           drag_start_y :0,
@@ -224,7 +224,7 @@ export default {
       this.eStates.copyByKeyBool = false;
     },
     // 组件拖拽：shiftKey === true 处理多选
-    dragCurrentComp(event, comp, state, currentIndex, canvesRect) {
+    dragCurrentComp(event, comp, state, currentIndex) {
       if(event && (event.shiftKey || event.metaKey && this.isMac())  ){
         console.log('多选处理')
       } else {
@@ -234,12 +234,11 @@ export default {
         let _t =_rect.left;
         if(state === 'start') {
           this.eStates.currentActiveIndex = currentIndex;
-          console.log( event.clientX , comp.style.left , _l , canvesRect.x, this.configs.scale)
-          comp.style.drag_start_x = event.clientX - comp.style.left - _l + canvesRect.x;
-          comp.style.drag_start_y = event.clientY - comp.style.top - _t + canvesRect.y;
+          comp.style.drag_start_x = (event.clientX - _l )/this.configs.scale - comp.style.left + 213;
+          comp.style.drag_start_y = (event.clientY -_t)/this.configs.scale  - comp.style.top + 60;
         }else if(state === 'drag'){
-          let _left = event.clientX  - comp.style.drag_start_x  - _l + canvesRect.x; 
-          let _top = event.clientY - comp.style.drag_start_y - _t + canvesRect.y ;
+          let _left = (event.clientX   - _l)/this.configs.scale  - comp.style.drag_start_x + 213; 
+          let _top = (event.clientY - _t)/this.configs.scale - comp.style.drag_start_y  + 60;
           if(_left <0 || _top < 0) return;
           _left =Math.max(0,  Math.min(_left, this.configs.maxWidth));
           _top = Math.max(0, Math.min(_top, this.configs.maxHieght));
@@ -262,10 +261,10 @@ export default {
         if(state === 'start') {
           this.eStates.currentActiveIndex = currentIndex;
           comp.style.drag_start_x = arrow === 'r' ? comp.style.left:
-                                    arrow === 'l' ?comp.style.left + comp.style.width + _l - 213 :
+                                    arrow === 'l' ? comp.style.left + comp.style.width:
                                     10;
           comp.style.drag_start_y = arrow === 'b' ? comp.style.top  :
-                                    arrow === 't' ?comp.style.top + comp.style.height  :
+                                    arrow === 't' ? comp.style.top + comp.style.height  :
                                     10;
         }else if(state === 'drag'){
           let _width = 0;
@@ -275,8 +274,11 @@ export default {
           switch(arrow) {
             case 'r':
               _width = parseInt((event.clientX- _l) /this.configs.scale) - comp.style.drag_start_x  + 213; 
-              _width = Math.min(_width, this.configs.width) ;
-              comp.style.width = Math.max(_width, 10);
+              comp.style.width = Math.max(Math.min(_width, this.configs.width), 10);
+              break;
+            case 'b':
+              _top = parseInt((event.clientY - _t) / this.configs.scale) - comp.style.drag_start_y + 60;
+              comp.style.height = Math.max(Math.min(_top, this.configs.maxWidth), 10);
               break;
             case 'l':
               comp.style.left = parseInt((event.clientX - _l)/this.configs.scale + 213) ; 
@@ -289,11 +291,6 @@ export default {
               _height = parseInt(comp.style.drag_start_y - comp.style.top)
               _height =Math.max(10,  Math.min(_height, this.configs.maxWidth));
               comp.style.height = Math.max(_height, 10);
-              break;
-            case 'b':
-              _top = _t >=0 ? ((event.clientY - _t) / this.configs.scale- comp.style.drag_start_y + 60) :event.clientY - comp.style.drag_start_y - _t  + 60;
-              _top = Math.max(10, Math.min(_top, this.configs.maxWidth));
-              comp.style.height = Math.max(_top, 10);
               break;
             default:
               break
