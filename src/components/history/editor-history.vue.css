@@ -1,16 +1,16 @@
 #history {
     background: #ffffff;
-  width: 1000px;
-  height: 600px;
-  position: absolute;
-  left: 50%;
-  top: 40%;
-  transform: translateX(-500px) translateY(-355px);
-  display: grid;
-  grid-template-columns: 20% 80%;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  z-index: 999;
+    width: 1000px;
+    height: 600px;
+    position: fixed;
+    left: 50%;
+    top: 420px;
+    transform: translateX(-500px) translateY(-355px);
+    display: grid;
+    grid-template-columns: 20% 80%;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    z-index: 999;
 }
 
 .list {
