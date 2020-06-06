@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Editor from './components/editor';
+import Editor from './components/editor/editor';
 export default {
   components: {
     Editor

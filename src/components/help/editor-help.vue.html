@@ -1,0 +1,39 @@
+<div id="keyboard"> 
+    <img 
+       src="./../../assets/icon/keyborder.svg" 
+       class="icon" 
+       @click="showKeyBoadrInfoBool= !showKeyBoadrInfoBool" 
+       alt="快捷键"
+       title="快捷键">
+    <div class="info" v-if="showKeyBoadrInfoBool">
+        <div class="title">
+            快捷操作(<code>Window/Mac</code>)
+        </div>
+        <div class="datas" >
+            <div class="item">
+                <span class="name">复制</span>
+                <span class="val"><code>Ctrl</code>+<code>c</code></span>
+            </div>
+           <div class="item">
+                <span class="name">粘贴</span>
+                <span class="val"><code>Ctrl</code>+<code>v</code></span>
+           </div>
+           <div class="item">
+                <span class="name">删除</span>
+                <span class="val"><code>Delete</code></span>
+           </div>
+           <div class="item">
+                <span class="name">位置</span>
+                <span class="val"><code>↑ ↓ ← →</code></span>
+           </div>
+           <div class="item">
+               <span class="name">多选</span>
+               <span class="val"><code>Shift</code>/<code>Comm</code> +点击</span>
+           </div>
+           <div class="item">
+               <span class="name">取消</span>
+               <span class="val"><code>Shift</code>/<code>Comm</code> +点击</span>
+            </div>
+        </div>
+    </div>
+</div>

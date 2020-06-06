@@ -1,0 +1,317 @@
+<div id="settings">
+    <div class="setting-config config">
+      <div class="config-item name">
+        <img class="icon" src="('./../../assets/icon/3D.svg" alt="">
+        <span class="baseMap">BaseMap</span>
+      </div>
+      <div class="config-item bg">
+        <div class="bgs">
+          <img class="bg-item" src="./../../assets/icon/bg-gray.svg"  @click="changeBg('bg', 'gray')" alt="">
+          <img class="bg-item" src="./../../assets/icon/bg-grid.svg"   @click="changeBg('bg', 'grid')" alt="">
+          <img class="bg-item" src="./../../assets/icon/floor3.png"   @click="changeBg('bg', 'floor')" alt="">
+          <input class="baseMapImgUrl" 
+            id="filePicker"
+            type="file" 
+            placeholder="底图路径"
+            @click="changeFile"
+            @change="changeFile"> 
+        </div>
+      </div>
+      <div class="config-item aligins">
+          <div class="aligin">
+            <div class="aligin-item">
+            </div>
+            <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'colu')">
+              <label for="">间距:</label>
+              <input type="number" min="0" max="500" v-model="configs.Isometric_colu">
+              <img class="img" 
+                v-bind:src="img.dispersion_v" 
+                @mouseenter="img.dispersion_v=img.dispersion_v_hover" 
+                @mouseleave="img.dispersion_v=img.dispersion_v_def" 
+                alt="垂直等距" 
+                title="垂直等距">
+            </div>
+            <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('Isometric', 'row')">
+              <label for="">间距:</label>
+              <input type="number" min="0" max="500" v-model="configs.Isometric_row">
+              <img class="img" 
+                v-bind:src="img.dispersion_l" 
+                @mouseenter="img.dispersion_l=img.dispersion_l_hover" 
+                @mouseleave="img.dispersion_l=img.dispersion_l_def"
+                alt="水平等距" 
+                title="水平等距">
+            </div>
+            <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'l')">
+              <img         
+                v-bind:src="img.l" 
+                @mouseenter="img.l=img.l_hover" 
+                @mouseleave="img.l=img.l_def"  
+                alt="左对齐" 
+                title="左对齐"></div>
+            <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 't')">
+              <img
+                v-bind:src="img.t" 
+                @mouseenter="img.t=img.t_hover" 
+                @mouseleave="img.t=img.t_def"  
+                alt="上对齐" title="上对齐"></div>
+            <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'b')">
+              <img 
+                v-bind:src="img.b" 
+                @mouseenter="img.b=img.b_hover" 
+                @mouseleave="img.b=img.b_def"   alt="下对齐" title="下对齐"></div>
+            <div class="aligin-item" @click="multipleActiveArr.length > 0 && setMultipleState('align', 'r')">
+              <img
+                v-bind:src="img.r" 
+                @mouseenter="img.r=img.r_hover" 
+                @mouseleave="img.r=img.r_def"  
+                alt="右对齐" title="右对齐"></div>
+          </div>
+      </div>
+      <div class="aligin-item contrls">
+        <!-- <img  
+          @click="downloadJSON()" 
+          v-bind:src="img.output" 
+          @mouseenter="img.output=img.output_hover" 
+          @mouseleave="img.output=img.output_def" 
+          alt="导出" 
+          title="导出">
+        <img  
+          @click="saveData()" 
+          v-bind:src="img.save" 
+          @mouseenter="img.save=img.save_hover" 
+          @mouseleave="img.save=img.save_def" 
+          alt="导入" 
+          title="导入"> -->
+        <img  
+          @click="saveData()" 
+          v-bind:src="img.save" 
+          @mouseenter="img.save=img.save_hover" 
+          @mouseleave="img.save=img.save_def" 
+          alt="保存" 
+          title="保存">
+        <img  
+          @click="getHistory()" 
+          v-bind:src="img.history" 
+          @mouseenter="img.history=img.history_hover" 
+          @mouseleave="img.history=img.history_def" 
+          alt="历史记录" 
+          title="历史记录"></div>
+      <div 
+        class="aligin-item screen">
+        <img 
+          @click="screen()"
+          src="./../../assets/icon/screen_full.svg" 
+          alt="全屏预览" 
+          title="全屏预览"></div>
+        
+      <!-- <div class="download">
+        <span class="title" @click="download">下载</span>
+      </div> -->
+     
+    </div>
+    <div class="setting-element element" v-if="currentElement && multipleActiveArr.length === 0">
+      <div class="item">
+        <span class="name">{{currentElement.name}}</span>
+      </div>
+      <div class="item">
+        <label for="" class="title">位置</label>
+        <div class="subs grid grid-2">
+          <div class="subs-item">
+            <label for="" class="lab">上</label>
+            <input type="number" class="val"  v-model="currentElement.style.top">
+          </div>
+           <div class="subs-item">
+            <label for="" class="lab">左</label>
+            <input type="number" class="val" v-model="currentElement.style.left"> 
+          </div>
+        </div>
+        <div class="subs">
+          <div class="subs-item">
+            <input class="val-cb"
+              type="checkbox"
+              v-model="currentElement.style.isFixed"
+              true-value=true
+              false-value=false
+            >
+            <span class="val">固定</span>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <label for="" class="title">大小</label>
+        <div class="subs grid grid-2">
+          <div class="subs-item">
+            <label class="lab" for="">长</label>
+            <input 
+              max="3200"
+              min="0"
+              class="val" type="number"  v-model="currentElement.style.width">
+          </div>
+           <div class="subs-item">
+            <label class="lab" for="">宽</label>
+            <input class="val" type="number" 
+              max="1200"
+              min="0"
+              v-model="currentElement.style.height"> 
+          </div>
+        </div>
+      </div>
+      <div class="item"  v-if="currentElement.type === 'text'">
+        <label for="" class="title">字体</label>
+        <div class="subs grid grid-1">
+          <div class="subs-item">
+            <label class="lab" for="">大小</label>
+            <input 
+              max="50"
+              min="12"
+              class="val" type="number"  v-model="currentElement.style.fontSize">
+          </div>
+          <div class="subs-item full">
+            <label class="lab" for="">颜色</label>
+            <div class="cols">
+              <span class="col-item" v-bind:class="{active: currentElement.style && currentElement.style.color === color}" v-for="(color, index) in colors" :key="index" v-bind:style="{
+                background:color
+              }"
+              v-bind:title="color"
+              @click="selColor(color)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item"  v-if="currentElement.type === 'device'">
+        <div class="subs grid grid-1">
+          <div class="subs-item full">
+  
+            <label class="lab" for="">背景</label>
+            <div class="cols">
+              <span class="col-item" v-bind:class="{active: currentElement.style && currentElement.style.background === color}" v-for="(color, index) in backgrounds" :key="index" v-bind:style="{
+                background:color
+              }"
+              v-bind:title="color"
+              @click="selBackground(color)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item" v-if="currentElement.type === 'aisle'">
+        <label for="" class="title">透明度</label>
+        <div class="subs grid grid-1 grid-1-1">
+          <div class="subs-item">
+            <label class="lab" for="">{{currentElement.style.opacity}}</label>
+            <input type="range" min="0.2" max="1.0" step="0.1" v-model="currentElement.style.opacity">
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <label for="" class="title">旋转</label>
+        <div class="subs grid grid-1">
+          <div class="subs-item">
+            <label class="lab" for="">角度</label>
+            <input class="val" type="number"  v-model="currentElement.style.rotate">
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <label for="" class="title">阴影</label>
+        <div class="subs">
+          <div class="subs-item">
+            <input class="val-cb"
+              type="checkbox"
+              v-model="currentElement.style.isApplyShadow"
+              true-value=true
+              false-value=false
+            >
+            <span class="val">应用阴影</span>
+          </div>
+        </div>
+      </div>
+      <div class="item" v-if="currentElement.type === 'room'">
+        <label for="" class="title">材质</label>
+        <div class="subs">
+          <div class="subs-item">
+            <input class="val-cb"
+              type="checkbox" v-model="currentElement.style.bgiBool"
+              true-value=true
+              false-value=false
+            >
+            <span class="val">应用材质</span>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <label for="" class="title">圆角</label>
+        <div class="subs">
+          <div class="subs-item">
+          <select class="val-s" v-model="currentElement.style.borderRadius">
+            <option v-bind:value="0">无</option>
+            <option v-bind:value="50">圆角</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="item del-item">
+      <img class="del"  
+        v-bind:class="{
+          delDef:currentActiveIndex === -1
+        }"
+        @click="delComp()" src="./../../assets/icon/delete.svg" alt="">
+    </div>
+    </div>
+  
+     <div class="setting-element element" v-if="currentActiveIndex === -1">
+      <div class="item">
+        <span class="name">{{'多选操作'}}</span>
+      </div>
+      <div class="item">
+        <label for="" class="title">阴影</label>
+        <div class="subs">
+          <div class="subs-item">
+            <input class="val-cb"
+              type="checkbox"
+              v-model="multipleApplyShadow"
+              true-value=true
+              false-value=false
+              @change="setMultipleState('isApplyShadow', multipleApplyShadow)"
+            >
+            <span class="val">应用阴影</span>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+          <label for="" class="title">圆角</label>
+          <div class="subs">
+            <div class="subs-item">
+            <select class="val-s" 
+              v-model="multipleApplyBorderRadius"
+               @change="setMultipleState('borderRadius', multipleApplyBorderRadius)">
+              <option v-bind:value="0">无</option>
+              <option v-bind:value="50">圆角</option>
+            </select>
+          </div>
+        </div>
+    </div>
+    <div class="item del-item">
+      <img class="del"  
+        v-bind:class="{
+          delDef:currentActiveIndex === -1
+        }"
+        @click="delComp('multipleDel')" src="./../../assets/icon/delete.svg" alt="多选删除" title="多选删除">
+    </div>
+    <div class="item">
+        <div class="muls-list">
+          <label for="" class="title">多选列表</label>      
+          <span class="nums">选中
+            <span class="val">{{multipleActiveArr.length}}</span>个组件
+          </span>
+        </div>
+        <div class="muls">
+          <div class="muls-item" v-for="(ele, index) in multipleActiveArr" :key="index">
+            <span class="ele-index">{{index+1}}</span>
+            <img  class="ele-icon" v-bind:src="ele.icon" alt="">
+            <span class="ele-name">{{ele.name}}</span>
+            <img class="ele-del" @click="delMultipComp(ele, index)" src="./../../assets/icon/del_sub.svg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>

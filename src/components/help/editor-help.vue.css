@@ -1,0 +1,65 @@
+#keyboard {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    cursor: pointer;
+}
+#keyboard .icon {
+    opacity: 0.6;
+    width: 22px;
+    height: 22px;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px rgba(255,0,0,0.2);
+    background: #ffffff;
+}
+#keyboard  .icon:hover {
+    padding: 11px;
+    opacity: 1;
+    box-shadow: 0px 0px 5px rgba(255,0,0,0.6);
+}
+.info {
+    position: fixed;
+    right: 10px;
+    bottom: 80px;
+    background: #f4f5f5;
+    width: 180px;
+    padding: 10px;
+}
+.title {
+    margin: 5px 3px;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 10px;
+}
+.nums .val {
+    position: relative;
+}
+.datas {
+    color: #666666;
+    font-size: 14px;
+    margin: 3px;
+}
+
+.datas .item {
+    height: 30px;
+    line-height: 30px;
+}
+.datas .val {
+    position: absolute;
+    right: 5px;
+}
+.item .name {
+    color:#888;
+    padding-right: 10px;
+}
+code {
+    color:dodgerblue;
+    padding: 2px;
+}
+.github img {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    left: 10px;
+    bottom: 50px;
+}

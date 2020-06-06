@@ -1,65 +1,9 @@
-<template>
-  <div id="editor">
-    <!-- 组件库 -->
-    <editor-comps 
-      v-bind:elements="edrawComponents"
-      v-bind:webConfig="webConfig"
-      v-on:initCompsState="initComponentState" 
-      v-on:selectComp="selectComp"></editor-comps>
-    
-    <!-- 画布 -->
-    <editor-canvas 
-      v-bind:configs="configs"
-      v-bind:edrawComps="edrawComponents"
-      v-bind:currentActiveIndex="eStates.currentActiveIndex"
-      v-bind:multipleActiveBool="eStates.multipleActiveBool"
-      v-on:initCompsState="initComponentState" 
-      v-on:dragComp="dragCurrentComp"
-      v-on:resizeByDragComp="resizeByDragComp"
-      v-on:trans="transComp"
-      v-on:changeTextVal="changeTextVal"
-      v-on:screen="screen"></editor-canvas>
-
-    <!-- 组件设置 -->
-    <editor-settings
-      v-bind:currentActiveIndex="eStates.currentActiveIndex"
-      v-bind:currentElement="edrawComponents[eStates.currentActiveIndex]"
-      v-bind:multipleActiveArr="eStates.multipleActiveArr"
-      v-bind:configs="configs"
-      v-on:delComp="delComp"
-      v-on:delMultipComp="delMultipComp"
-      v-on:setMultipleState="setMultipleState"
-      v-on:changeConfig="changeConfig"
-      v-on:download="download"
-      v-on:screen="screen"
-      v-on:saveDateToStorage="saveDateToStorage"
-      v-on:getHistory="getStorageData"
-      v-on:changeBgImg="changeBgImg"
-      v-on:selColor="selColor"
-      v-on:selBackground="selBackground"></editor-settings>
-    
-    <editor-history 
-      v-if="activeHistoryBool"
-      v-bind:list="historyCurrnetData"
-      v-bind:currentIndex="currentHistoryIndex"
-      v-on:initState="initHistoryListState"
-      v-on:applyHistory="applyHistory"
-      v-on:closeHistory="closeHistory"
-      v-on:deleteHistoryData="deleteHistoryData"
-      v-on:clerarHistoryData="clearStorageData"
-      ></editor-history>
-    <!-- 帮助 -->
-    <editor-help/>
-  </div>
-</template>
-
-<script>
 import Vue from 'vue';
-import EditorComps from './editor-comps';
-import EditorCanvas from './editor-canvas';
-import EditorSettings from './editor-settings';
-import EditorHelp from './editor-help';
-import EditorHistory from './editor-history';
+import EditorComps from './../../components/comps/editor-comps'
+import EditorCanvas from './../../components/canvas/editor-canvas';
+import EditorSettings from './../../components/settings/editor-settings';
+import EditorHelp from './../../components/help/editor-help';
+import EditorHistory from './../../components/history/editor-history';
 import _ from 'lodash';  
 
 export default {
@@ -719,16 +663,3 @@ export default {
     },
   }
 }
-</script>
-
-<style>
-
-#editor {
-  margin-top: 60px;
-  padding: 0;
-  position: relative;
-  color: #2c3e50;
-  display: grid;
-  grid-template-columns: 205px auto 205px;
-}
-</style>

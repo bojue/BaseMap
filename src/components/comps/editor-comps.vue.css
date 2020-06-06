@@ -1,0 +1,170 @@
+#comps {
+    width: 200px;
+    background: #ffffff;
+    user-select: none;
+    border: 1px solid #eeeeee;
+  }
+  .flexed {
+    position: fixed;
+    width: 200px;
+  }
+  .tits {
+    font-size: 14px;
+    border-bottom: 1px dashed #cccccc;
+  }
+  .tits .title {
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 10px;
+    margin-bottom: -1px;
+    color: #666;
+  }
+  .tits .title.active {
+    color: #000;
+    background: #cccccc;
+    border-bottom: 1px solid #cccccc;
+  }
+  .tits .setconfig {
+    position: absolute;
+    right: 0px;
+    height: 19px;
+    text-align: center;
+    width: 20px;
+  }
+  .setconfig img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* 组件库 */
+  .comps {
+    margin: 5px 2px;
+  }
+  .subComp {
+    display: inline-grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+  }
+  .sub-comps {
+    margin-bottom: 15px;
+  }
+  .sub-comps .title {
+    margin: 1px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 2px 10px;
+    background: #eeeeee;
+  }
+  .item-comp {
+    cursor: pointer;
+    border: 1px solid #cccccc;
+    margin-left: 1px;
+    margin-top: 1px;
+    text-align: center;
+    background: #f4f5f5;
+  }
+  .item-comp:hover {
+    background: antiquewhite;
+  }
+  .item-comp:hover .name {
+    color: #000 !important;
+  }
+  .item-comp .icon {
+    position: relative;
+    height: 32px;
+    width: 32px;
+    padding: 2px;
+    display: inline-block;
+  }
+  .item-comp span.icon {
+    background: rgb(209, 207, 208);
+    width: 30px;
+    height: 30px;
+    margin-top: 2px;
+  }
+  
+  .item-comp .name {
+    display: inline-block;
+    width: 100%;
+    font-size: 12px;
+    color: #666;
+  }
+  
+  /* 元素列表 */
+  .elements {
+    position: relative;
+    margin: 5px 2px;
+    background: #fff;
+    font-size: 12px;
+    height: 878px;
+    overflow-y: auto;
+  }
+  
+  .elements .item-element {
+    cursor: pointer;
+    padding: 3px 10px;
+    display: inline-block;
+    position: relative;
+    width: 90%;
+    height: 26px;
+    line-height: 26px;
+    border-bottom: 1px solid rgba(200, 205, 208, 0.3);
+  }
+  .item-element.active {
+    background: bisque;
+  }
+  .item-element .index {
+    display: inline-block;
+    width: 20px;
+  }
+  .item-element .icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 5px;
+  }
+  .item-element .name {
+    margin-left: 25px;
+  }
+  .item-element:hover {
+    background: bisque;
+  }
+  .item-element:hover .name {
+    color: red !important;
+  }
+  .activeState {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 10px;
+    right: 10px;
+    background: green;
+    border-radius: 50%;
+  }
+  .noElement {
+    text-align: center;
+    color: #000;
+  }
+  
+  .setConfigs {
+    margin: 10px;
+  }
+  .set-item .title{
+    font-size: 16px;
+    color: #777777;
+    height: 40px;
+    line-height: 40px;
+  }
+  .uls .sub-item {
+    display: inline-grid;
+    grid-template-columns: 110px 70px;
+  }
+  .sub-item label {
+    text-align: center;
+    font-size: 14px;
+    display: inline-block;
+    color: #aaa;
+    text-align: left;
+    margin-left: 5px;
+  }

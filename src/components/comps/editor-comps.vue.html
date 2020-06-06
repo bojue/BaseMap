@@ -1,0 +1,73 @@
+<div id="comps">
+    <div class="flexed">
+      <div class="tits">
+        <span
+          class="title"
+          v-for="(tit, index) in compTits"
+          :key="index"
+          @click="selCategory(tit)"
+          v-bind:class="{active: tit['isActive']}"
+        >
+        {{tit.name}}
+        </span>
+    </div>
+    <div class="comps" v-if="currentCategory === 'tools'">
+      <div class="sub-comps" v-for="(sub, index) in devices" :key="index">
+        <p class="title">{{sub.name}}</p>
+        <div class="subComp">
+          <span
+            class="item item-comp"
+            draggable="true"
+            v-for="(item, index) in sub.list"
+            :key="index"
+            @dragstart="dragStart($event, item)"
+            @dragend="dragEnd($event, item)"
+          >
+            <img  v-if="!item.bgBool" class="icon" v-bind:src="item.icon" v-bind:style="item.styleObject" alt />
+            <span v-if="item.bgBool" class="icon" v-bind:style="{
+              background:item.styleObject.background,
+              border:item.styleObject.border,
+              width:item.type === 'aisle' && item.styleObject.width,
+              height:item.type === 'aisle' && item.styleObject.height
+            }"></span>
+            <span class="name">{{item.name}}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="elements" v-if="currentCategory === 'elements'">
+      <span
+        class="item item-element"
+        draggable="false"
+        v-for="(item, index) in elements"
+        :key="index"
+        v-bind:class="{active:item.isActive}"
+        @click="selectElement(index)"
+      >
+        <span class="index">{{index + 1}}</span>
+        <img class="icon" v-bind:src="item.icon" alt />
+        <span class="name">{{item.name}}</span>
+        <span v-if="item.isActive" class="activeState"></span>
+      </span>
+      <span v-if="!elements.length" class="item item-element noElement">当前页面没有元素</span>
+    </div>
+    <div class="setConfigs" v-if="currentCategory === 'setConfig' && webConfig">
+      <div class="set-item">
+        <div class="title">
+          历史存储
+        </div>
+        <div class="uls">
+          <div class="sub-item">
+            <label for="">自动存储个数</label>
+            <input type="number" v-model="webConfig.auto">
+          </div>
+          <div class="sub-item">
+            <label for="">手动存储个数</label>
+            <input type="number" v-model="webConfig.custom">
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    </div>
+  </div>
