@@ -14,13 +14,13 @@
     transform-origin: top left;
   }
   #rangeNums {
-    left: 30px;
-    top: 315px;
     width: 20px;
-    position: absolute;
+    position: fixed;
     height: 99px;
     font-size: 12px;
     display: block;
+    top: 75px;
+    left: 241px;
   }
   #rangeNums .item {
     display: block;

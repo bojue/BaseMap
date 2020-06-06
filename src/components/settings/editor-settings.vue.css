@@ -5,6 +5,7 @@
     padding: 0px;
     border: 1px solid #cccc;
     user-select:none;
+    min-width: 1200px;
   }
   
   .setting-config {
@@ -18,6 +19,7 @@
       background: #fff;
       z-index: 1000;
       border-bottom: 1px solid #cccccc;
+      max-width: 1200px;
   }
   .baseMap {
     color: #999;
