@@ -42,7 +42,10 @@
     background: darkred;
     position: absolute;
     top: 4px;
-    right: 21px;
+    right: 28px;
+  }
+  #rangeNums .f .line {
+    right: 30px;
   }
   .slide {
     position: fixed;
