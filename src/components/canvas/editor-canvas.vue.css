@@ -78,7 +78,7 @@
     -webkit-appearance: none;
     width: 100px;
     height: 2px;
-    background: darkred;
+    background: #aaa;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -97,23 +97,23 @@
     border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
-    border:1px solid darkred;
+    border:1px solid #aaa;
   }
   
   .slider::-moz-range-thumb {
     width: 16px;
     height: 16px;
     background: #fff;
-    border:1px solid red;
+    border:1px solid green;
     cursor: pointer;
   }
   .disScale::-webkit-slider-thumb {
     background: yellowgreen !important;
-    border:1px solid red;
+    border:1px solid green;
   }
   .disScale::-moz-range-thumb {
     background: yellowgreen !important;
-    border:1px solid red;
+    border:1px solid green;
   }
   
   img {
