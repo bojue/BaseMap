@@ -1,5 +1,24 @@
+import ImgComponent from './comps/img';
+import TextComponent from './comps/text';
+import PillarComponent from './comps/pillar';
+import RoomComponent from './comps/room';
+import DeivceComponent from './comps/device';
+import AisleComponent from './comps/aisle';
+import LineRowComponent from './comps/line-row';
+import LineColuComponent from './comps/line-colu';
+
 export default {
     name: 'EditorCanvas',
+    components: {
+      'comp-img': ImgComponent,
+      'comp-text': TextComponent,
+      'comp-pillar': PillarComponent,
+      'comp-room': RoomComponent,
+      'comp-device': DeivceComponent,
+      'comp-aisle': AisleComponent,
+      'comp-line-row': LineRowComponent,
+      'comp-line-colu': LineColuComponent
+    },
     props: {
       currentActiveIndex:Number, // 编辑状态管理
       edrawComps: Array, //绘制组件（图片）列表
