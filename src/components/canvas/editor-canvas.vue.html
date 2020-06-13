@@ -41,135 +41,55 @@
           active:item.isActive,
           roomActive:item.type === 'room'}"
           v-bind:draggable="item.isActive">
-        <!-- 1.img -->
-        <img class="comp-element comp-img icon"
-          v-if="item.type === 'img'" 
-          v-bind:src="item.icon" 
-          v-bind:style="{
-              width:item.style.width +'px',
-              height:item.style.height +'px',
-              borderRadius:item.style.borderRadius +'%'
-          }" 
-          v-bind:title="item.name"
-          v-bind:alt="item.name" 
-          v-bind:class="{
-            active:item.isActive, 
-            isShadow:item.style.isApplyShadow ==='true',
-            multipleActive:item.multipleActiveBool}">
 
+        <!-- 1.img -->
+        <comp-img
+          v-if="item.type === 'img'" 
+          v-bind:item="item">
+        </comp-img>
+      
         <!-- 2.line_colu  -->
-        <div class="comp-element line comp-line_colu"
+        <comp-line-colu
           v-if="item.type === 'line_colu'"
-          v-bind:style="{
-            height:item.style.height +'px'
-          }"
-          v-bind:class="{
-            active:item.isActive, 
-            isShadow:item.style.isApplyShadow ==='true',
-            multipleActive:item.multipleActiveBool}">
-        </div>
+          v-bind:item="item">
+        </comp-line-colu>
 
         <!-- 3.line_row  -->
-        <div class="comp-element line comp-line_row"
+        <comp-line-row
           v-if="item.type === 'line_row'"
-          v-bind:style="{
-            with:item.style.width +'px'
-          }"
-          v-bind:class="{
-            active:item.isActive, 
-            isShadow:item.style.isApplyShadow ==='true',
-            multipleActive:item.multipleActiveBool}">
-        </div>
+          v-bind:item="item">
+        </comp-line-row>
 
         <!-- 4.柱子 -->
-        <div class="comp-element line comp-pillar comp-pillar-shadow "
+        <comp-pillar 
           v-if="item.type === 'pillar'"
-          v-bind:style="{
-            height:item.style.height +'px',
-            width:item.style.width +'px'
-          }"
-          v-bind:class="{
-            active:item.isActive, 
-            height:item.style.height +'px',
-            width:item.style.width +'px',
-            isShadow:item.style.isApplyShadow ==='true',
-            multipleActive:item.multipleActiveBool}">
-        </div>
+          v-bind:item="item">
+        </comp-pillar>
 
         <!-- 5.盒子 -->
-        <div class="comp-element line comp-room"
+        <comp-room 
           v-if="item.type === 'room'"
-          v-bind:style="{
-            width:item.style.width +'px',
-            height:item.style.height +'px',
-          }"
-          v-bind:class="{
-            active:item.isActive, 
-            isShadow:item.style.isApplyShadow ==='true',
-            multipleActive:item.multipleActiveBool}">
-          <span class="comp-room-inset"
-            v-bind:style="{
-              width:item.style.width +'px',
-              height:item.style.height +'px',
-              background:item.style.bgiBool === 'true' ? 'url('+ item.backgroundImage +')' :null
-            }"></span>
-        </div>
+          v-bind:item="item">
+        </comp-room>
         
         <!-- 6.设备 -->
-        <div class="comp-element device comp-device"
+        <comp-device 
           v-if="item.type === 'device'"
-          v-bind:style="{
-            width:item.style.width +'px',
-            height:item.style.height +'px',
-            background:item.style.background
-          }"
-          v-bind:class="{
-            active:item.isActive, 
-            isShadow:item.style.isApplyShadow ==='true',
-            multipleActive:item.multipleActiveBool}">
-        </div>
+          v-bind:item="item">
+        </comp-device>
 
         <!-- 7.文本 -->
-        <div class="comp-element device comp-text"
-          v-if="item.type === 'text'"
-          v-bind:style="{
-            width:item.style.width +'px',
-            height:item.style.height +'px',
-            background:item.style.background
-          }"
-          v-bind:class="{
-            active:item.isActive, 
-            isShadow:item.style.isApplyShadow ==='true',
-            multipleActive:item.multipleActiveBool}">
-            <div      
-              v-bind:style="{
-              width:item.style.width +'px',
-              height:item.style.height +'px',
-              fontSize:item.style.fontSize+'px',
-              background:item.style.background,
-              color:item.style.color
-            }"
-            v-on:blur="changeTextVal($event,item)"
-            v-bind:contenteditable='item.style.isApplyShadow'>
-              {{item.value}}
-            </div>
-        </div>
+        <comp-text 
+          v-if="item.type === 'text'" 
+          v-bind:item="item"
+          v-on:changeTextVal="changeTextVal">
+        </comp-text>
 
         <!-- 8.冷通道 -->
-        <div class="comp-element line comp-pillar comp-pillar-shadow "
-          v-if="item.type === 'aisle'"
-          v-bind:style="{
-            height:item.style.height +'px',
-            width:item.style.width +'px',
-            border:item.style.border,
-            opacity:item.style.opacity,
-            background:item.style.background,
-            isShadow:item.style.isApplyShadow ==='true',
-          }"
-          v-bind:class="{
-            active:item.isActive, 
-            multipleActive:item.multipleActiveBool}">
-        </div>
+        <comp-aisle 
+          v-if="item.type==='aisle'"
+          v-bind:item = "item">
+        </comp-aisle>
         
         <!-- 辅助 -->	
         <span 	
