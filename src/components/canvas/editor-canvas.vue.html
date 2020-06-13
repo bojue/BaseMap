@@ -242,6 +242,7 @@
       </div>
   </div>
   <div class="slide" v-if="!configs.bgAllBool">
+    <img @click="zoom('zoom')" class="ctrl zoom" src="./../../assets/icon/contr/zoom.svg" alt="增加" title="增加">
     <input 
       type="range" 
       v-bind:title="configs.scale"
@@ -253,21 +254,8 @@
       name="vol" 
       min="0.7" 
       max="1.5">
+    <img @click="zoom('zoomout')" class="ctrl zoomOut" src="./../../assets/icon/contr/zoomOut.svg" alt="减少" title="减少">
   </div>
-  <!-- <span id="rangeNums" v-if="!configs.bgAllBool">
-    <span class="item f">
-        <span class="line"></span>
-        <span class="val">0.7</span>
-    </span>
-    <span class="item s">
-        <span class="line"></span>
-        <span class="val">1.0</span>
-    </span>
-    <span class="item t">
-        <span class="line"></span>
-        <span class="val">1.5</span>
-    </span>
-  </span> -->
   <div class="screen" v-if="configs.bgAllBool">
     <img @click="screen" src="./../../assets/icon/screen_cancel.svg" alt="右对齐" title="右对齐">
   </div>

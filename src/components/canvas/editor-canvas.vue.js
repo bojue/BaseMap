@@ -54,6 +54,9 @@ export default {
       },
       changeTextVal:function(event,item) {
         this.$emit('changeTextVal',event, item)	
+      },
+      zoom:(state)=> {
+        this.$emit('zoom',state)	
       }
     }
   }
