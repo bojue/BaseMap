@@ -76,16 +76,18 @@
   }
   #vol {
     margin-left: 10px; 
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
   }
   .ctrl {
     width: 16px;
     height: 16px;
     right: 4px;
+    cursor: pointer;
   }
   .ctrl.zoom {
     position: absolute;
     top: 5px;
+
   }
   .ctrl.zoomOut {
     position: absolute;
@@ -249,32 +251,7 @@
   .comp-room-inset.isShadow {
     box-shadow: inset 0px 0px 26px -11px rgba(13,13,13,0.8);
   }
-  .assist span {	
-    position: absolute;	
-    width: 6px;	
-    height: 6px;	
-    border:1px solid red;	
-    display: inline;	
-    background: #fff;	
-  }	
-  .assist .trans {	
-    width: 22px;	
-    height: 22px;	
-    border:none;	
-    background: transparent;	
-    border-radius: 50%;	
-    cursor: pointer;	
-  }	
-  .assist .trans img {	
-    width: 22px;	
-    height: 22px;	
-  }	
-  .adR, .adL {	
-    cursor: ew-resize;	
-  }	
-  .adT, .adB {	
-    cursor: ns-resize;	
-  }
+ 
   .comp-text {
     text-align: center;
     font-size: 14px;

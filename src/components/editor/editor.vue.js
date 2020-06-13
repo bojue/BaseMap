@@ -661,5 +661,12 @@ export default {
         position:'top-right'
       });
     },
+    zoom:function(state) {
+      if(state === 'zoomout') {
+        this.configs.scale = Math.max(this.configs.scale - 0.1, 0.7);
+      }else {
+        this.configs.scale = Math.min(this.configs.scale + 0.1, 1.5);
+      }
+    }
   }
 }

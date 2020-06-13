@@ -1,3 +1,4 @@
+import AuxiliaryComponent from './comps/auxiliary';
 import ImgComponent from './comps/img';
 import TextComponent from './comps/text';
 import PillarComponent from './comps/pillar';
@@ -10,6 +11,7 @@ import LineColuComponent from './comps/line-colu';
 export default {
     name: 'EditorCanvas',
     components: {
+      'comp-auxiliary':AuxiliaryComponent,
       'comp-img': ImgComponent,
       'comp-text': TextComponent,
       'comp-pillar': PillarComponent,
@@ -74,7 +76,7 @@ export default {
       changeTextVal:function(event,item) {
         this.$emit('changeTextVal',event, item)	
       },
-      zoom:(state)=> {
+      zoom:function(state) {
         this.$emit('zoom',state)	
       }
     }
