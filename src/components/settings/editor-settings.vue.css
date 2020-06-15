@@ -1,10 +1,10 @@
 #settings {
     position: relative;
-    background: #eee;
+    /* background: #eee; */
     min-height: 820px;
     overflow-y: scroll;
     padding: 0px;
-    border: 1px solid #cccc;
+    border: 1px solid #eeeeee;
     user-select:none;
     min-width: 1200px;
   }
@@ -38,6 +38,7 @@
   .setting-element {
     position: absolute;
     height: 100%;
+    width: 100%;
     overflow-y: scroll;
     display: inline-block;
     overflow-x: hidden;
@@ -86,7 +87,7 @@
   }
   .aligins {
     position: absolute;
-    right: 570px;
+    right: 505px;
     top:0px;
     cursor: pointer;
   }
@@ -96,7 +97,7 @@
     display: grid;
     margin-left: 40px;
     text-align: center;
-    grid-template-columns:50px 150px 150px 50px 50px 50px 50px;
+    grid-template-columns:50px 130px 130px 35px 35px 35px 35px;
   }
   .aligin-item  {
     cursor: pointer;
@@ -118,7 +119,7 @@
     position: absolute;
     right: 80px;
     text-align: center;
-    width: 200px;
+    width: 100px;
     height: 59px;
     top: -4px;
     border-right:1px solid #cccccc;
@@ -127,7 +128,7 @@
     margin: 20px 10px ;
   }
   .aligin-item label {
-      padding: 2px 4px;
+      padding: 2px 0px;
       font-size: 12px;
       position: absolute;
       top: 0px;
@@ -136,11 +137,11 @@
   .aligin-item  input {
     width: 40px;
     padding: 2px 4px;
-    margin-left: 15px;
   }
   .aligin-item img {
     width: 22px;
     height: 22px;
+    background: #fff;
   }
   .aligin-item .img {
     position: absolute;
