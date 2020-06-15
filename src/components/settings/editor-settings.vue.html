@@ -68,20 +68,6 @@
           </div>
       </div>
       <div class="aligin-item contrls">
-        <!-- <img  
-          @click="downloadJSON()" 
-          v-bind:src="img.output" 
-          @mouseenter="img.output=img.output_hover" 
-          @mouseleave="img.output=img.output_def" 
-          alt="导出" 
-          title="导出">
-        <img  
-          @click="saveData()" 
-          v-bind:src="img.save" 
-          @mouseenter="img.save=img.save_hover" 
-          @mouseleave="img.save=img.save_def" 
-          alt="导入" 
-          title="导入"> -->
         <img  
           @click="saveData()" 
           v-bind:src="img.save" 
@@ -102,141 +88,108 @@
           @click="screen()"
           src="./../../assets/icon/screen_full.svg" 
           alt="全屏预览" 
-          title="全屏预览"></div>
-        
-      <!-- <div class="download">
-        <span class="title" @click="download">下载</span>
-      </div> -->
-     
+          title="全屏预览"></div>     
     </div>
     <div class="setting-element element" v-if="currentElement && multipleActiveArr.length === 0">
       <div class="item">
         <span class="name">{{currentElement.name}}</span>
       </div>
+      <comp-comm-attr-checkbox
+        v-bind:label="'固定'"
+        v-bind:name="'固定'"
+        v-bind:attribute="'isFixed'"
+        v-bind:currentElement="currentElement"/>
       <div class="item">
         <label for="" class="title">位置</label>
         <div class="subs grid grid-2">
-          <div class="subs-item">
-            <label for="" class="lab">上</label>
-            <input type="number" class="val"  v-model="currentElement.style.top">
-          </div>
-           <div class="subs-item">
-            <label for="" class="lab">左</label>
-            <input type="number" class="val" v-model="currentElement.style.left"> 
-          </div>
-        </div>
-        <div class="subs">
-          <div class="subs-item">
-            <input class="val-cb"
-              type="checkbox"
-              v-model="currentElement.style.isFixed"
-              true-value=true
-              false-value=false
-            >
-            <span class="val">固定</span>
-          </div>
+            <comp-comm-attr-number
+              v-bind:name="'上'"
+              v-bind:attribute="'top'"
+              v-bind:max="3200"
+              v-bind:min="0"
+              v-bind:currentElement="currentElement"/>
+            <comp-comm-attr-number
+              v-bind:name="'左'"
+              v-bind:attribute="'left'"
+              v-bind:max="2200"
+              v-bind:min="0"
+              v-bind:currentElement="currentElement"/>
         </div>
       </div>
       <div class="item">
         <label for="" class="title">大小</label>
         <div class="subs grid grid-2">
-          <div class="subs-item">
-            <label class="lab" for="">长</label>
-            <input 
-              max="3200"
-              min="0"
-              class="val" type="number"  v-model="currentElement.style.width">
-          </div>
-           <div class="subs-item">
-            <label class="lab" for="">宽</label>
-            <input class="val" type="number" 
-              max="1200"
-              min="0"
-              v-model="currentElement.style.height"> 
-          </div>
+          <comp-comm-attr-number
+            v-bind:name="'长'"
+            v-bind:attribute="'width'"
+            v-bind:max="3200"
+            v-bind:min="0"
+            v-bind:currentElement="currentElement"/>
+          <comp-comm-attr-number
+            v-bind:name="'宽'"
+            v-bind:attribute="'height'"
+            v-bind:max="1200"
+            v-bind:min="0"
+            v-bind:currentElement="currentElement"/>
         </div>
       </div>
-      <div class="item"  v-if="currentElement.type === 'text'">
+      <div class="item" v-if="currentElement.type === 'text'">
         <label for="" class="title">字体</label>
         <div class="subs grid grid-1">
-          <div class="subs-item">
-            <label class="lab" for="">大小</label>
-            <input 
-              max="50"
-              min="12"
-              class="val" type="number"  v-model="currentElement.style.fontSize">
-          </div>
-          <div class="subs-item full">
-            <label class="lab" for="">颜色</label>
-            <div class="cols">
-              <span class="col-item" v-bind:class="{active: currentElement.style && currentElement.style.color === color}" v-for="(color, index) in colors" :key="index" v-bind:style="{
-                background:color
-              }"
-              v-bind:title="color"
-              @click="selColor(color)"></span>
-            </div>
-          </div>
+          <comp-comm-attr-number
+            v-bind:name="'大小'"
+            v-bind:attribute="'fontSize'"
+            v-bind:max="50"
+            v-bind:min="12"
+            v-bind:currentElement="currentElement"/>
+          <comp-comm-attr-color
+            v-bind:currentElement="currentElement"
+            v-bind:name="'颜色'"
+            v-bind:attribute="'color'"
+            v-on:selColor="selColor"
+          />
         </div>
       </div>
       <div class="item"  v-if="currentElement.type === 'device'">
         <div class="subs grid grid-1">
-          <div class="subs-item full">
-  
-            <label class="lab" for="">背景</label>
-            <div class="cols">
-              <span class="col-item" v-bind:class="{active: currentElement.style && currentElement.style.background === color}" v-for="(color, index) in backgrounds" :key="index" v-bind:style="{
-                background:color
-              }"
-              v-bind:title="color"
-              @click="selBackground(color)"></span>
-            </div>
-          </div>
+          <comp-comm-attr-color
+            v-bind:currentElement="currentElement"
+            v-bind:name="'背景'"
+            v-bind:attribute="'background'"
+            v-on:selColor="selColor"
+          />
         </div>
       </div>
+
       <div class="item" v-if="currentElement.type === 'aisle'">
-        <label for="" class="title">透明度</label>
-        <div class="subs grid grid-1 grid-1-1">
-          <div class="subs-item">
-            <label class="lab" for="">{{currentElement.style.opacity}}</label>
-            <input type="range" min="0.2" max="1.0" step="0.1" v-model="currentElement.style.opacity">
-          </div>
-        </div>
+          <comp-opeacity v-bind:currentElement="currentElement"/>
       </div>
+
+      
       <div class="item">
         <label for="" class="title">旋转</label>
         <div class="subs grid grid-1">
-          <div class="subs-item">
-            <label class="lab" for="">角度</label>
-            <input class="val" type="number"  v-model="currentElement.style.rotate">
-          </div>
+          <comp-comm-attr-number
+            v-bind:name="'角度'"
+            v-bind:attribute="'rotate'"
+            v-bind:max="360"
+            v-bind:min="-360"
+            v-bind:currentElement="currentElement"/>
         </div>
       </div>
       <div class="item">
-        <label for="" class="title">阴影</label>
-        <div class="subs">
-          <div class="subs-item">
-            <input class="val-cb"
-              type="checkbox"
-              v-model="currentElement.style.isApplyShadow"
-              true-value=true
-              false-value=false
-            >
-            <span class="val">应用阴影</span>
-          </div>
-        </div>
+        <comp-comm-attr-checkbox
+          v-bind:label="'阴影'"
+          v-bind:name="'应用阴影'"
+          v-bind:attribute="'isApplyShadow'"
+          v-bind:currentElement="currentElement"/>
       </div>
       <div class="item" v-if="currentElement.type === 'room'">
-        <label for="" class="title">材质</label>
-        <div class="subs">
-          <div class="subs-item">
-            <input class="val-cb"
-              type="checkbox" v-model="currentElement.style.bgiBool"
-              true-value=true
-              false-value=false
-            >
-            <span class="val">应用材质</span>
-          </div>
-        </div>
+        <comp-comm-attr-checkbox
+          v-bind:label="'材质'"
+          v-bind:name="'应用材质'"
+          v-bind:attribute="'bgiBool'"
+          v-bind:currentElement="currentElement"/>
       </div>
       <div class="item">
         <label for="" class="title">圆角</label>
@@ -257,61 +210,17 @@
         @click="delComp()" src="./../../assets/icon/delete.svg" alt="">
     </div>
     </div>
-  
-     <div class="setting-element element" v-if="currentActiveIndex === -1">
-      <div class="item">
-        <span class="name">{{'多选操作'}}</span>
-      </div>
-      <div class="item">
-        <label for="" class="title">阴影</label>
-        <div class="subs">
-          <div class="subs-item">
-            <input class="val-cb"
-              type="checkbox"
-              v-model="multipleApplyShadow"
-              true-value=true
-              false-value=false
-              @change="setMultipleState('isApplyShadow', multipleApplyShadow)"
-            >
-            <span class="val">应用阴影</span>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-          <label for="" class="title">圆角</label>
-          <div class="subs">
-            <div class="subs-item">
-            <select class="val-s" 
-              v-model="multipleApplyBorderRadius"
-               @change="setMultipleState('borderRadius', multipleApplyBorderRadius)">
-              <option v-bind:value="0">无</option>
-              <option v-bind:value="50">圆角</option>
-            </select>
-          </div>
-        </div>
-    </div>
-    <div class="item del-item">
-      <img class="del"  
-        v-bind:class="{
-          delDef:currentActiveIndex === -1
-        }"
-        @click="delComp('multipleDel')" src="./../../assets/icon/delete.svg" alt="多选删除" title="多选删除">
-    </div>
-    <div class="item">
-        <div class="muls-list">
-          <label for="" class="title">多选列表</label>      
-          <span class="nums">选中
-            <span class="val">{{multipleActiveArr.length}}</span>个组件
-          </span>
-        </div>
-        <div class="muls">
-          <div class="muls-item" v-for="(ele, index) in multipleActiveArr" :key="index">
-            <span class="ele-index">{{index+1}}</span>
-            <img  class="ele-icon" v-bind:src="ele.icon" alt="">
-            <span class="ele-name">{{ele.name}}</span>
-            <img class="ele-del" @click="delMultipComp(ele, index)" src="./../../assets/icon/del_sub.svg" alt="">
-          </div>
-        </div>
-      </div>
+    <div class="setting-element element" v-if="currentActiveIndex === -1">
+      <comp-multip-setting 
+        v-on:setMultipleState="setMultipleState"
+        v-bind:multipleApplyBorderRadius="multipleApplyBorderRadius"
+        v-bind:multipleApplyShadow="multipleApplyShadow"
+      />
+      <comp-multip-del 
+        v-on:delComp="delComp"
+        v-bind:currentActiveIndex="currentActiveIndex"/>
+      <comp-multip-list
+        v-bind:multipleActiveArr="multipleActiveArr"
+        v-on:delMultipComp="delMultipComp"/>
     </div>
    </div>

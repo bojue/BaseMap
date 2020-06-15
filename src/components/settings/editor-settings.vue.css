@@ -38,7 +38,7 @@
   .setting-element {
     position: absolute;
     height: 100%;
-    width: 100%;
+    width: 220px;
     overflow-y: scroll;
     display: inline-block;
     overflow-x: hidden;
@@ -149,6 +149,7 @@
   }
   .item {
     padding: 10px;
+    padding-bottom: 0px;
     min-height: 30px;
     line-height: 30px;
     position: relative;
@@ -268,8 +269,8 @@
     text-align: center;
   }
   .ele-icon {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     display: inline-block;
     margin-left: 5px;
     margin-right: 15px;
@@ -287,7 +288,7 @@
     width: 25px;
     position: absolute;
     right: 10px;
-    top: 6px;
+    top: 2px;
   }
   .cols {
     padding: 5px;
@@ -306,6 +307,6 @@
   }
   .full .active {
     margin: 0;
-    border:1px solid #ffffff;
+    border:1px solid #eeeeee;
   }
   

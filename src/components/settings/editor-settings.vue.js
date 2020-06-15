@@ -1,4 +1,30 @@
+//公共组件
+import CommAttrNumber from './comps/comm-attr-number';
+import CommAttrColor from './comps/comm-attr-color';
+import CommAttrCheckBox from './comps/comm-attr-checkbox'
+
+//属性
+import FontSizeComp from './comps/attr-font-size';
+import OpeacityComp from './comps/attr-opacity';
+
+//多选
+import MultipListComp from './multip/list';
+import MultipDelComp from './multip/delete';
+import MiltipSettingComp from './multip/settings'
+
+
+
 export default {
+    components: {
+      'comp-font-size':FontSizeComp,
+      'comp-opeacity':OpeacityComp,
+      'comp-comm-attr-number':CommAttrNumber,
+      'comp-comm-attr-color':CommAttrColor,
+      'comp-comm-attr-checkbox':CommAttrCheckBox,
+      'comp-multip-list':MultipListComp,
+      'comp-multip-del':MultipDelComp,
+      'comp-multip-setting':MiltipSettingComp
+    },
     props: {
       currentElement:Object, //当前组件
       currentActiveIndex:Number, // 编辑状态管理
@@ -10,32 +36,6 @@ export default {
         imgUrlPre:'',
         multipleApplyShadow:'true',
         multipleApplyBorderRadius:'0',
-        colors:[
-          '#d81e06', 
-          '#ff7f00',
-          '#ffff00',
-          '#00ca98', 
-          '#0007ff',
-          '#13227a',
-          '#ffffff',
-          '#dbdbdb',
-          '#bfbfbf',
-          '#4f4f4f',
-          '#2c2c2c',
-          '#000000'],
-        backgrounds:[
-          '#FF8c00', 
-          '#2f3035',
-          '#5e8ad1',
-          '#d1cfd0', 
-          '#ffffff',
-          '#d81e06',
-          '#ffff00',
-          '#7fff00',
-          '#00ca98',
-          '#26c9ff',
-          '#13227A',
-          "#000"],
         img: {
           l:require('./../../assets/icon/align/l.png'),
           l_def:require('./../../assets/icon/align/l.png'),
@@ -74,11 +74,13 @@ export default {
   
     },
     methods: {
-      selColor:function(color) {
-        this.$emit('selColor',this.currentElement, color);
-      },
-      selBackground:function(bgColor) {
-        this.$emit('selBackground', this.currentElement, bgColor)
+      selColor:function(color, attribute) {
+        if(attribute === 'background') {
+          this.$emit('selBackground', this.currentElement, color)
+        }else {
+          this.$emit('selColor',this.currentElement, color);
+        }
+
       },
       delMultipComp:function(comp, index) {
         this.$emit('delMultipComp', comp, index);
