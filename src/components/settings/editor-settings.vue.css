@@ -2,6 +2,7 @@
     position: relative;
     background: #eee;
     min-height: 820px;
+    overflow-y: scroll;
     padding: 0px;
     border: 1px solid #cccc;
     user-select:none;
@@ -35,7 +36,11 @@
     user-select: none;
   }
   .setting-element {
-    position:fixed;
+    position: absolute;
+    height: 100%;
+    overflow-y: scroll;
+    display: inline-block;
+    overflow-x: hidden;
   }
   
   .icon {
