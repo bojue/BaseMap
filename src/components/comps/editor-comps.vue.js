@@ -333,6 +333,17 @@ export default {
                   height: 40,
                   isApplyShadow:'false'
                 }
+              },
+              {
+               id: 2,
+               type: "img",
+               name: "蓄冷罐",
+               icon: require("./../../assets/comps/xulengguan.png"),
+               defStyle: {
+                 width: 50,
+                 height: 50,
+                 isApplyShadow:'false'
+               }
               }
             ]
           },

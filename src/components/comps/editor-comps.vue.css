@@ -4,8 +4,10 @@
     user-select: none;
     border: 1px solid #eeeeee;
   }
-  .flexed {
-    position: fixed;
+  .abs {
+    /* position: fixed; */
+    width: 200px;
+    position: absolute;
     width: 200px;
   }
   .tits {

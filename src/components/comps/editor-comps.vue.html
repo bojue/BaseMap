@@ -1,5 +1,5 @@
 <div id="comps">
-    <div class="flexed">
+    <div class="abs">
       <div class="tits">
         <span
           class="title"
@@ -51,23 +51,6 @@
       </span>
       <span v-if="!elements.length" class="item item-element noElement">当前页面没有元素</span>
     </div>
-    <div class="setConfigs" v-if="currentCategory === 'setConfig' && webConfig">
-      <div class="set-item">
-        <div class="title">
-          历史存储
-        </div>
-        <div class="uls">
-          <div class="sub-item">
-            <label for="">自动存储个数</label>
-            <input type="number" v-model="webConfig.auto">
-          </div>
-          <div class="sub-item">
-            <label for="">手动存储个数</label>
-            <input type="number" v-model="webConfig.custom">
-          </div>
-        </div>
-        
-      </div>
-    </div>
+  
     </div>
   </div>

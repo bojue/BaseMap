@@ -22,6 +22,7 @@ export default {
   padding: 0;
   position: relative;
   width: 100%;
+  min-width: 1250px;
 }
 ::-webkit-scrollbar-thumb:horizontal { 
     width: 4px;
