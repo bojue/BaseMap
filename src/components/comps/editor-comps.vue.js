@@ -448,8 +448,62 @@ export default {
                   height: 80,
                   isApplyShadow:'false'
                 }
+              },
+              {
+                id: 2,
+                type: "img",
+                name: "健身器材1",
+                icon: require("./../../assets/comps/jianshen1.png"),
+                defStyle: {
+                  width: 50,
+                  height: 100,
+                  isApplyShadow:'false'
+                }
+              },
+              {
+                id: 2,
+                type: "img",
+                name: "健身器材2",
+                icon: require("./../../assets/comps/jianshen2.png"),
+                defStyle: {
+                  width: 50,
+                  height: 100,
+                  isApplyShadow:'false'
+                }
+              },
+              {
+                id: 2,
+                type: "img",
+                name: "健身器材2",
+                icon: require("./../../assets/comps/jianshen3.png"),
+                defStyle: {
+                  width: 50,
+                  height: 100,
+                  isApplyShadow:'false'
+                }
+              },
+              {
+                id: 2,
+                type: "img",
+                name: "植物1",
+                icon: require("./../../assets/comps/zhiwu1.png"),
+                defStyle: {
+                  width: 50,
+                  height: 50,
+                  isApplyShadow:'false'
+                }
+              },
+              {
+              id: 2,
+              type: "img",
+              name: "植物2",
+              icon: require("./../../assets/comps/zhiwu2.png"),
+              defStyle: {
+                width: 50,
+                height: 50,
+                isApplyShadow:'false'
               }
-               
+            }    
             ]
           }
         ]
