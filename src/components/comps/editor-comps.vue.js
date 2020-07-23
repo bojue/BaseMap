@@ -494,16 +494,82 @@ export default {
                 }
               },
               {
-              id: 2,
-              type: "img",
-              name: "植物2",
-              icon: require("./../../assets/comps/zhiwu2.png"),
-              defStyle: {
-                width: 50,
-                height: 50,
-                isApplyShadow:'false'
-              }
-            }    
+                id: 2,
+                type: "img",
+                name: "植物2",
+                icon: require("./../../assets/comps/zhiwu2.png"),
+                defStyle: {
+                  width: 50,
+                  height: 50,
+                  isApplyShadow:'false'
+                }
+              },
+              {
+                id: 2,
+                type: "img",
+                name: "伞",
+                icon: require("./../../assets/comps/san.png"),
+                defStyle: {
+                  width: 50,
+                  height: 50,
+                  isApplyShadow:'false'
+                }
+              },
+              {
+                id: 2,
+                type: "img",
+                name: "草坪",
+                icon: require("./../../assets/comps/caoping.jpg"),
+                defStyle: {
+                  width: 250,
+                  height: 100,
+                  isApplyShadow:'false'
+                }
+              } ,
+              {
+                id: 2,
+                type: "img",
+                name: "圆桌",
+                icon: require("./../../assets/comps/yuanzhuo.png"),
+                defStyle: {
+                  width: 150,
+                  height: 150,
+                  isApplyShadow:'false'
+                }
+              }  ,
+              {
+                id: 2,
+                type: "img",
+                name: "餐桌",
+                icon: require("./../../assets/comps/canzhuo.png"),
+                defStyle: {
+                  width: 250,
+                  height: 100,
+                  isApplyShadow:'false'
+                }
+              }  ,
+              {
+                id: 2,
+                type: "img",
+                name: "床",
+                icon: require("./../../assets/comps/chuang.png"),
+                defStyle: {
+                  width: 100,
+                  height: 200,
+                  isApplyShadow:'false'
+                }
+              }  ,
+              {
+                id: 2,
+                type: "img",
+                name: "沙发",
+                icon: require("./../../assets/comps/shafa.png"),
+                defStyle: {
+                  width: 250,
+                  height: 100,
+                  isApplyShadow:'false'
+                }
+              }     
             ]
           }
         ]
