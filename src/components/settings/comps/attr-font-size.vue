@@ -1,6 +1,6 @@
 <template>
     <div class="subs-item">
-        <label class="lab" for="">??</label>
+        <label class="lab" for="">大小</label>
         <input 
             max="50"
             min="12"

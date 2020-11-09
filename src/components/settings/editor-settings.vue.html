@@ -161,7 +161,7 @@
         </div>
       </div>
 
-      <div class="item" v-if="currentElement.type === 'aisle'">
+      <div class="item" v-if="currentElement.type === 'aisle' || currentElement.type === 'pillar'">
           <comp-opeacity v-bind:currentElement="currentElement"/>
       </div>
 

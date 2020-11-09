@@ -71,7 +71,8 @@ export default {
                 styleObject: {
                   width: "16px",
                   height: "16px",
-                  marginTop: "16px"
+                  marginTop: "16px",
+                  opacity:1
                 }
               },{
                 id: 2,

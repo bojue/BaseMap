@@ -10,6 +10,7 @@
         multipleActive:item.multipleActiveBool}">
         <span class="comp-room-inset"
         v-bind:style="{
+            opacity:item.style.opacity,
             width:item.style.width +'px',
             height:item.style.height +'px',
             background:item.style.bgiBool === 'true' ? 'url('+ item.backgroundImage +')' :null

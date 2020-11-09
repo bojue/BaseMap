@@ -10,6 +10,7 @@
         v-bind:alt="item.name" 
         v-bind:class="{
         active:item.isActive, 
+        opacity:item.style.opacity,
         isShadow:item.style.isApplyShadow ==='true',
         multipleActive:item.multipleActiveBool}">
 

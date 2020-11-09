@@ -124,7 +124,7 @@ export default {
           borderRadius:borderRadius || 0,
           border:border ,
           fontSize: 14,
-          opacity:opacity,
+          opacity:opacity || 1,
           color: color
       }
       _style.left =Math.max(0,  Math.min(_style.left, this.configs.maxWidth));
