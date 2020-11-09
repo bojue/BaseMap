@@ -3,7 +3,7 @@
         <div class="title">历史列表 <span class="nums">{{list.length}}条</span></div>
         <div class="uls" v-if="list">
             <div class="item" 
-                v-for="(item, index) in list " :key="item.updateTime "
+                v-for="(item, index) in list "
                 v-bind:class="{
                     isActive:item.isActive
                 }"
@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="content">
-      <p class="current-name" v-if="currentIndex > -1">
+      <p class="current-name" v-if="currentIndex > -1 && list && list[currentIndex]">
         {{"数据记录：" + list[currentIndex].updateTime }}</p>
       <img class="closeIcon"  @click="close()" src="./../../assets/icon/close.svg" alt="">
       <div id="history-content">    
@@ -117,8 +117,6 @@
         </div>
       </div>
       <div class="btns">
-          <div class="btn clerar"
-            @click="clerarHistoryData()">全部清除</div>
           <div class="btn delete"
             @click="deleteCurrnetData()">删除</div>
           <div class="btn apply"

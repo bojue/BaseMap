@@ -47,7 +47,9 @@ export default {
         },
         historyCurrnetData:[],
         currentHistoryIndex:-1,
-        activeHistoryBool:false
+        activeHistoryBool:false,
+        bd:IDBDatabase ,
+        objectStore:IDBObjectStore 
      }
   },
   components: {
@@ -499,122 +501,119 @@ export default {
         this.configs.scale = 1;
       }
     },
-    initStorageData(clearBool) {
-      if(!clearBool && window.localStorage.getItem('bm_datas')) return;
-      let params = {
-          save_data_auto:[],
-          save_data_custom:[]
-      }
-      window.localStorage.setItem('bm_datas', JSON.stringify(params));
+    async initStorageData(clearBool) {
+      this.db = await this.getIndexDB();
     },
-    saveDateToStorage(data, state) {
-      let saveData = data || this.edrawComponents;
-      //存储优化，没有内容的页面不需要存储
-      if(!saveData || Array.isArray(saveData) && saveData.length === 0) {
+    async getIndexDB() {
+      return new Promise((resolve, reject)=> {
+        if (!window.indexedDB) {
+          console.log("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.");
+          return;
+        }
+        let dbName = 'bm_DBDataBase';
+        let request =  window.indexedDB.open(dbName,1);
+        request.onerror  = function(error) {
+          console.error("数据库 ", dbName, "打开失败:", error);
+        }
+        request.onsuccess  = function(event) {
+          console.info("数据库连接成功！");
+          resolve(event.target.result);
+        }
+        request.onupgradeneeded = function(event) {
+          let db = event.target.result;
+          console.log(db.objectStoreNames.contains('save_data_custom'))
+          if(!db.objectStoreNames.contains('save_data_custom')){
+            this.objectStore = db.createObjectStore('save_data_custom',  { keyPath: 'id', autoIncrement: true });
+            this.objectStore.createIndex('id', 'id', { unique: false })
+          }
+
+        }
+      })
+    },
+    async saveDateToStorage(data, state) {
+      let item = data || this.edrawComponents;
+      if(!item || Array.isArray(item) && item.length === 0) {
         return;
       }
+
+      console.log('data',item)
       let obj = {
-        data: saveData,
+        data: item,
         type: state || 'auto',
         updateTime:new Date()
       };
-      if(!window.localStorage.getItem('bm_datas')) {
-        this.initStorageData();
-      }
-      let params = window.localStorage.getItem('bm_datas');
-      if(params && typeof params === 'string') {
-        params = JSON.parse(params)
-      }
-      if(!this.webConfig) {
-        this.initConfig();
-      }
-      if(state === 'custom') {
-        params.save_data_custom.unshift(obj);
-        if(params.save_data_custom.length >  this.webConfig.custom) {
-          params.save_data_custom = params.save_data_custom.slice(0, this.webConfig.custom);
-        }
-      } else {
-        params.save_data_auto.unshift(obj);
-        if(params.save_data_auto.length >  this.webConfig.auto) {
-          params.save_data_auto = params.save_data_auto.slice(0,  this.webConfig.auto);
-        }
-      }
-      this._saveWebStorage(params);
-      this.currentHistoryIndex = -1;
-    },
-    getStorageData(reloadBool) {
-      if(!reloadBool) {
-        this.activeHistoryBool = !this.activeHistoryBool;
-      }
-      this.currentHistoryIndex = -1;
-      let params = window.localStorage.getItem('bm_datas');
-      if(params && typeof params === 'string') {
-        params = JSON.parse(params)
-      }
-      let list = [].concat(params.save_data_custom, params.save_data_auto);
+      await this.addDateToDb(obj);
+      let list = await this.getStorageData(true);
       this.historyCurrnetData = _.orderBy(list, 'updateTime', "desc");
+      this.currentHistoryIndex = -1;
     },
-    _saveWebStorage(params, delSaveBool) {
-      let seccMessage = delSaveBool ? "删除成功": "保存成功";
-      let errMessage  = delSaveBool ? "删除失败": 
-                        encodeURIComponent(JSON.stringify(localStorage).length) > (1024 * 1024 * 5 - 100) ? '数据超过历史数据最大值，请删除历史不需要的数据重新存储' :"保存数据出错";
-      try {
-        window.localStorage.setItem('bm_datas', JSON.stringify(params));
-        this.saveDataInfo("success",seccMessage);
-      }catch {
-        this.saveDataInfo('error',errMessage)
-      }
-      if(this.activeHistoryBool) {
-        this.getStorageData(true);
-      }
+    addDateToDb(item) {
+      return new Promise((resolve, reject) => {
+        let store = this.db.transaction(['save_data_custom'], 'readwrite').objectStore('save_data_custom');
+        let request = store.add(item);
+        request.onerror = error => {
+          let errMessage = "保存失败";
+          this.saveDataInfo('error',errMessage)
+          reject(error);
+        }
+        request.onsuccess = event => {
+          let seccMessage = '保存成功！';
+          this.saveDataInfo("success",seccMessage);
+          resolve();
+        }
+      });
     },
-    initConfig() {
-      if(window.localStorage.getItem('bm_datas')) return;
-      let params = {
-        custom:50,
-        auto:50,
-      }
-      window.localStorage.setItem('configs', JSON.stringify(params));
+    async getHostoryList() {
+      let list = await this.getStorageData(true);
+      this.historyCurrnetData = _.orderBy(list, 'updateTime', "desc");
+      this.activeHistoryBool = true;
     },
-    deleteHistoryData(index) {
+    async getStorageData(reloadBool)  {
+      return new Promise((resolve, reject) => {
+        var objectStore = this.db.transaction('save_data_custom').objectStore('save_data_custom');
+        let res = [];
+        let request = objectStore.openCursor();
+        request.onerror = error => { reject(error)}
+        request.onsuccess = function (event) {
+          let cursor = event.target.result;
+          if (cursor) {
+              res.push(cursor.value);
+              cursor.continue();
+          }else {
+              resolve(res);
+          }
+        }
+      });
+
+    },
+    async deleteHistoryData(index) {
       let currentData = this.historyCurrnetData[index];
+      if(!currentData) return;
+      this.currentIndex = -1;
       if(currentData) {
         delete currentData.isActive;
       }
-      if(!window.localStorage.getItem('bm_datas')) {
-        this.initStorageData();
-      }
-      let params = window.localStorage.getItem('bm_datas');
-      if(params && typeof params === 'string') {
-        params = JSON.parse(params);
-      }
-      if(params) {
-        let c = params.save_data_custom
-        let len_c =  c.length;
-        let hasBool = false;
-        for(let i=0;i<len_c;i++) {
-          let item = c[i];
-          if(item && currentData && item.updateTime === currentData.updateTime) {
-            params.save_data_custom.splice(i, 1);
-            hasBool = true;
-          }
-        }
-        if(!hasBool) {
-          let a = params.save_data_auto;
-          let len_a = a.length;
-          for(let i=0;i<len_a;i++) {
-            let item = a[i];
-            if(item && currentData && item.updateTime === currentData.updateTime) {
-              params.save_data_auto.splice(i, 1);
-            }
-          }
-        }
-        this._saveWebStorage(params, true)
-      }
+      let key = currentData['id'];
+      await this.deleteData(key)
+      let list = await this.getStorageData(true);
+      this.historyCurrnetData = _.orderBy(list, 'updateTime', "desc");
     },
-    clearStorageData() {
-      this.initStorageData(true);
-      this.getStorageData(true);
+    async deleteData(key) {
+      let api = 'save_data_custom';
+      return new Promise((resolve, reject) => {
+          let objectStore = this.db.transaction([api], 'readwrite').objectStore(api);
+          let request = objectStore.delete(key);
+          request.onerror = error => {
+              let errMessage = "删除失败";
+              this.saveDataInfo('error',errMessage)
+              reject(error);
+          }
+          request.onsuccess = event => {
+              let seccMessage =  "删除成功";
+              this.saveDataInfo("success",seccMessage);
+              resolve();
+          }
+      })
     },
     changeBgImg(url) {
       this.configs.backgroundUrl = url;

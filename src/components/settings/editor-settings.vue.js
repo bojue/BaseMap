@@ -97,7 +97,7 @@ export default {
       screen:function() {
         this.$emit('screen');
       },
-      getHistory:function() {
+       getHistory:function() {
         this.$emit('getHistory')
       },
       saveData:function() {

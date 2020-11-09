@@ -9,7 +9,7 @@ export default {
     data(){
         return {
           activeTheme:'save_data_custom', //选择主题
-          currentData:[]
+          currentData:[],
         }
     },
     mounted:function() {
@@ -28,10 +28,8 @@ export default {
         this.$emit('closeHistory')
       },
       deleteCurrnetData:function() {
+        if(this.currentIndex < 0) return;
         this.$emit("deleteHistoryData", this.currentIndex)
-      },
-      clerarHistoryData:function() {
-        this.$emit('clerarHistoryData')
       }
     }
   }
