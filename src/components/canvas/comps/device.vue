@@ -3,6 +3,7 @@
         v-bind:style="{
         width:item.style.width +'px',
         height:item.style.height +'px',
+        opacity:item.style.opacity,
         background:item.style.background
         }"
         v-bind:class="{

@@ -106,7 +106,8 @@ export default {
                   background:'#ff8c00',
                   width: "22px",
                   height: "22px",
-                  marginTop: "10px"
+                  marginTop: "10px",
+                  opacity:1,
                 }
               }, {
                 id: 1,
