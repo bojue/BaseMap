@@ -5,7 +5,7 @@
 [稳定版](https://h5-editor.github.io/baseMap/)
 
 ```diff
--  数据存储在IndexedDB，不要清除本地缓存:cookie及其他网站数据 
+!  数据存储在IndexedDB，不要清除本地缓存:cookie及其他网站数据 
 ```
 
 ## 预览
