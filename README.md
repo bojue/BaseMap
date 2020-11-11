@@ -7,8 +7,9 @@
 ## 预览
 
 ![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/demo.png)
-
-## !! 数据存储在IndexedDB，不要清除本地缓存:cookie及其他网站数据
+```diff
+-  数据存储在IndexedDB，不要清除本地缓存:cookie及其他网站数据 
+```
 
 ## 底图说明
 
