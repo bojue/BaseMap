@@ -8,6 +8,8 @@
 
 ![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/demo.png)
 
+## !! 数据存储在IndexedDB，不要清除本地缓存:cookie及其他网站数据
+
 ## 底图说明
 
 业务需要已经重构到 `2980x1440`像素大小的底图支持
