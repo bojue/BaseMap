@@ -12,6 +12,7 @@
     "core-js": "^3.6.4",
     "html2canvas": "^1.0.0-rc.5",
     "lodash": "^4.17.15",
+    "remove-drag-ghosting": "^1.0.4",
     "vue": "^2.6.11",
     "vue-html2canvas": "0.0.4",
     "vue-lodash": "^2.1.2",
@@ -42,7 +43,7 @@
       "parser": "babel-eslint"
     },
     "rules": {
-       "no-unused-vars": "off"
+      "no-unused-vars": "off"
     }
   },
   "browserslist": [
