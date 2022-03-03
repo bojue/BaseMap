@@ -133,6 +133,20 @@ export default {
       this.edrawComponents.push(item);
       this.eStates.currentActiveIndex = this.edrawComponents.length -1;
     },
+    showSelectCompByDray() {
+      const currItem = this.edrawComponents[this.eStates.currentActiveIndex]
+      let rect = document.getElementById('canvas').getClientRects()[0];
+      let {clientX , clientY} = event;
+      if(clientX && clientY) {
+        let _style = {
+          top: (clientY  - rect.top + 60 || 100)/ this.configs.scale,
+          left:(clientX +213 - rect.left || 100) / this.configs.scale,
+        }
+        currItem.style.left = _style.left
+        currItem.style.top = _style.top
+      }
+  
+    },
     initComponentState(current, event) {
       if(current === undefined || current === null || current === -1) return;
       if(event && (event.shiftKey || event.metaKey && this.isMac()) && event.button === 0 ) {

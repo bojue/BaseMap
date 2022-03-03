@@ -578,18 +578,16 @@ export default {
       };
     },
     methods: {
-      // 组件拖拽完成
-      dragEnd: function(event, comp) {
-        this.$emit("selectComp", event, comp);
-      },
-  
       // 开始拖拽组件
       dragStart: function(event, comp) {
         let { clientX, clientY } = event;
         comp.defStyle.startX = clientX;
         comp.defStyle.startY = clientY;
+        this.$emit("selectComp", event, comp);
       },
-  
+      drag:function(event) {
+        this.$emit("showSelectCompByDray", event);
+      },
       // Tab切换，目前只有一个组件库:tools
       selCategory: function(categroy) {
         if(categroy === 'setConfig') {

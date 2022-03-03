@@ -21,7 +21,7 @@
             v-for="(item, index) in sub.list"
             :key="index"
             @dragstart="dragStart($event, item)"
-            @dragend="dragEnd($event, item)"
+            @drag="drag($event)"
           >
             <img  v-if="!item.bgBool" class="icon" v-bind:src="item.icon" v-bind:style="item.styleObject" alt />
             <span v-if="item.bgBool" class="icon" v-bind:style="{
