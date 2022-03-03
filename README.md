@@ -1,8 +1,8 @@
 # BaseMap
 
-基于Vue开发的底图配置工具, [开源最新版本（持续迭代）](https://bojue.github.io/BaseMap)
+基于Vue开发的底图配置工具, [开源最新版本](https://bojue.github.io/BaseMap)
 
-[稳定版](https://h5-editor.github.io/baseMap/)
+[持续迭代（欢迎提交issue）](https://github.com/bojue/BaseMap/issues)
 
 ```diff
 !  数据存储在IndexedDB，不要清除本地缓存:cookie及其他网站数据 
@@ -36,7 +36,7 @@ npm run build
 
 - 组件创建：拖拽/拷贝
 - 样式属性绑定：大小/位置/圆角/阴影/材质
-- 组件拖拽:大小/位置/旋转
+- 组件拖拽:大小/位置/旋转()
 - 多选操作:样式设置/间距/对齐/删除
 - 设置背景：图片/颜色/网格
 - 快捷键:复制粘贴/创建/删除
@@ -47,4 +47,5 @@ npm run build
 ## 更新历史
 
 - 2020/11/09 本地缓存方案更新：localstorage -> indexDB
+- 2022/03/03 优化拖拽创建组件卡顿问题，由拖拽监听dragEnd修改成drag
 
