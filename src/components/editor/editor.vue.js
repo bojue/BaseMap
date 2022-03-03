@@ -27,7 +27,7 @@ export default {
         },
         edrawComponents:[],
         configs:{
-          bg:"grid",
+          bg:"floor",
           pageName:'底图',
           spacing:10,
           scale:1,
