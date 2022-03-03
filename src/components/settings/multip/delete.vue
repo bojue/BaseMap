@@ -4,7 +4,7 @@
         v-bind:class="{
           delDef:currentActiveIndex === -1
         }"
-        @click="delComp('multipleDel')" src="./../../../assets/icon/delete.svg" alt="多选删除" title="多选删除">
+        @click="delComp('multipleDel')" src="@/assets/icon/delete.svg" alt="多选删除" title="多选删除">
     </div>
 </template>
 <script>

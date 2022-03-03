@@ -5,6 +5,7 @@ import EditorSettings from './../../components/settings/editor-settings';
 import EditorHelp from './../../components/help/editor-help';
 import EditorHistory from './../../components/history/editor-history';
 import _ from 'lodash';  
+import removeGhosting from 'remove-drag-ghosting';
 
 export default {
   name: 'Editor',
@@ -88,6 +89,7 @@ export default {
     },
     // 组件选择
     selectComp(event, comp) {
+      removeGhosting(event);
       let item = JSON.parse(JSON.stringify(comp));
       if(!item) return;
       this.initCompState();
@@ -133,7 +135,8 @@ export default {
       this.edrawComponents.push(item);
       this.eStates.currentActiveIndex = this.edrawComponents.length -1;
     },
-    showSelectCompByDray() {
+    showSelectCompByDray(event) {
+      removeGhosting(event);
       const currItem = this.edrawComponents[this.eStates.currentActiveIndex]
       let rect = document.getElementById('canvas').getClientRects()[0];
       let {clientX , clientY} = event;
@@ -148,6 +151,7 @@ export default {
   
     },
     initComponentState(current, event) {
+      removeGhosting(event);
       if(current === undefined || current === null || current === -1) return;
       if(event && (event.shiftKey || event.metaKey && this.isMac()) && event.button === 0 ) {
         this.edrawComponents[current].isActive = false;

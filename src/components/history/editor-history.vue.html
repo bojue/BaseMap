@@ -19,7 +19,7 @@
     <div class="content">
       <p class="current-name" v-if="currentIndex > -1 && list && list[currentIndex]">
         {{"数据记录：" + list[currentIndex].updateTime }}</p>
-      <img class="closeIcon"  @click="close()" src="./../../assets/icon/close.svg" alt="">
+      <img class="closeIcon"  @click="close()" src="@/assets/icon/close.svg" alt="">
       <div id="history-content">    
         <div class="onData" v-if="currentData.length ===0">
             {{currentIndex === -1 ? '请选择记录' :'当前记录没有数据'}}</div>

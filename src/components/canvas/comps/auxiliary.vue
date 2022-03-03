@@ -61,7 +61,7 @@
         @dragstart.stop="trans($event, item, 'start', index)"	
         @drag.stop="trans($event, item, 'drag', index)"	
         @dragend.stop="trans($event, item,'end', index)">	
-        <img src="./../../../assets/icon/translate.svg" alt="">	
+        <img src="@/assets/icon/translate.svg" alt="">	
         </span>	
     </span>	
 </template>

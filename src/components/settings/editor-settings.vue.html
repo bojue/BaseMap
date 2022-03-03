@@ -1,14 +1,14 @@
 <div id="settings">
     <div class="setting-config config">
       <div class="config-item name">
-        <img class="icon" src="./../../assets/icon/3D.svg" alt="">
+        <img class="icon" src="@/assets/icon/3D.svg" alt="">
         <span class="baseMap">BaseMap</span>
       </div>
       <div class="config-item bg">
         <div class="bgs">
-          <img class="bg-item" src="./../../assets/icon/bg-gray.svg"  @click="changeBg('bg', 'gray')" alt="">
-          <img class="bg-item" src="./../../assets/icon/bg-grid.svg"   @click="changeBg('bg', 'grid')" alt="">
-          <img class="bg-item" src="./../../assets/icon/floor3.png"   @click="changeBg('bg', 'floor')" alt="">
+          <img class="bg-item" src="@/assets/icon/bg-gray.svg"  @click="changeBg('bg', 'gray')" alt="">
+          <img class="bg-item" src="@/assets/icon/bg-grid.svg"   @click="changeBg('bg', 'grid')" alt="">
+          <img class="bg-item" src="@/assets/icon/floor3.png"   @click="changeBg('bg', 'floor')" alt="">
           <input class="baseMapImgUrl" 
             id="filePicker"
             type="file" 
@@ -86,7 +86,7 @@
         class="aligin-item screen">
         <img 
           @click="screen()"
-          src="./../../assets/icon/screen_full.svg" 
+          src="@/assets/icon/screen_full.svg" 
           alt="全屏预览" 
           title="全屏预览"></div>     
     </div>
@@ -207,7 +207,7 @@
         v-bind:class="{
           delDef:currentActiveIndex === -1
         }"
-        @click="delComp()" src="./../../assets/icon/delete.svg" alt="">
+        @click="delComp()" src="@/assets/icon/delete.svg" alt="">
     </div>
     </div>
     <div class="setting-element element" v-if="currentActiveIndex === -1">

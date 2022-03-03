@@ -11,7 +11,7 @@
             <span class="ele-index">{{index+1}}</span>
             <img  class="ele-icon" v-bind:src="ele.icon" alt="">
             <span class="ele-name">{{ele.name}}</span>
-            <img class="ele-del" @click="delMultipComp(ele, index)" src="./../../../assets/icon/del_sub.svg" alt="">
+            <img class="ele-del" @click="delMultipComp(ele, index)" src="@/assets/icon/del_sub.svg" alt="">
           </div>
         </div>
     </div>
