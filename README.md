@@ -9,8 +9,8 @@
 ```
 
 ## 预览
+![demo](https://user-images.githubusercontent.com/14350577/156908201-c62eed78-f316-485f-8cc5-f4c32cbceef4.png)
 
-![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/demo.png)
 
 ## 底图说明
 
