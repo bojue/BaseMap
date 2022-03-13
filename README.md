@@ -10,7 +10,10 @@
 
 ## 预览
 
-![DEMO](https://github.com/bojue/BaseMap/blob/master/src/assets/demo.png)
+![截屏2022-03-06 上午11 48 00](https://user-images.githubusercontent.com/14350577/156908397-84dae84b-0141-4910-80ef-f56eed170307.png)
+
+![demo](https://user-images.githubusercontent.com/14350577/156908201-c62eed78-f316-485f-8cc5-f4c32cbceef4.png)
+
 
 ## 底图说明
 
