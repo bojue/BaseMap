@@ -6,7 +6,7 @@
     padding: 0px;
     border: 1px solid #eeeeee;
     user-select:none;
-    min-width: 1200px;
+    min-width: 230px;
   }
   
   .setting-config {
@@ -20,7 +20,7 @@
       background: #fff;
       z-index: 1000;
       border-bottom: 1px solid #cccccc;
-      min-width: 1200px;
+
   }
   .baseMap {
     color: #999;
@@ -180,7 +180,7 @@
   
   }
   .nums .val {
-    color: red;
+    color:#3370FF;
     padding: 5px;
   }
   .title {
@@ -243,7 +243,6 @@
       cursor: pointer;
       border-radius: 50%;
       padding: 5px;
-      box-shadow: 0px 0px 5px rgba(255,0,0,0.3);
   }
   .del:hover {
     box-shadow: 0px 0px 10px #ccc;

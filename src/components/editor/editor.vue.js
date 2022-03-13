@@ -216,6 +216,7 @@ export default {
       }
     },
     resizeByDragComp(event, comp, state, arrow,currentIndex) {
+      removeGhosting(event)
       if(event && (event.shiftKey || event.metaKey && this.isMac())  ){
         console.log('多选处理')
       } else {

@@ -5,9 +5,11 @@
     z-index: 9999;
     text-align: center;
   }
+  #content {
+    width: calc(100% - 435px);
+  }
   #content, #canvas {
     position: relative;
-    width: 100%;
     min-height: 822px;
     background: whitesmoke;
     overflow: auto;
