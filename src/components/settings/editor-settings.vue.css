@@ -1,12 +1,14 @@
 #settings {
-    position: relative;
-    /* background: #eee; */
+    position: fixed;
+    background: #fff;
     min-height: 820px;
     overflow-y: scroll;
     padding: 0px;
     border: 1px solid #eeeeee;
     user-select:none;
     min-width: 230px;
+    right: 0;
+    top: 60px;
   }
   
   .setting-config {
@@ -14,7 +16,7 @@
       top: 0px;
       left: 0px;
       width: 100%;
-      margin-left: 10px;
+      margin-left: 0px;
       font-size: 16px;
       height: 60px;
       background: #fff;
@@ -97,6 +99,7 @@
     display: grid;
     margin-left: 40px;
     text-align: center;
+    background: #fff;
     grid-template-columns:50px 130px 130px 35px 35px 35px 35px;
   }
   .aligin-item  {

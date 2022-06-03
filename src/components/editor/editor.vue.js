@@ -4,7 +4,7 @@ import EditorCanvas from './../../components/canvas/editor-canvas';
 import EditorSettings from './../../components/settings/editor-settings';
 import EditorHelp from './../../components/help/editor-help';
 import EditorHistory from './../../components/history/editor-history';
-import _ from 'lodash';  
+import * as _ from 'lodash';  
 import removeGhosting from 'remove-drag-ghosting';
 
 export default {

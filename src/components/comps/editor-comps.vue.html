@@ -13,8 +13,14 @@
     </div>
     <div class="comps" v-if="currentCategory === 'tools'">
       <div class="sub-comps" v-for="(sub, index) in devices" :key="index">
-        <p class="title">{{sub.name}}</p>
-        <div class="subComp">
+        <div class="title">
+          <p class="title">{{sub.name}}</p>
+          <span class="icon" @click="changeShowStatus(index)">
+            <img v-if="sub.isShow" title="收起组件" class="img" src="@/assets/icon/left.svg" />
+            <img v-if="!sub.isShow"  title="展开组件" class="img bottom" src="@/assets/icon/left.svg" />
+          </span>
+        </div>
+        <div class="subComp" v-if="sub.isShow">
           <span
             class="item item-comp"
             draggable="true"
