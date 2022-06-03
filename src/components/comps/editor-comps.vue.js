@@ -10,7 +10,6 @@ export default {
       webConfig:Object
     },
     data() {
-      console.log(Devices_base)
       return {
         currentCategory: "tools",
         compTits: [
@@ -31,14 +30,17 @@ export default {
         devices: [
           {
             name: "基础",
+            isShow: true,
             list: Devices_base
           },
           {
             name: "设备",
+            isShow: true,
             list: Devices_idc
           },
           {
             name: "其他",
+            isShow: true,
             list: Devices_other
           }
         ]
@@ -76,6 +78,11 @@ export default {
       // 元素选择
       selectElement: function(index) {
         this.$emit("initCompsState", index);
-      }
+      },
+
+      // 展示隐藏按钮
+      changeShowStatus: function(index) {
+        this.devices[index].isShow = !this.devices[index].isShow
+      },
     }
   };
