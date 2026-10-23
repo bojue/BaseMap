@@ -1,9 +1,11 @@
+import { asset } from "@/utils/assets";
+
 const Devices_idc = [
     {
       id: 1,
       type: "device",
       name: "机柜-橙",
-      icon: require("@/assets/comps/device.png"),
+      icon: asset("comps/device.webp"),
       bgBool:true,
       defStyle: {
         width: 25,
@@ -21,7 +23,7 @@ const Devices_idc = [
       id: 1,
       type: "device",
       name: "机柜-蓝",
-      icon: require("@/assets/comps/device.png"),
+      icon: asset("comps/device.webp"),
       bgBool:true,
       defStyle: {
         width: 25,
@@ -38,7 +40,7 @@ const Devices_idc = [
       id: 1,
       type: "device",
       name: "机柜-灰白",
-      icon: require("@/assets/comps/device.png"),
+      icon: asset("comps/device.webp"),
       bgBool:true,
       defStyle: {
         width: 25,
@@ -55,7 +57,7 @@ const Devices_idc = [
       id: 1,
       type: "device",
       name: "机柜-黑",
-      icon: require("@/assets/comps/device.png"),
+      icon: asset("comps/device.webp"),
       bgBool:true,
       defStyle: {
         width: 25,
@@ -72,7 +74,7 @@ const Devices_idc = [
       id: 1,
       type: "aisle",
       name: "冷通道",
-      icon: require("@/assets/comps/device.png"),
+      icon: asset("comps/device.webp"),
       bgBool:true,
       defStyle: {
         width: 100,
@@ -94,7 +96,7 @@ const Devices_idc = [
       id: 3,
       type: "img",
       name: "冷机",
-      icon: require("@/assets/comps/lengji.png"),
+      icon: asset("comps/lengji.webp"),
       defStyle: {
         width: 40,
         height: 150
@@ -107,7 +109,7 @@ const Devices_idc = [
       id: 4,
       type: "img",
       name: "冷机2",
-      icon: require("@/assets/comps/lengji.jpg"),
+      icon: asset("comps/lengji.webp"),
       defStyle: {
         width: 40,
         height: 80
@@ -122,7 +124,7 @@ const Devices_idc = [
       id: 4,
       type: "img",
       name: "柴发",
-      icon: require("@/assets/comps/chaifa.png"),
+      icon: asset("comps/chaifa.webp"),
       defStyle: {
         width: 100,
         height: 35
@@ -137,7 +139,7 @@ const Devices_idc = [
       id: 4,
       type: "img",
       name: "柴发2",
-      icon: require("@/assets/comps/chaifa2.jpg"),
+      icon: asset("comps/chaifa2.webp"),
       defStyle: {
         width: 60,
         height: 120
@@ -152,7 +154,7 @@ const Devices_idc = [
       id: 4,
       type: "img",
       name: "水泵",
-      icon: require("@/assets/comps/shuibang.png"),
+      icon: asset("comps/shuibang.webp"),
       defStyle: {
         width: 30,
         height: 50
@@ -167,7 +169,7 @@ const Devices_idc = [
       id: 4,
       type: "img",
       name: "二次泵",
-      icon: require("@/assets/comps/ercibeng.jpg"),
+      icon: asset("comps/ercibeng.webp"),
       defStyle: {
         width: 60,
         height: 120
@@ -182,7 +184,7 @@ const Devices_idc = [
       id: 4,
       type: "img",
       name: "风机",
-      icon: require("@/assets/comps/fengji.jpg"),
+      icon: asset("comps/fengji.webp"),
       defStyle: {
         width: 160,
         height: 130
@@ -197,7 +199,7 @@ const Devices_idc = [
       id: 4,
       type: "img",
       name: "电池组",
-      icon: require("@/assets/comps/dianchizu_duohang.png"),
+      icon: asset("comps/dianchizu_duohang.webp"),
       defStyle: {
         width: 110,
         height: 40
@@ -212,7 +214,7 @@ const Devices_idc = [
       id: 4,
       type: "img",
       name: "单行电池组",
-      icon: require("@/assets/comps/dianchizu.png"),
+      icon: asset("comps/dianchizu.webp"),
       defStyle: {
         width: 110,
         height: 40
@@ -227,7 +229,7 @@ const Devices_idc = [
       id: 2,
       type: "img",
       name: "室外机",
-      icon: require("@/assets/comps/shiwaiji.jpg"),
+      icon: asset("comps/shiwaiji.webp"),
       defStyle: {
         width: 80,
         height: 80
@@ -237,7 +239,7 @@ const Devices_idc = [
       id: 2,
       type: "img",
       name: "闸机",
-      icon: require("@/assets/comps/zhaji.png"),
+      icon: asset("comps/zhaji.webp"),
       defStyle: {
         width: 100,
         height: 40,
@@ -248,7 +250,7 @@ const Devices_idc = [
      id: 2,
      type: "img",
      name: "蓄冷罐",
-     icon: require("@/assets/comps/xulengguan.png"),
+     icon: asset("comps/xulengguan.webp"),
      defStyle: {
        width: 50,
        height: 50,

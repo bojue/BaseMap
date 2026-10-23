@@ -1,10 +1,12 @@
+import { asset } from "@/utils/assets";
+
 const Devices_base = [
     {
       id: 1,
       type: "room",
       name: "房间",
-      icon: require("@/assets/comps/room.png"),
-      backgroundImage:require("@/assets/icon/floor3.png"),
+      icon: asset("comps/room.webp"),
+      backgroundImage:asset("icon/floor3.webp"),
       bgiBool:false,
       defStyle: {
         width: 120,
@@ -16,7 +18,7 @@ const Devices_base = [
       id: 1,
       type: "line_row",
       name: "水平墙",
-      icon: require("@/assets/comps/line_row.png"),
+      icon: asset("comps/line_row.webp"),
       defStyle: {
         width: 100,
         height: 5,
@@ -27,7 +29,7 @@ const Devices_base = [
       id: 1,
       type: "line_colu",
       name: "垂直墙",
-      icon: require("@/assets/comps/line_colu.png"),
+      icon: asset("comps/line_colu.webp"),
       defStyle: {
         width: 5,
         height: 100
@@ -37,7 +39,7 @@ const Devices_base = [
       id: 1,
       type: "pillar",
       name: "柱子",
-      icon: require("@/assets/comps/room.png"),
+      icon: asset("comps/room.webp"),
       defStyle: {
         width: 15,
         height: 15
@@ -53,7 +55,7 @@ const Devices_base = [
       type: "text",
       name: "文本",
       value:"",
-      icon: require("@/assets/comps/text.png"),
+      icon: asset("comps/text.webp"),
       defStyle: {
         width: 100,
         height: 40,

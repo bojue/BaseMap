@@ -1,9 +1,11 @@
+import { asset } from "@/utils/assets";
+
 const Devices_other = [
     {
       id: 1,
       type: "img",
       name: "灭火器",
-      icon: require("@/assets/comps/miehuoqi.png"),
+      icon: asset("comps/miehuoqi.webp"),
       defStyle: {
         width: 30,
         height: 30,
@@ -15,7 +17,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "钢瓶",
-      icon: require("@/assets/comps/gangping.png"),
+      icon: asset("comps/gangping.webp"),
       defStyle: {
         width: 30,
         height: 30,
@@ -27,7 +29,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "办公桌1",
-      icon: require("@/assets/comps/bangongzhuo.png"),
+      icon: asset("comps/bangongzhuo.webp"),
       defStyle: {
         width: 120,
         height: 70,
@@ -38,7 +40,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "办公桌2",
-      icon: require("@/assets/comps/bangongzhuo2.png"),
+      icon: asset("comps/bangongzhuo2.webp"),
       defStyle: {
         width: 160,
         height: 240,
@@ -49,7 +51,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "办公桌3",
-      icon: require("@/assets/comps/bangongzhuo3.png"),
+      icon: asset("comps/bangongzhuo3.webp"),
       defStyle: {
         width: 120,
         height: 120,
@@ -60,7 +62,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "楼梯",
-      icon: require("@/assets/comps/luti.png"),
+      icon: asset("comps/luti.webp"),
       defStyle: {
         width: 100,
         height: 40
@@ -69,7 +71,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "楼梯2",
-      icon: require("@/assets/comps/louti.jpg"),
+      icon: asset("comps/louti.webp"),
       defStyle: {
         width: 100,
         height: 80
@@ -80,7 +82,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "前台",
-      icon: require("@/assets/comps/qiantai.png"),
+      icon: asset("comps/qiantai.webp"),
       defStyle: {
         width: 130,
         height: 200,
@@ -91,7 +93,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "监控中心",
-      icon: require("@/assets/comps/jiankongzhongxin.png"),
+      icon: asset("comps/jiankongzhongxin.webp"),
       defStyle: {
         width: 180,
         height: 80,
@@ -102,7 +104,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "健身器材1",
-      icon: require("@/assets/comps/jianshen1.png"),
+      icon: asset("comps/jianshen1.webp"),
       defStyle: {
         width: 50,
         height: 100,
@@ -113,7 +115,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "健身器材2",
-      icon: require("@/assets/comps/jianshen2.png"),
+      icon: asset("comps/jianshen2.webp"),
       defStyle: {
         width: 50,
         height: 100,
@@ -124,7 +126,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "健身器材2",
-      icon: require("@/assets/comps/jianshen3.png"),
+      icon: asset("comps/jianshen3.webp"),
       defStyle: {
         width: 50,
         height: 100,
@@ -135,7 +137,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "植物1",
-      icon: require("@/assets/comps/zhiwu1.png"),
+      icon: asset("comps/zhiwu1.webp"),
       defStyle: {
         width: 50,
         height: 50,
@@ -146,7 +148,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "植物2",
-      icon: require("@/assets/comps/zhiwu2.png"),
+      icon: asset("comps/zhiwu2.webp"),
       defStyle: {
         width: 50,
         height: 50,
@@ -157,7 +159,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "伞",
-      icon: require("@/assets/comps/san.png"),
+      icon: asset("comps/san.webp"),
       defStyle: {
         width: 50,
         height: 50,
@@ -168,7 +170,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "草坪",
-      icon: require("@/assets/comps/caoping.jpg"),
+      icon: asset("comps/caoping.webp"),
       defStyle: {
         width: 250,
         height: 100,
@@ -179,7 +181,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "圆桌",
-      icon: require("@/assets/comps/yuanzhuo.png"),
+      icon: asset("comps/yuanzhuo.webp"),
       defStyle: {
         width: 150,
         height: 150,
@@ -190,7 +192,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "餐桌",
-      icon: require("@/assets/comps/canzhuo.png"),
+      icon: asset("comps/canzhuo.webp"),
       defStyle: {
         width: 250,
         height: 100,
@@ -201,7 +203,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "床",
-      icon: require("@/assets/comps/chuang.png"),
+      icon: asset("comps/chuang.webp"),
       defStyle: {
         width: 100,
         height: 200,
@@ -212,7 +214,7 @@ const Devices_other = [
       id: 2,
       type: "img",
       name: "沙发",
-      icon: require("@/assets/comps/shafa.png"),
+      icon: asset("comps/shafa.webp"),
       defStyle: {
         width: 250,
         height: 100,

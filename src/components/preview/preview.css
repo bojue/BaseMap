@@ -1,0 +1,59 @@
+.preview-root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef0f3;
+  overflow: hidden;
+}
+
+.preview-stage {
+  position: relative;
+  overflow: hidden;
+  flex: none;
+}
+
+.preview-canvas {
+  position: relative;
+  background: #eeeeee;
+  transform-origin: top left;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(28, 31, 35, 0.14);
+}
+
+.preview-canvas.other {
+  background-repeat: no-repeat !important;
+  background-size: 1920px 1080px;
+}
+
+.preview-canvas.grid {
+  background-image: linear-gradient(rgba(200, 205, 208, 0.3) 1px, transparent 0),
+    linear-gradient(90deg, rgba(200, 205, 208, 0.3), 1px, transparent 0),
+    linear-gradient(#c8cdd0 1px, transparent 0),
+    linear-gradient(90deg, #c8cdd0 1px, transparent 0);
+  background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+}
+
+.preview-canvas.floor {
+  background: url('../../assets/icon/floor3.webp');
+}
+
+.preview-comp {
+  position: absolute;
+}
+
+.preview-comp .comp-text-inner {
+  cursor: default;
+}
+
+.preview-empty {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef0f3;
+  color: #8a919f;
+  font-size: 14px;
+}

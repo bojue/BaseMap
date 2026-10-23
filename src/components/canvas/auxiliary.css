@@ -1,0 +1,32 @@
+.assist span {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid red;
+  display: inline;
+  background: #fff;
+}
+
+.assist .trans {
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.assist .trans img {
+  width: 22px;
+  height: 22px;
+}
+
+.adR,
+.adL {
+  cursor: ew-resize;
+}
+
+.adT,
+.adB {
+  cursor: ns-resize;
+}

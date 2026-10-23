@@ -1,6 +1,6 @@
 # BaseMap
 
-基于Vue开发的底图配置工具, [开源最新版本](https://bojue.github.io/BaseMap)
+基于 React + Semi Design 开发的底图配置工具, [开源最新版本](https://bojue.github.io/BaseMap)
 
 [持续迭代（欢迎提交issue）](https://github.com/bojue/BaseMap/issues)
 
